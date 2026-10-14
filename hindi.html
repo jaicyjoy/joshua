@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>हिंदी मधुकिरण – कक्षा 3</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:"Kohinoor Devanagari","Noto Sans Devanagari","Mangal",system-ui,sans-serif;color:#2b2d42;background:linear-gradient(180deg,#bde0fe 0%,#fff1f6 60%,#fff8e1 100%);min-height:100vh}
+button{font-family:inherit;color:inherit;cursor:pointer}
+.ml{font-family:"Noto Sans Malayalam","Malayalam Sangam MN","Kartika",sans-serif}
+#app{max-width:980px;margin:0 auto;padding:14px 14px 60px}
+
+.hero{text-align:center;padding:18px 10px 8px}
+.hero .rb{font-size:64px;animation:bob 2.4s ease-in-out infinite;display:inline-block}
+.hero h1{margin:4px 0 2px;font-size:40px;color:#ef476f;text-shadow:3px 3px 0 #fff}
+.hero p{margin:0;font-size:19px;color:#5a5f7a}
+.total{display:inline-block;margin-top:10px;background:#fff;border-radius:30px;padding:6px 18px;font-size:22px;box-shadow:0 4px 0 #ffd166}
+@keyframes bob{50%{transform:translateY(-10px) rotate(-4deg)}}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px;margin-top:18px}
+.ccard{border:0;border-radius:26px;padding:16px 12px 14px;background:linear-gradient(145deg,var(--c1),var(--c2));color:#fff;display:flex;flex-direction:column;align-items:center;gap:4px;box-shadow:0 7px 0 rgba(0,0,0,.15);transition:transform .15s}
+.ccard:active{transform:translateY(5px);box-shadow:0 2px 0 rgba(0,0,0,.15)}
+.pnum{background:rgba(255,255,255,.3);border-radius:20px;padding:2px 12px;font-size:16px;font-weight:700}
+.cem{font-size:64px;line-height:1.15;filter:drop-shadow(0 4px 2px rgba(0,0,0,.18))}
+.ct{font-size:24px;font-weight:800;text-shadow:0 2px 0 rgba(0,0,0,.18);text-align:center}
+.ctype{font-size:15px;opacity:.95}
+.cstar{background:#fff;color:#e09f00;border-radius:20px;padding:2px 12px;font-weight:700;font-size:15px;margin-top:4px}
+
+.bar{display:flex;align-items:center;gap:12px;border-radius:24px;padding:10px 14px;color:#fff;background:linear-gradient(135deg,var(--c1),var(--c2));box-shadow:0 6px 0 rgba(0,0,0,.12);position:sticky;top:8px;z-index:5}
+.backbtn{border:0;background:#fff;color:#2b2d42;border-radius:50%;width:48px;height:48px;font-size:24px;flex:none;box-shadow:0 3px 0 rgba(0,0,0,.15)}
+.bar .bt{flex:1;display:flex;flex-direction:column}
+.bar small{font-size:15px;opacity:.95}
+.bar b{font-size:25px;text-shadow:0 2px 0 rgba(0,0,0,.15)}
+.bar .bem{font-size:44px}
+
+.tabs{display:grid;grid-template-columns:repeat(var(--n,4),1fr);gap:8px;margin:16px 0 12px}
+.tab{border:0;border-radius:18px;padding:12px 4px;font-size:19px;font-weight:700;background:#fff;box-shadow:0 5px 0 #d9d9e8}
+.tab.on{background:#ffd166;box-shadow:0 5px 0 #e0a800}
+.tip{font-size:19px;color:#5a5f7a;margin:6px 2px 12px;text-align:center}
+.spk{border:0;background:#e0f2ff;border-radius:50%;width:46px;height:46px;font-size:22px;flex:none}
+.tools{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:4px 0 10px}
+.pill{border:0;border-radius:30px;padding:11px 20px;font-size:19px;font-weight:700;color:#fff;background:#06d6a0;box-shadow:0 5px 0 #04a57b}
+.pill.alt{background:#8338ec;box-shadow:0 5px 0 #5a1fb0}
+
+.mlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.mrow{display:flex;align-items:center;gap:12px;background:#fff;border-radius:20px;padding:10px 12px;box-shadow:0 4px 0 #e6e6f2;border:3px solid transparent;transition:all .2s;cursor:pointer}
+.mrow.hl{border-color:#ffd166;background:#fffbea;transform:scale(1.02)}
+.mem{font-size:46px;flex:none;width:58px;text-align:center}
+.mtx{flex:1;display:flex;flex-direction:column}
+.mtx b{font-size:28px;color:#ef476f}
+.men{font-size:21px;font-weight:700}
+.mml{font-size:18px;color:#555}
+.mhint{display:none;font-size:16px;color:#999}
+.hide .mrow:not(.open) .men,.hide .mrow:not(.open) .mml{display:none}
+.hide .mrow:not(.open) .mhint{display:block}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}
+.card{perspective:800px;height:190px;cursor:pointer}
+.card .in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.card.flipped .in{transform:rotateY(180deg)}
+.f{position:absolute;inset:0;border-radius:22px;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:10px;text-align:center;box-shadow:0 6px 0 rgba(0,0,0,.12)}
+.front{background:#fff;border:4px solid var(--c1)}
+.front .wem{font-size:66px;line-height:1.1}
+.front .wen{font-size:19px;font-weight:700;color:#555}
+.front i{font-style:normal;color:#ef476f;font-size:16px;font-weight:700}
+.fback{background:linear-gradient(145deg,var(--c1),var(--c2));color:#fff;transform:rotateY(180deg)}
+.fback .wem{font-size:44px}
+.fback b{font-size:32px;text-shadow:0 2px 0 rgba(0,0,0,.15)}
+
+.mcols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.mcol{display:flex;flex-direction:column;gap:10px}
+.mcol h3{margin:0;text-align:center;font-size:20px;color:#5a5f7a}
+.mbtn{border:0;border-radius:18px;padding:14px 8px;font-size:23px;font-weight:700;background:#fff;box-shadow:0 5px 0 #d9d9e8;transition:all .15s}
+.mbtn.sel{background:#ffd166;box-shadow:0 5px 0 #e0a800;transform:scale(1.04)}
+.mbtn.done{background:#b9fbc0;box-shadow:0 5px 0 #38b000;opacity:.8}
+.mbtn.bad{background:#ffc2c2;animation:shake .4s}
+.mround{text-align:center;font-size:19px;color:#5a5f7a;margin-bottom:10px}
+
+.qhead{display:flex;align-items:center;gap:10px;margin:14px 0}
+.prog{flex:1;height:18px;background:#fff;border-radius:20px;overflow:hidden;box-shadow:inset 0 2px 3px rgba(0,0,0,.1)}
+.prog i{display:block;height:100%;background:linear-gradient(90deg,#06d6a0,#ffd166);border-radius:20px;transition:width .4s}
+.score{background:#fff;border-radius:20px;padding:4px 14px;font-size:21px;font-weight:700}
+.qcard{background:#fff;border-radius:28px;padding:20px 16px;text-align:center;box-shadow:0 7px 0 #e6e6f2}
+.qp{display:flex;align-items:center;justify-content:center;gap:10px;font-size:25px;font-weight:700;line-height:1.5}
+.qvis{font-size:92px;line-height:1.2;margin:10px 0 4px}
+.qword{font-size:52px;font-weight:800;color:#ef476f;margin:10px 0}
+.qen{font-size:40px;font-weight:800;color:#118ab2;margin:4px 0 10px}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:16px}
+.opt{border:0;border-radius:20px;padding:16px 10px;font-size:26px;font-weight:700;background:#f1f3ff;box-shadow:0 5px 0 #cfd4f5;line-height:1.35}
+.opt small{display:block;font-size:19px;font-weight:600;color:#555;margin-top:2px}
+.opt.ok{background:#b9fbc0;box-shadow:0 5px 0 #38b000;animation:pop .4s}
+.opt.bad{background:#ffc2c2;box-shadow:0 5px 0 #e63946;animation:shake .4s}
+.opt:disabled{cursor:default}
+@keyframes pop{50%{transform:scale(1.08)}}
+@keyframes shake{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+.next{display:none;margin:18px auto 0;border:0;border-radius:30px;padding:14px 36px;font-size:24px;font-weight:800;color:#fff;background:#ef476f;box-shadow:0 6px 0 #b8304f}
+.next.show{display:block}
+.end{text-align:center;background:#fff;border-radius:30px;padding:26px 16px;margin-top:16px;box-shadow:0 7px 0 #e6e6f2}
+.end .big{font-size:90px}
+.end h2{font-size:32px;margin:6px 0}
+.end .st{font-size:34px;letter-spacing:2px;word-break:break-all}
+.btnrow{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.btn{border:0;border-radius:30px;padding:13px 26px;font-size:22px;font-weight:800;color:#fff;background:#118ab2;box-shadow:0 5px 0 #0b5f7a}
+.btn.pink{background:#ef476f;box-shadow:0 5px 0 #b8304f}
+
+.qwords{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:4px 0 14px}
+.qw{border:0;border-radius:30px;padding:8px 16px;font-size:20px;font-weight:700;background:#fff;box-shadow:0 4px 0 #d9d9e8}
+.qw small{font-size:15px;color:#666;font-weight:600;margin-left:4px}
+.fcard{background:#fff;border-radius:22px;padding:14px;margin-bottom:14px;box-shadow:0 5px 0 #e6e6f2;border:3px solid transparent}
+.fcard.done{border-color:#38b000;background:#f3fff4}
+.fq{font-size:27px;font-weight:700;line-height:1.6}
+.blank{display:inline-block;min-width:80px;border-bottom:4px dashed #f77f00;text-align:center;color:#ef476f;padding:0 6px}
+.fcard.done .blank{border-bottom-color:#38b000;color:#2b9348}
+.fh{font-size:19px;color:#5a5f7a;margin:4px 0 10px}
+.fopts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.fopt{border:0;border-radius:16px;padding:12px 4px;font-size:24px;font-weight:800;background:#f1f3ff;box-shadow:0 5px 0 #cfd4f5}
+.fopt.ok{background:#b9fbc0;box-shadow:0 5px 0 #38b000}
+.fopt.bad{background:#ffc2c2;box-shadow:0 5px 0 #e63946;animation:shake .4s}
+.qfill{font-size:34px;font-weight:800;margin:14px 0 4px;line-height:1.5}
+.qhint{font-size:21px;color:#5a5f7a}
+.conf{position:fixed;top:-40px;font-size:30px;pointer-events:none;z-index:30;animation:fall 1.6s ease-in forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg);opacity:.6}}
+@media (max-width:560px){.tab{font-size:16px}.mbtn{font-size:20px}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script type="application/json" id="data">{"chapters": [{"id": "c1", "num": 1, "title": "मौसम आया पानी का", "emoji": "🌧️", "c1": "#4cc9f0", "c2": "#4361ee", "meanings": [{"hi": "बादल", "en": "cloud", "ml": "മേഘം", "em": "☁️", "vid": "c1-m0", "hid": "c1-h0"}, {"hi": "हरियाली", "en": "greenery", "ml": "പച്ചപ്പ്", "em": "🌿", "vid": "c1-m1", "hid": "c1-h1"}, {"hi": "स्वर", "en": "sound", "ml": "ശബ്ദം / സ്വരം", "em": "🎵", "vid": "c1-m2", "hid": "c1-h2"}, {"hi": "मौसम", "en": "weather", "ml": "കാലാവസ്ഥ", "em": "🌦️", "vid": "c1-m3", "hid": "c1-h3"}, {"hi": "किसान", "en": "farmer", "ml": "കർഷകൻ", "em": "👨‍🌾", "vid": "c1-m4", "hid": "c1-h4"}, {"hi": "गाँव", "en": "village", "ml": "ഗ്രാമം", "em": "🏡", "vid": "c1-m5", "hid": "c1-h5"}, {"hi": "धरती", "en": "earth", "ml": "ഭൂമി", "em": "🌍", "vid": "c1-m6", "hid": "c1-h6"}], "pics": [{"hi": "गमला", "en": "plant pot", "em": "🪴", "vid": "c1-p0"}, {"hi": "फूल", "en": "flower", "em": "🌸", "vid": "c1-p1"}, {"hi": "शेर", "en": "lion", "em": "🦁", "vid": "c1-p2"}, {"hi": "सेब", "en": "apple", "em": "🍎", "vid": "c1-p3"}, {"hi": "पेड़", "en": "tree", "em": "🌳", "vid": "c1-p4"}, {"hi": "छाता", "en": "umbrella", "em": "☂️", "vid": "c1-p5"}, {"hi": "तोता", "en": "parrot", "em": "🦜", "vid": "c1-p6"}, {"hi": "हाथी", "en": "elephant", "em": "🐘", "vid": "c1-p7"}, {"hi": "अंगूर", "en": "grapes", "em": "🍇", "vid": "c1-p8"}, {"hi": "मकड़ी", "en": "spider", "em": "🕷️", "vid": "c1-p9"}, {"hi": "जाला", "en": "spider web", "em": "🕸️", "vid": "c1-p10"}], "match": [{"hi": "बादल", "en": "cloud", "ml": "മേഘം", "em": "☁️", "vid": "c1-m0", "hid": "c1-h0"}, {"hi": "हरियाली", "en": "greenery", "ml": "പച്ചപ്പ്", "em": "🌿", "vid": "c1-m1", "hid": "c1-h1"}, {"hi": "स्वर", "en": "sound", "ml": "ശബ്ദം / സ്വരം", "em": "🎵", "vid": "c1-m2", "hid": "c1-h2"}, {"hi": "मौसम", "en": "weather", "ml": "കാലാവസ്ഥ", "em": "🌦️", "vid": "c1-m3", "hid": "c1-h3"}, {"hi": "किसान", "en": "farmer", "ml": "കർഷകൻ", "em": "👨‍🌾", "vid": "c1-m4", "hid": "c1-h4"}, {"hi": "गाँव", "en": "village", "ml": "ഗ്രാമം", "em": "🏡", "vid": "c1-m5", "hid": "c1-h5"}, {"hi": "धरती", "en": "earth", "ml": "ഭൂമി", "em": "🌍", "vid": "c1-m6", "hid": "c1-h6"}]}, {"id": "c2", "num": 2, "title": "बबलू-बंटी", "emoji": "👦🏽👦🏻", "c1": "#ffb703", "c2": "#fb8500", "meanings": [{"hi": "कक्षा", "en": "classroom", "ml": "ക്ലാസ് മുറി", "em": "🏫", "vid": "c2-m0", "hid": "c2-h0"}, {"hi": "मित्र", "en": "friend", "ml": "സുഹൃത്ത്", "em": "🤝", "vid": "c2-m1", "hid": "c2-h1"}, {"hi": "शुरू", "en": "beginning", "ml": "തുടക്കം", "em": "🏁", "vid": "c2-m2", "hid": "c2-h2"}, {"hi": "ज्ञान", "en": "knowledge", "ml": "അറിവ്", "em": "📚", "vid": "c2-m3", "hid": "c2-h3"}, {"hi": "श्रम", "en": "labour (hard work)", "ml": "അധ്വാനം", "em": "💪", "vid": "c2-m4", "hid": "c2-h4"}], "pics": [{"hi": "कक्षा", "en": "classroom", "em": "🏫", "vid": "c2-p0"}, {"hi": "मित्र", "en": "friend", "em": "🧑‍🤝‍🧑", "vid": "c2-p1"}, {"hi": "अध्यापक", "en": "teacher", "em": "👩‍🏫", "vid": "c2-p2"}, {"hi": "पत्र", "en": "letter", "em": "✉️", "vid": "c2-p3"}, {"hi": "आश्रम", "en": "ashram", "em": "🛖", "vid": "c2-p4"}], "match": [{"hi": "कक्षा", "en": "classroom", "ml": "ക്ലാസ് മുറി", "em": "🏫", "vid": "c2-m0", "hid": "c2-h0"}, {"hi": "मित्र", "en": "friend", "ml": "സുഹൃത്ത്", "em": "🤝", "vid": "c2-m1", "hid": "c2-h1"}, {"hi": "शुरू", "en": "beginning", "ml": "തുടക്കം", "em": "🏁", "vid": "c2-m2", "hid": "c2-h2"}, {"hi": "ज्ञान", "en": "knowledge", "ml": "അറിവ്", "em": "📚", "vid": "c2-m3", "hid": "c2-h3"}, {"hi": "श्रम", "en": "labour (hard work)", "ml": "അധ്വാനം", "em": "💪", "vid": "c2-m4", "hid": "c2-h4"}]}, {"id": "c3", "num": 3, "title": "किसका बोल", "emoji": "🐶", "c1": "#80ed99", "c2": "#2a9d8f", "meanings": [{"hi": "चुहिया", "en": "mouse", "ml": "എലി", "em": "🐭", "vid": "c3-m0", "hid": "c3-h0"}, {"hi": "बेटा", "en": "son", "ml": "മകൻ", "em": "👦", "vid": "c3-m1", "hid": "c3-h1"}, {"hi": "मुर्गा", "en": "cock", "ml": "പൂവൻകോഴി", "em": "🐓", "vid": "c3-m2", "hid": "c3-h2"}, {"hi": "कुत्ता", "en": "dog", "ml": "നായ", "em": "🐕", "vid": "c3-m3", "hid": "c3-h3"}, {"hi": "बिल्ली", "en": "cat", "ml": "പൂച്ച", "em": "🐈", "vid": "c3-m4", "hid": "c3-h4"}, {"hi": "पत्ता", "en": "leaf", "ml": "ഇല", "em": "🍃", "vid": "c3-m5", "hid": "c3-h5"}, {"hi": "उल्लू", "en": "owl", "ml": "മൂങ്ങ", "em": "🦉", "vid": "c3-m6", "hid": "c3-h6"}, {"hi": "मोमबत्ती", "en": "candle", "ml": "മെഴുകുതിരി", "em": "🕯️", "vid": "c3-m7", "hid": "c3-h7"}, {"hi": "पिल्ला", "en": "puppy", "ml": "നായ്ക്കുട്ടി", "em": "🐶", "vid": "c3-m8", "hid": "c3-h8"}, {"hi": "मक्खी", "en": "bee", "ml": "തേനീച്ച", "em": "🐝", "vid": "c3-m9", "hid": "c3-h9"}], "pics": [{"hi": "सिक्का", "en": "coin", "em": "🪙", "vid": "c3-p0"}, {"hi": "बिल्ली", "en": "cat", "em": "🐱", "vid": "c3-p1"}, {"hi": "पिल्ला", "en": "puppy", "em": "🐶", "vid": "c3-p2"}, {"hi": "चमगादड़", "en": "bat", "em": "🦇", "vid": "c3-p3"}, {"hi": "पत्ता", "en": "leaf", "em": "🍃", "vid": "c3-p4"}, {"hi": "मोमबत्ती", "en": "candle", "em": "🕯️", "vid": "c3-p5"}, {"hi": "उल्लू", "en": "owl", "em": "🦉", "vid": "c3-p6"}, {"hi": "गुल्लक", "en": "piggy bank", "em": "🐷", "vid": "c3-p7"}], "match": [{"hi": "सिक्का", "en": "coin", "em": "🪙", "vid": "c3-p0"}, {"hi": "बिल्ली", "en": "cat", "em": "🐱", "vid": "c3-p1"}, {"hi": "पिल्ला", "en": "puppy", "em": "🐶", "vid": "c3-p2"}, {"hi": "चमगादड़", "en": "bat", "em": "🦇", "vid": "c3-p3"}, {"hi": "पत्ता", "en": "leaf", "em": "🍃", "vid": "c3-p4"}, {"hi": "मोमबत्ती", "en": "candle", "em": "🕯️", "vid": "c3-p5"}, {"hi": "उल्लू", "en": "owl", "em": "🦉", "vid": "c3-p6"}, {"hi": "गुल्लक", "en": "piggy bank", "em": "🐷", "vid": "c3-p7"}]}, {"id": "c4", "num": 4, "title": "सैंडविच", "emoji": "🥪", "c1": "#ffd166", "c2": "#f77f00", "meanings": [{"hi": "शाम", "en": "evening", "ml": "വൈകുന്നേരം", "em": "🌇", "vid": "c4-m0", "hid": "c4-h0"}, {"hi": "नाश्ता", "en": "breakfast", "ml": "പ്രഭാതഭക്ഷണം", "em": "🍳", "vid": "c4-m1", "hid": "c4-h1"}, {"hi": "चीनी", "en": "sugar", "ml": "പഞ്ചസാര", "em": "<svg viewBox=\"0 0 64 64\" width=\"1em\" height=\"1em\"><rect x=\"13\" y=\"14\" width=\"13\" height=\"13\" rx=\"2\" fill=\"#fff\" stroke=\"#bbb\" stroke-width=\"1.5\"/><rect x=\"26\" y=\"8\" width=\"13\" height=\"13\" rx=\"2\" fill=\"#fff\" stroke=\"#bbb\" stroke-width=\"1.5\"/><rect x=\"38\" y=\"15\" width=\"13\" height=\"13\" rx=\"2\" fill=\"#fff\" stroke=\"#bbb\" stroke-width=\"1.5\"/><rect x=\"20\" y=\"20\" width=\"13\" height=\"13\" rx=\"2\" fill=\"#fff\" stroke=\"#bbb\" stroke-width=\"1.5\"/><rect x=\"32\" y=\"21\" width=\"13\" height=\"13\" rx=\"2\" fill=\"#fff\" stroke=\"#bbb\" stroke-width=\"1.5\"/><path d=\"M5 31h54c0 15-12 26-27 26S5 46 5 31z\" fill=\"#4cc9f0\"/><ellipse cx=\"32\" cy=\"31\" rx=\"27\" ry=\"3.5\" fill=\"#3a9fc4\"/><\/svg>", "vid": "c4-m2", "hid": "c4-h2"}, {"hi": "खीरा", "en": "cucumber", "ml": "വെള്ളരിക്ക", "em": "🥒", "vid": "c4-m3", "hid": "c4-h3"}, {"hi": "गाजर", "en": "carrot", "ml": "കാരറ്റ്", "em": "🥕", "vid": "c4-m4", "hid": "c4-h4"}, {"hi": "मक्खन", "en": "butter", "ml": "വെണ്ണ", "em": "🧈", "vid": "c4-m5", "hid": "c4-h5"}, {"hi": "स्वच्छता", "en": "cleanliness", "ml": "ശുചിത്വം", "em": "🧹", "vid": "c4-m6", "hid": "c4-h6"}, {"hi": "जल्दी", "en": "quickly", "ml": "വേഗം", "em": "⏩", "vid": "c4-m7", "hid": "c4-h7"}, {"hi": "स्वास्थ्य", "en": "health", "ml": "ആരോഗ്യം", "em": "💪", "vid": "c4-m8", "hid": "c4-h8"}, {"hi": "विद्यालय", "en": "school", "ml": "വിദ്യാലയം", "em": "🏫", "vid": "c4-m9", "hid": "c4-h9"}, {"hi": "क्या", "en": "what", "ml": "എന്ത്", "em": "❓", "vid": "c4-m10", "hid": "c4-h10"}, {"hi": "मध्याह्न", "en": "midday", "ml": "ഉച്ച", "em": "🕛", "vid": "c4-m11", "hid": "c4-h11"}, {"hi": "मध्यांतर", "en": "interval", "ml": "ഇടവേള", "em": "🔔", "vid": "c4-m12", "hid": "c4-h12"}, {"hi": "तुम्हारा", "en": "your", "ml": "നിന്റെ", "em": "👉", "vid": "c4-m13", "hid": "c4-h13"}, {"hi": "ध्यान", "en": "care", "ml": "ശ്രദ്ധ", "em": "🤲", "vid": "c4-m14", "hid": "c4-h14"}, {"hi": "मस्टर्ड", "en": "mustard", "ml": "കടുക്", "em": "🌭", "vid": "c4-m15", "hid": "c4-h15"}, {"hi": "स्लाइस", "en": "piece", "ml": "കഷണം", "em": "🍕", "vid": "c4-m16", "hid": "c4-h16"}, {"hi": "अच्छा", "en": "good", "ml": "നല്ലത്", "em": "👍", "vid": "c4-m17", "hid": "c4-h17"}, {"hi": "प्लेट", "en": "plate", "ml": "പ്ലേറ്റ്", "em": "🍽️", "vid": "c4-m18", "hid": "c4-h18"}, {"hi": "पेस्ट", "en": "paste", "ml": "പേസ്റ്റ് / അരച്ചത്", "em": "🥣", "vid": "c4-m19", "hid": "c4-h19"}, {"hi": "कब", "en": "when", "ml": "എപ്പോൾ", "em": "⏰", "vid": "c4-m20", "hid": "c4-h20"}, {"hi": "कहाँ", "en": "where", "ml": "എവിടെ", "em": "📍", "vid": "c4-m21", "hid": "c4-h21"}, {"hi": "कौन", "en": "who", "ml": "ആര്", "em": "🧑", "vid": "c4-m22", "hid": "c4-h22"}], "blanks": [{"q": "नाश्ते में ____ बना?", "hint": "नाश्ते में सैंडविच बना।", "a": "क्या", "vid": "c4-b0"}, {"q": "सैंडविच ____ लाया?", "hint": "सैंडविच पिताजी लाए।", "a": "कौन", "vid": "c4-b1"}, {"q": "राजू ____ से आया?", "hint": "राजू विद्यालय से आया।", "a": "कहाँ", "vid": "c4-b2"}, {"q": "राजू ____ आया?", "hint": "राजू शाम को आया।", "a": "कब", "vid": "c4-b3"}, {"q": "मध्यांतर ____ होता है?", "hint": "मध्यांतर मध्याह्न में होता है।", "a": "कब", "vid": "c4-b4"}, {"q": "चाबी ____ है?", "hint": "चाबी मेज़ पर है।", "a": "कहाँ", "vid": "c4-b5"}, {"q": "दरवाज़े पर ____ है?", "hint": "दरवाज़े पर माँ है।", "a": "कौन", "vid": "c4-b6"}, {"q": "तुम्हारे हाथ में ____ है?", "hint": "मेरे हाथ में गाजर है।", "a": "क्या", "vid": "c4-b7"}, {"q": "तुम नाश्ता ____ करते हो?", "hint": "मैं सुबह नाश्ता करता हूँ।", "a": "कब", "vid": "c4-b8"}, {"q": "तुम्हारा विद्यालय ____ है?", "hint": "मेरा विद्यालय गाँव में है।", "a": "कहाँ", "vid": "c4-b9"}, {"q": "सबसे अच्छा सैंडविच ____ बनाता है?", "hint": "माँ सबसे अच्छा सैंडविच बनाती है।", "a": "कौन", "vid": "c4-b10"}, {"q": "डिब्बे में ____ है?", "hint": "डिब्बे में चीनी है।", "a": "क्या", "vid": "c4-b11"}], "pics": [{"hi": "मधुमक्खी", "en": "bee", "em": "🐝", "vid": "c4-p0"}, {"hi": "चाबी", "en": "key", "em": "🔑", "vid": "c4-p1"}, {"hi": "मच्छर", "en": "mosquito", "em": "🦟", "vid": "c4-p2"}, {"hi": "मगरमच्छ", "en": "crocodile", "em": "🐊", "vid": "c4-p3"}, {"hi": "ऑक्टोपस", "en": "octopus", "em": "🐙", "vid": "c4-p4"}, {"hi": "चील", "en": "eagle", "em": "🦅", "vid": "c4-p5"}, {"hi": "डॉल्फ़िन", "en": "dolphin", "em": "🐬", "vid": "c4-p6"}, {"hi": "राजहंस", "en": "flamingo", "em": "🦩", "vid": "c4-p7"}, {"hi": "बिच्छू", "en": "scorpion", "em": "🦂", "vid": "c4-p8"}], "match": [{"hi": "विद्यालय", "en": "school", "ml": "വിദ്യാലയം", "em": "🏫", "vid": "c4-x0"}, {"hi": "क्या", "en": "what", "ml": "എന്ത്", "em": "❓", "vid": "c4-x1"}, {"hi": "स्वच्छता", "en": "cleanliness", "ml": "ശുചിത്വം", "em": "🧹", "vid": "c4-x2"}, {"hi": "मध्याह्न", "en": "midday", "ml": "ഉച്ച", "em": "🕛", "vid": "c4-x3"}, {"hi": "शाम", "en": "evening", "ml": "വൈകുന്നേരം", "em": "🌇", "vid": "c4-x4"}, {"hi": "मध्यांतर", "en": "interval", "ml": "ഇടവേള", "em": "🔔", "vid": "c4-x5"}]}, {"id": "c5", "num": 5, "title": "वर्षा रानी", "emoji": "🌈", "c1": "#c77dff", "c2": "#7b2cbf", "meanings": [{"hi": "वर्षा", "en": "rain", "ml": "മഴ", "em": "🌧️", "vid": "c5-m0", "hid": "c5-h0"}, {"hi": "रानी", "en": "queen", "ml": "റാണി", "em": "👸", "vid": "c5-m1", "hid": "c5-h1"}, {"hi": "खिड़की", "en": "window", "ml": "ജനൽ", "em": "🪟", "vid": "c5-m2", "hid": "c5-h2"}, {"hi": "दरवाज़ा", "en": "door", "ml": "വാതിൽ", "em": "🚪", "vid": "c5-m3", "hid": "c5-h3"}, {"hi": "भ्रमर", "en": "beetle (black bee)", "ml": "വണ്ട്", "em": "🪲", "vid": "c5-m4", "hid": "c5-h4"}, {"hi": "चंद्रमा", "en": "moon", "ml": "ചന്ദ്രൻ", "em": "🌙", "vid": "c5-m5", "hid": "c5-h5"}, {"hi": "चक्र", "en": "wheel", "ml": "ചക്രം", "em": "🛞", "vid": "c5-m6", "hid": "c5-h6"}, {"hi": "आज", "en": "today", "ml": "ഇന്ന്", "em": "📅", "vid": "c5-m7", "hid": "c5-h7"}, {"hi": "शान", "en": "pride", "ml": "അഭിമാനം", "em": "🏅", "vid": "c5-m8", "hid": "c5-h8"}], "pics": [{"hi": "ट्रक", "en": "truck", "em": "🚚", "vid": "c5-p0"}, {"hi": "रेलगाड़ी", "en": "train", "em": "🚆", "vid": "c5-p1"}, {"hi": "कार", "en": "car", "em": "🚗", "vid": "c5-p2"}, {"hi": "स्कूटर", "en": "scooter", "em": "🛵", "vid": "c5-p3"}, {"hi": "हवाई जहाज़", "en": "aeroplane", "em": "✈️", "vid": "c5-p4"}, {"hi": "साइकिल", "en": "cycle", "em": "🚲", "vid": "c5-p5"}, {"hi": "रिक्शा", "en": "rickshaw", "em": "🛺", "vid": "c5-p6"}, {"hi": "बस", "en": "bus", "em": "🚌", "vid": "c5-p7"}, {"hi": "मेट्रो", "en": "metro", "em": "🚇", "vid": "c5-p8"}, {"hi": "ढोल", "en": "drum", "em": "🥁", "vid": "c5-p9"}, {"hi": "पार्क", "en": "park", "em": "🏞️", "vid": "c5-p10"}, {"hi": "नमस्ते", "en": "namaste", "em": "🙏", "vid": "c5-p11"}, {"hi": "सूरज", "en": "sun", "em": "☀️", "vid": "c5-p12"}, {"hi": "बादल", "en": "cloud", "em": "☁️", "vid": "c5-p13"}, {"hi": "बारिश", "en": "rain", "em": "🌧️", "vid": "c5-p14"}, {"hi": "इंद्रधनुष", "en": "rainbow", "em": "🌈", "vid": "c5-p15"}, {"hi": "छाता", "en": "umbrella", "em": "☂️", "vid": "c5-p16"}], "match": [{"hi": "वर्षा", "en": "rain", "ml": "മഴ", "em": "🌧️", "vid": "c5-m0", "hid": "c5-h0"}, {"hi": "रानी", "en": "queen", "ml": "റാണി", "em": "👸", "vid": "c5-m1", "hid": "c5-h1"}, {"hi": "खिड़की", "en": "window", "ml": "ജനൽ", "em": "🪟", "vid": "c5-m2", "hid": "c5-h2"}, {"hi": "दरवाज़ा", "en": "door", "ml": "വാതിൽ", "em": "🚪", "vid": "c5-m3", "hid": "c5-h3"}, {"hi": "भ्रमर", "en": "beetle (black bee)", "ml": "വണ്ട്", "em": "🪲", "vid": "c5-m4", "hid": "c5-h4"}, {"hi": "चंद्रमा", "en": "moon", "ml": "ചന്ദ്രൻ", "em": "🌙", "vid": "c5-m5", "hid": "c5-h5"}, {"hi": "चक्र", "en": "wheel", "ml": "ചക്രം", "em": "🛞", "vid": "c5-m6", "hid": "c5-h6"}, {"hi": "आज", "en": "today", "ml": "ഇന്ന്", "em": "📅", "vid": "c5-m7", "hid": "c5-h7"}, {"hi": "शान", "en": "pride", "ml": "അഭിമാനം", "em": "🏅", "vid": "c5-m8", "hid": "c5-h8"}]}, {"id": "c6", "num": 6, "title": "रेल चली", "emoji": "🚂", "c1": "#ff6b6b", "c2": "#c9184a", "meanings": [{"hi": "चिड़ियाघर", "en": "zoo", "ml": "മൃഗശാല", "em": "🦓", "vid": "c6-m0", "hid": "c6-h0"}, {"hi": "तुम", "en": "you", "ml": "നീ", "em": "👉", "vid": "c6-m1", "hid": "c6-h1"}, {"hi": "गर्दन", "en": "neck", "ml": "കഴുത്ത്", "em": "🦒", "vid": "c6-m2", "hid": "c6-h2"}, {"hi": "निहारना", "en": "to look", "ml": "നോക്കുക", "em": "👀", "vid": "c6-m3", "hid": "c6-h3"}, {"hi": "दहाड़ना", "en": "roar", "ml": "ഗർജ്ജിക്കുക", "em": "🦁", "vid": "c6-m4", "hid": "c6-h4"}, {"hi": "चिंघाड़ना", "en": "trumpet (elephant's call)", "ml": "ചിന്നം വിളിക്കുക", "em": "🐘", "vid": "c6-m5", "hid": "c6-h5"}], "pics": [{"hi": "हाथी", "en": "elephant", "em": "🐘", "vid": "c6-p0"}, {"hi": "भालू", "en": "bear", "em": "🐻", "vid": "c6-p1"}, {"hi": "जिराफ़", "en": "giraffe", "em": "🦒", "vid": "c6-p2"}, {"hi": "गैंडा", "en": "rhino", "em": "🦏", "vid": "c6-p3"}, {"hi": "मोर", "en": "peacock", "em": "🦚", "vid": "c6-p4"}, {"hi": "शेर", "en": "lion", "em": "🦁", "vid": "c6-p5"}], "match": [{"hi": "चिड़ियाघर", "en": "zoo", "ml": "മൃഗശാല", "em": "🦓", "vid": "c6-m0", "hid": "c6-h0"}, {"hi": "तुम", "en": "you", "ml": "നീ", "em": "👉", "vid": "c6-m1", "hid": "c6-h1"}, {"hi": "गर्दन", "en": "neck", "ml": "കഴുത്ത്", "em": "🦒", "vid": "c6-m2", "hid": "c6-h2"}, {"hi": "निहारना", "en": "to look", "ml": "നോക്കുക", "em": "👀", "vid": "c6-m3", "hid": "c6-h3"}, {"hi": "दहाड़ना", "en": "roar", "ml": "ഗർജ്ജിക്കുക", "em": "🦁", "vid": "c6-m4", "hid": "c6-h4"}, {"hi": "चिंघाड़ना", "en": "trumpet (elephant's call)", "ml": "ചിന്നം വിളിക്കുക", "em": "🐘", "vid": "c6-m5", "hid": "c6-h5"}]}], "voice": [["c1-m0", "बादल, मतलब, cloud"], ["c1-h0", "बादल"], ["c1-m1", "हरियाली, मतलब, greenery"], ["c1-h1", "हरियाली"], ["c1-m2", "स्वर, मतलब, sound"], ["c1-h2", "स्वर"], ["c1-m3", "मौसम, मतलब, weather"], ["c1-h3", "मौसम"], ["c1-m4", "किसान, मतलब, farmer"], ["c1-h4", "किसान"], ["c1-m5", "गाँव, मतलब, village"], ["c1-h5", "गाँव"], ["c1-m6", "धरती, मतलब, earth"], ["c1-h6", "धरती"], ["c1-p0", "गमला"], ["c1-p1", "फूल"], ["c1-p2", "शेर"], ["c1-p3", "सेब"], ["c1-p4", "पेड़"], ["c1-p5", "छाता"], ["c1-p6", "तोता"], ["c1-p7", "हाथी"], ["c1-p8", "अंगूर"], ["c1-p9", "मकड़ी"], ["c1-p10", "जाला"], ["c2-m0", "कक्षा, मतलब, classroom"], ["c2-h0", "कक्षा"], ["c2-m1", "मित्र, मतलब, friend"], ["c2-h1", "मित्र"], ["c2-m2", "शुरू, मतलब, beginning"], ["c2-h2", "शुरू"], ["c2-m3", "ज्ञान, मतलब, knowledge"], ["c2-h3", "ज्ञान"], ["c2-m4", "श्रम, मतलब, labour"], ["c2-h4", "श्रम"], ["c2-p0", "कक्षा"], ["c2-p1", "मित्र"], ["c2-p2", "अध्यापक"], ["c2-p3", "पत्र"], ["c2-p4", "आश्रम"], ["c3-m0", "चुहिया, मतलब, mouse"], ["c3-h0", "चुहिया"], ["c3-m1", "बेटा, मतलब, son"], ["c3-h1", "बेटा"], ["c3-m2", "मुर्गा, मतलब, cock"], ["c3-h2", "मुर्गा"], ["c3-m3", "कुत्ता, मतलब, dog"], ["c3-h3", "कुत्ता"], ["c3-m4", "बिल्ली, मतलब, cat"], ["c3-h4", "बिल्ली"], ["c3-m5", "पत्ता, मतलब, leaf"], ["c3-h5", "पत्ता"], ["c3-m6", "उल्लू, मतलब, owl"], ["c3-h6", "उल्लू"], ["c3-m7", "मोमबत्ती, मतलब, candle"], ["c3-h7", "मोमबत्ती"], ["c3-m8", "पिल्ला, मतलब, puppy"], ["c3-h8", "पिल्ला"], ["c3-m9", "मक्खी, मतलब, bee"], ["c3-h9", "मक्खी"], ["c3-p0", "सिक्का"], ["c3-p1", "बिल्ली"], ["c3-p2", "पिल्ला"], ["c3-p3", "चमगादड़"], ["c3-p4", "पत्ता"], ["c3-p5", "मोमबत्ती"], ["c3-p6", "उल्लू"], ["c3-p7", "गुल्लक"], ["c4-m0", "शाम, मतलब, evening"], ["c4-h0", "शाम"], ["c4-m1", "नाश्ता, मतलब, breakfast"], ["c4-h1", "नाश्ता"], ["c4-m2", "चीनी, मतलब, sugar"], ["c4-h2", "चीनी"], ["c4-m3", "खीरा, मतलब, cucumber"], ["c4-h3", "खीरा"], ["c4-m4", "गाजर, मतलब, carrot"], ["c4-h4", "गाजर"], ["c4-m5", "मक्खन, मतलब, butter"], ["c4-h5", "मक्खन"], ["c4-m6", "स्वच्छता, मतलब, cleanliness"], ["c4-h6", "स्वच्छता"], ["c4-m7", "जल्दी, मतलब, quickly"], ["c4-h7", "जल्दी"], ["c4-m8", "स्वास्थ्य, मतलब, health"], ["c4-h8", "स्वास्थ्य"], ["c4-m9", "विद्यालय, मतलब, school"], ["c4-h9", "विद्यालय"], ["c4-m10", "क्या, मतलब, what"], ["c4-h10", "क्या"], ["c4-m11", "मध्याह्न, मतलब, midday"], ["c4-h11", "मध्याह्न"], ["c4-m12", "मध्यांतर, मतलब, interval"], ["c4-h12", "मध्यांतर"], ["c4-m13", "तुम्हारा, मतलब, your"], ["c4-h13", "तुम्हारा"], ["c4-m14", "ध्यान, मतलब, care"], ["c4-h14", "ध्यान"], ["c4-m15", "मस्टर्ड, मतलब, mustard"], ["c4-h15", "मस्टर्ड"], ["c4-m16", "स्लाइस, मतलब, piece"], ["c4-h16", "स्लाइस"], ["c4-m17", "अच्छा, मतलब, good"], ["c4-h17", "अच्छा"], ["c4-m18", "प्लेट, मतलब, plate"], ["c4-h18", "प्लेट"], ["c4-m19", "पेस्ट, मतलब, paste"], ["c4-h19", "पेस्ट"], ["c4-m20", "कब, मतलब, when"], ["c4-h20", "कब"], ["c4-m21", "कहाँ, मतलब, where"], ["c4-h21", "कहाँ"], ["c4-m22", "कौन, मतलब, who"], ["c4-h22", "कौन"], ["c4-p0", "मधुमक्खी"], ["c4-p1", "चाबी"], ["c4-p2", "मच्छर"], ["c4-p3", "मगरमच्छ"], ["c4-p4", "ऑक्टोपस"], ["c4-p5", "चील"], ["c4-p6", "डॉल्फ़िन"], ["c4-p7", "राजहंस"], ["c4-p8", "बिच्छू"], ["c4-b0", "नाश्ते में क्या बना? नाश्ते में सैंडविच बना।"], ["c4-b1", "सैंडविच कौन लाया? सैंडविच पिताजी लाए।"], ["c4-b2", "राजू कहाँ से आया? राजू विद्यालय से आया।"], ["c4-b3", "राजू कब आया? राजू शाम को आया।"], ["c4-b4", "मध्यांतर कब होता है? मध्यांतर मध्याह्न में होता है।"], ["c4-b5", "चाबी कहाँ है? चाबी मेज़ पर है।"], ["c4-b6", "दरवाज़े पर कौन है? दरवाज़े पर माँ है।"], ["c4-b7", "तुम्हारे हाथ में क्या है? मेरे हाथ में गाजर है।"], ["c4-b8", "तुम नाश्ता कब करते हो? मैं सुबह नाश्ता करता हूँ।"], ["c4-b9", "तुम्हारा विद्यालय कहाँ है? मेरा विद्यालय गाँव में है।"], ["c4-b10", "सबसे अच्छा सैंडविच कौन बनाता है? माँ सबसे अच्छा सैंडविच बनाती है।"], ["c4-b11", "डिब्बे में क्या है? डिब्बे में चीनी है।"], ["c4-x0", "विद्यालय"], ["c4-x1", "क्या"], ["c4-x2", "स्वच्छता"], ["c4-x3", "मध्याह्न"], ["c4-x4", "शाम"], ["c4-x5", "मध्यांतर"], ["c5-m0", "वर्षा, मतलब, rain"], ["c5-h0", "वर्षा"], ["c5-m1", "रानी, मतलब, queen"], ["c5-h1", "रानी"], ["c5-m2", "खिड़की, मतलब, window"], ["c5-h2", "खिड़की"], ["c5-m3", "दरवाज़ा, मतलब, door"], ["c5-h3", "दरवाज़ा"], ["c5-m4", "भ्रमर, मतलब, beetle"], ["c5-h4", "भ्रमर"], ["c5-m5", "चंद्रमा, मतलब, moon"], ["c5-h5", "चंद्रमा"], ["c5-m6", "चक्र, मतलब, wheel"], ["c5-h6", "चक्र"], ["c5-m7", "आज, मतलब, today"], ["c5-h7", "आज"], ["c5-m8", "शान, मतलब, pride"], ["c5-h8", "शान"], ["c5-p0", "ट्रक"], ["c5-p1", "रेलगाड़ी"], ["c5-p2", "कार"], ["c5-p3", "स्कूटर"], ["c5-p4", "हवाई जहाज़"], ["c5-p5", "साइकिल"], ["c5-p6", "रिक्शा"], ["c5-p7", "बस"], ["c5-p8", "मेट्रो"], ["c5-p9", "ढोल"], ["c5-p10", "पार्क"], ["c5-p11", "नमस्ते"], ["c5-p12", "सूरज"], ["c5-p13", "बादल"], ["c5-p14", "बारिश"], ["c5-p15", "इंद्रधनुष"], ["c5-p16", "छाता"], ["c6-m0", "चिड़ियाघर, मतलब, zoo"], ["c6-h0", "चिड़ियाघर"], ["c6-m1", "तुम, मतलब, you"], ["c6-h1", "तुम"], ["c6-m2", "गर्दन, मतलब, neck"], ["c6-h2", "गर्दन"], ["c6-m3", "निहारना, मतलब, to look"], ["c6-h3", "निहारना"], ["c6-m4", "दहाड़ना, मतलब, roar"], ["c6-h4", "दहाड़ना"], ["c6-m5", "चिंघाड़ना, मतलब, trumpet"], ["c6-h5", "चिंघाड़ना"], ["c6-p0", "हाथी"], ["c6-p1", "भालू"], ["c6-p2", "जिराफ़"], ["c6-p3", "गैंडा"], ["c6-p4", "मोर"], ["c6-p5", "शेर"], ["pr-pic", "इस चित्र का हिंदी नाम क्या है?"], ["pr-hi", "इसे हिंदी में क्या कहते हैं?"], ["pr-fill", "सही प्रश्न-शब्द भरो।"], ["pr-ok0", "शाबाश!"], ["pr-ok1", "बहुत बढ़िया! सही जवाब!"], ["pr-ok2", "वाह! तुम तो बहुत होशियार हो!"], ["pr-no", "कोई बात नहीं! सही जवाब हरे रंग में है।"], ["pr-try", "फिर से कोशिश करो!"], ["pr-end", "शाबाश! खेल पूरा हुआ।"]]}</script>
+<script>
+const D = JSON.parse(document.getElementById('data').textContent);
+const TEXT = {};
+D.voice.forEach(([id, t]) => TEXT[id] = t);
+const app = document.getElementById('app');
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const others = (arr, n, not) => shuffle(arr.filter(x => x !== not && x.hi !== not.hi)).slice(0, n);
+
+const speaker = new Audio();
+let token = 0, pend = null;
+function stopAudio() {
+  token++;
+  speaker.pause();
+  if (pend) { const p = pend; pend = null; p(false); }
+}
+function say(id) {
+  stopAudio();
+  const my = token;
+  return new Promise(resolve => {
+    pend = resolve;
+    let remote = false;
+    const fin = ok => {
+      if (my !== token) return;
+      speaker.onended = speaker.onerror = null;
+      pend = null;
+      resolve(ok);
+    };
+    speaker.onended = () => fin(true);
+    speaker.onerror = () => {
+      if (my !== token) return;
+      if (!remote && TEXT[id]) {
+        remote = true;
+        speaker.src = 'https://translate.googleapis.com/translate_tts?ie=UTF-8&client=gtx&tl=hi&q=' + encodeURIComponent(TEXT[id]);
+        speaker.play().catch(e => { if (e.name === 'NotAllowedError') fin(false); });
+      } else fin(false);
+    };
+    speaker.src = 'voice/' + id + '.mp3';
+    speaker.play().catch(e => { if (e.name === 'NotAllowedError') fin(false); });
+  });
+}
+
+const best = k => +(localStorage.getItem('h3-best-' + k) || 0);
+const setBest = (k, v) => { if (v > best(k)) localStorage.setItem('h3-best-' + k, v); };
+
+let view = {name: 'home'};
+function go(v) { stopAudio(); if (v.name !== 'ch' || v.tab !== 'fill') fillDone = new Set(); view = v; render(); window.scrollTo(0, 0); }
+function render() {
+  if (view.name === 'home') home();
+  else if (view.name === 'ch') chapter();
+  else if (view.name === 'quiz') quizView();
+}
+
+function home() {
+  const keys = D.chapters.map(c => c.id).concat(['all']);
+  const total = keys.reduce((s, k) => s + best(k), 0);
+  app.innerHTML = `
+    <div class="hero">
+      <div class="rb">📚</div>
+      <h1>हिंदी मधुकिरण</h1>
+      <p>कक्षा 3 • पाठ 1 से 6 • पढ़ो, सुनो, खेलो!</p>
+      <div class="total">⭐ कुल सितारे: <b>${total}</b></div>
+    </div>
+    <div class="grid">
+      ${D.chapters.map((c, i) => `
+        <button class="ccard" style="--c1:${c.c1};--c2:${c.c2}" onclick="go({name:'ch',i:${i},tab:'mean'})">
+          <span class="pnum">पाठ ${c.num}</span>
+          <span class="cem">${c.emoji}</span>
+          <span class="ct">${esc(c.title)}</span>
+          <span class="ctype">${c.meanings.length} अर्थ • ${c.pics.length} चित्र</span>
+          <span class="cstar">⭐ ${best(c.id)}</span>
+        </button>`).join('')}
+      <button class="ccard" style="--c1:#ffb703;--c2:#ef476f" onclick="startQuiz('all')">
+        <span class="pnum">सब पाठ</span><span class="cem">🏆</span><span class="ct">बड़ा क्विज़</span><span class="ctype">पाठ 1–6 मिलाकर</span><span class="cstar">⭐ ${best('all')}</span>
+      </button>
+    </div>`;
+}
+
+function bar(c1, c2, small, title, em, backTo) {
+  return `<div class="bar" style="--c1:${c1};--c2:${c2}">
+    <button class="backbtn" onclick='go(${JSON.stringify(backTo)})'>⬅️</button>
+    <div class="bt"><small>${small}</small><b>${esc(title)}</b></div>
+    <span class="bem">${em}</span></div>`;
+}
+
+let hideMeanings = false;
+function chapter() {
+  const c = D.chapters[view.i];
+  const tabs = [['mean', '📝 अर्थ'], ['pics', '🖼️ चित्र'], ['match', '🔗 मिलान']].concat(c.blanks ? [['fill', '✍️ भरो']] : [], [['game', '🎮 खेल']]);
+  let body = '';
+  if (view.tab === 'mean') {
+    body = `<div class="tools">
+        <button class="pill" onclick="playAll()">▶ सब सुनो</button>
+        <button class="pill alt" onclick="hideMeanings=!hideMeanings;render()">${hideMeanings ? '👀 अर्थ दिखाओ' : '🙈 अर्थ छिपाओ (टेस्ट)'}</button>
+      </div>
+      <div class="mlist ${hideMeanings ? 'hide' : ''}">
+      ${c.meanings.map((m, k) => `
+        <div class="mrow" id="mr${k}" onclick="tapRow(this,${k})">
+          <span class="mem">${m.em}</span>
+          <div class="mtx"><b>${m.hi}</b><span class="men">${esc(m.en)}</span><span class="ml mml">${m.ml}</span><span class="mhint">छुओ — अर्थ देखो 👆</span></div>
+          <button class="spk" onclick="event.stopPropagation();tapRow(this.parentNode,${k})">🔊</button>
+        </div>`).join('')}
+      </div>`;
+  } else if (view.tab === 'pics') {
+    body = `<p class="tip">चित्र देखो, हिंदी नाम सोचो, फिर कार्ड छुओ! 👆</p>
+      <div class="cards" style="--c1:${c.c1};--c2:${c.c2}">
+      ${c.pics.map(p => `
+        <div class="card" onclick="flip(this,'${p.vid}')">
+          <div class="in">
+            <div class="f front"><span class="wem">${p.em}</span><span class="wen">${esc(p.en)}</span><i>हिंदी में?</i></div>
+            <div class="f fback"><span class="wem">${p.em}</span><b>${p.hi}</b></div>
+          </div>
+        </div>`).join('')}
+      </div>`;
+  } else if (view.tab === 'match') {
+    body = matchBody(c);
+  } else if (view.tab === 'fill') {
+    body = fillBody(c);
+  }
+  app.innerHTML = bar(c.c1, c.c2, `पाठ ${c.num}`, c.title, c.emoji, {name: 'home'}) + `
+    <div class="tabs" style="--n:${tabs.length}">${tabs.map(([k, l]) => `<button class="tab ${view.tab === k ? 'on' : ''}" onclick="${k === 'game' ? `startQuiz('${c.id}')` : `go({name:'ch',i:${view.i},tab:'${k}'})`}">${l}</button>`).join('')}</div>
+    ${body}`;
+}
+
+function hl(k) {
+  document.querySelectorAll('.mrow').forEach((el, j) => el.classList.toggle('hl', j === k));
+  const el = document.getElementById('mr' + k);
+  if (el) el.scrollIntoView({behavior: 'smooth', block: 'center'});
+}
+function tapRow(el, k) {
+  const c = D.chapters[view.i];
+  el.classList.add('open');
+  hl(k);
+  say(c.meanings[k].vid).then(ok => { if (ok) hl(-1); });
+}
+async function playAll() {
+  const c = D.chapters[view.i];
+  for (let k = 0; k < c.meanings.length; k++) {
+    document.getElementById('mr' + k).classList.add('open');
+    hl(k);
+    if (!(await say(c.meanings[k].vid))) return;
+  }
+  hl(-1);
+}
+function flip(el, id) { el.classList.toggle('flipped'); say(id); }
+
+const QW = ['कब', 'कहाँ', 'क्या', 'कौन'];
+let fillDone = new Set();
+function blankHtml(q, filled) {
+  return esc(q).replace('____', `<span class="blank">${filled ? filled : '&nbsp;?&nbsp;'}</span>`);
+}
+function fillBody(c) {
+  const chips = QW.map(w => {
+    const k = c.meanings.findIndex(m => m.hi === w);
+    const m = c.meanings[k];
+    return `<button class="qw" onclick="say('${m.hid}')">${m.em} ${w}<small>${esc(m.en)}</small></button>`;
+  }).join('');
+  const all = fillDone.size === c.blanks.length;
+  return `<p class="tip">सही प्रश्न-शब्द चुनकर खाली स्थान भरो 👇</p>
+    <div class="qwords">${chips}</div>
+    ${all ? `<div class="end" style="margin:0 0 16px"><div class="big">🏆</div><h2>शाबाश! सब सही भरे!</h2>
+      <div class="btnrow"><button class="btn pink" onclick="fillDone=new Set();render()">🔁 फिर से करो</button></div></div>` : ''}
+    ${c.blanks.map((b, k) => {
+      const done = fillDone.has(k);
+      return `<div class="fcard ${done ? 'done' : ''}" id="fc${k}">
+        <div class="fq">${k + 1}. ${blankHtml(b.q, done ? b.a : '')}</div>
+        <div class="fh">उत्तर: ${esc(b.hint)}</div>
+        <div class="fopts">${QW.map(w => `<button class="fopt ${done && w === b.a ? 'ok' : ''}" ${done ? 'disabled' : ''} onclick="fillPick(${k},this,'${w}')">${w}</button>`).join('')}</div>
+      </div>`;
+    }).join('')}`;
+}
+function fillPick(k, btn, w) {
+  const c = D.chapters[view.i], b = c.blanks[k];
+  if (fillDone.has(k)) return;
+  if (w === b.a) {
+    fillDone.add(k);
+    const card = document.getElementById('fc' + k);
+    card.classList.add('done');
+    card.querySelector('.blank').textContent = w;
+    btn.classList.add('ok');
+    card.querySelectorAll('.fopt').forEach(x => x.disabled = true);
+    confetti();
+    say(b.vid);
+    if (fillDone.size === c.blanks.length) setTimeout(() => { render(); window.scrollTo(0, 0); say('pr-ok1'); }, 2600);
+  } else {
+    btn.classList.add('bad');
+    setTimeout(() => btn.classList.remove('bad'), 450);
+    say('pr-try');
+  }
+}
+
+let M = null;
+function matchBody(c) {
+  if (!M || M.cid !== c.id) {
+    const all = shuffle(c.match);
+    const rounds = Math.ceil(all.length / 6), size = Math.ceil(all.length / rounds);
+    M = {cid: c.id, rounds: [], r: 0, sel: null, done: 0};
+    for (let i = 0; i < all.length; i += size) M.rounds.push(all.slice(i, i + size));
+    M.left = shuffle(M.rounds[0]);
+    M.right = shuffle(M.rounds[0]);
+  }
+  const R = M.rounds[M.r];
+  if (M.done === R.length) {
+    const last = M.r + 1 >= M.rounds.length;
+    return `<div class="end"><div class="big">🎉</div><h2>शाबाश! सब जोड़े सही!</h2>
+      <div class="btnrow">
+        ${last ? '' : `<button class="btn pink" onclick="nextRound()">अगला राउंड ➜</button>`}
+        <button class="btn" onclick="M=null;render()">🔁 फिर से खेलो</button>
+      </div></div>`;
+  }
+  return `<p class="mround">हिंदी शब्द छुओ, फिर उसका English अर्थ छुओ 👆 ${M.rounds.length > 1 ? `• राउंड ${M.r + 1}/${M.rounds.length}` : ''}</p>
+    <div class="mcols">
+      <div class="mcol"><h3>हिंदी</h3>${M.left.map(p => `<button class="mbtn" data-hi="${p.hi}" onclick="pickL(this)">${p.hi}</button>`).join('')}</div>
+      <div class="mcol"><h3>English</h3>${M.right.map(p => `<button class="mbtn" data-hi="${p.hi}" onclick="pickR(this)">${esc(p.en)}</button>`).join('')}</div>
+    </div>`;
+}
+function pickL(b) {
+  if (b.classList.contains('done')) return;
+  document.querySelectorAll('.mcol:first-child .mbtn').forEach(x => x.classList.remove('sel'));
+  b.classList.add('sel');
+  M.sel = b;
+  const p = M.rounds[M.r].find(x => x.hi === b.dataset.hi);
+  say(p.hid || p.vid);
+}
+function pickR(b) {
+  if (b.classList.contains('done')) return;
+  if (!M.sel) { b.classList.add('bad'); setTimeout(() => b.classList.remove('bad'), 400); return; }
+  if (b.dataset.hi === M.sel.dataset.hi) {
+    [b, M.sel].forEach(x => { x.classList.remove('sel'); x.classList.add('done'); });
+    M.sel = null;
+    M.done++;
+    if (M.done === M.rounds[M.r].length) { confetti(); say('pr-ok1'); setTimeout(render, 900); }
+    else say('pr-ok0');
+  } else {
+    [b, M.sel].forEach(x => x.classList.add('bad'));
+    const s = M.sel;
+    setTimeout(() => { b.classList.remove('bad'); s.classList.remove('bad'); }, 400);
+    say('pr-try');
+  }
+}
+function nextRound() {
+  M.r++; M.done = 0; M.sel = null;
+  M.left = shuffle(M.rounds[M.r]);
+  M.right = shuffle(M.rounds[M.r]);
+  render();
+}
+
+function chapterQs(c) {
+  const Mn = c.meanings, P = c.pics, qs = [];
+  shuffle(Mn).slice(0, 4).forEach(m => qs.push({
+    prompt: 'इसका अर्थ क्या है?', audio: m.hid,
+    vis: `<div class="qword">${m.hi}</div>`,
+    ans: m.hi, opts: shuffle([m, ...others(Mn, 2, m)]).map(x => ({k: x.hi, h: `${esc(x.en)}<small class="ml">${x.ml}</small>`}))
+  }));
+  shuffle(Mn).slice(0, 3).forEach(m => qs.push({
+    prompt: 'इसे हिंदी में क्या कहते हैं?', audio: 'pr-hi',
+    vis: `<div class="qen">${esc(m.en)}</div>`,
+    ans: m.hi, opts: shuffle([m, ...others(Mn, 2, m)]).map(x => ({k: x.hi, h: x.hi}))
+  }));
+  shuffle(P).slice(0, 4).forEach(p => qs.push({
+    prompt: 'इस चित्र का हिंदी नाम क्या है?', audio: 'pr-pic',
+    vis: `<div class="qvis">${p.em}</div><div class="qen" style="font-size:24px">${esc(p.en)}</div>`,
+    ans: p.hi, opts: shuffle([p, ...others(P, 2, p)]).map(x => ({k: x.hi, h: x.hi}))
+  }));
+  const fills = shuffle(c.blanks || []).slice(0, 3).map(b => ({
+    prompt: 'सही प्रश्न-शब्द भरो:', audio: 'pr-fill',
+    vis: `<div class="qfill">${blankHtml(b.q, '')}</div><div class="qhint">उत्तर: ${esc(b.hint)}</div>`,
+    ans: b.a, opts: QW.map(o => ({k: o, h: o}))
+  }));
+  return shuffle(shuffle(qs).slice(0, 10 - fills.length).concat(fills));
+}
+
+let Q = null;
+function startQuiz(key) {
+  let qs, back, title, c1 = '#ffb703', c2 = '#ef476f', em = '🏆', small = 'पाठ 1–6';
+  if (key === 'all') {
+    qs = shuffle(D.chapters.flatMap(chapterQs)).slice(0, 15);
+    back = {name: 'home'}; title = 'बड़ा क्विज़';
+  } else {
+    const i = D.chapters.findIndex(c => c.id === key), c = D.chapters[i];
+    qs = chapterQs(c); back = {name: 'ch', i, tab: 'mean'}; title = c.title;
+    c1 = c.c1; c2 = c.c2; em = c.emoji; small = `पाठ ${c.num} • खेल`;
+  }
+  Q = {key, qs, i: 0, score: 0, answered: false, back, title, c1, c2, em, small};
+  go({name: 'quiz'});
+}
+function quizView() {
+  const head = bar(Q.c1, Q.c2, Q.small, Q.title, Q.em, Q.back);
+  const q = Q.qs[Q.i];
+  if (!q) return endView(head);
+  app.innerHTML = head + `
+    <div class="qhead">
+      <div class="prog"><i style="width:${Q.i / Q.qs.length * 100}%"></i></div>
+      <div class="score">⭐ <span id="sc">${Q.score}</span></div>
+    </div>
+    <div class="qcard">
+      <div class="qp"><button class="spk" onclick="say('${q.audio}')">🔊</button><span>${esc(q.prompt)}</span></div>
+      ${q.vis}
+      <div class="opts">${q.opts.map((o, j) => `<button class="opt" onclick="answer(this,${j})">${o.h}</button>`).join('')}</div>
+      <button class="next" id="next" onclick="nextQ()">${Q.i + 1 < Q.qs.length ? 'आगे ➜' : 'नतीजा देखो 🎉'}</button>
+    </div>`;
+  setTimeout(() => { if (view.name === 'quiz' && Q.qs[Q.i] === q && !Q.answered) say(q.audio); }, 350);
+}
+function answer(btn, j) {
+  if (Q.answered) return;
+  Q.answered = true;
+  const q = Q.qs[Q.i], btns = [...document.querySelectorAll('.opt')];
+  btns.forEach(b => b.disabled = true);
+  if (q.opts[j].k === q.ans) {
+    btn.classList.add('ok');
+    Q.score++;
+    document.getElementById('sc').textContent = Q.score;
+    confetti();
+    say('pr-ok' + Math.floor(Math.random() * 3));
+  } else {
+    btn.classList.add('bad');
+    btns.forEach((b, k) => { if (q.opts[k].k === q.ans) b.classList.add('ok'); });
+    say('pr-no');
+  }
+  document.getElementById('next').classList.add('show');
+}
+function nextQ() { stopAudio(); Q.i++; Q.answered = false; render(); window.scrollTo(0, 0); }
+function endView(head) {
+  const n = Q.qs.length, s = Q.score;
+  setBest(Q.key, s);
+  const [big, msg] = s >= n * 0.8 ? ['🏆', 'वाह! तुम चैंपियन हो!'] : s >= n * 0.5 ? ['👍', 'अच्छा! थोड़ा और अभ्यास करो।'] : ['💪', 'कोई बात नहीं, फिर से खेलो!'];
+  app.innerHTML = head + `
+    <div class="end">
+      <div class="big">${big}</div>
+      <h2>${msg}</h2>
+      <p style="font-size:24px">${n} में से <b>${s}</b> सही</p>
+      <div class="st">${'⭐'.repeat(s)}${'☆'.repeat(n - s)}</div>
+      <div class="btnrow">
+        <button class="btn pink" onclick="startQuiz('${Q.key}')">🔁 फिर खेलो</button>
+        <button class="btn" onclick='go(${JSON.stringify(Q.back)})'>⬅ वापस</button>
+      </div>
+    </div>`;
+  if (s >= n * 0.5) confetti();
+  say('pr-end');
+}
+function confetti() {
+  const em = ['⭐', '🎉', '✨', '🌟', '🎈', '💛'];
+  for (let i = 0; i < 22; i++) {
+    const s = document.createElement('span');
+    s.className = 'conf';
+    s.textContent = em[i % em.length];
+    s.style.left = Math.random() * 100 + 'vw';
+    s.style.animationDelay = Math.random() * 0.4 + 's';
+    document.body.appendChild(s);
+    setTimeout(() => s.remove(), 2200);
+  }
+}
+
+render();
+</script>
+</body>
+</html>
