@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Coming soon · Joshua</title>
+<style>
+body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:"Avenir Next","Segoe UI",system-ui,sans-serif;background:linear-gradient(160deg,#e0f7fa,#fff3e0);color:#2b2350;text-align:center;padding:24px}
+.box{background:#fff;border-radius:28px;padding:36px 28px;box-shadow:0 10px 0 #e6dff7;max-width:420px}
+.em{font-size:64px}
+h1{margin:8px 0 6px;font-size:28px}
+p{margin:0;color:#6a5f8f;font-size:17px}
+a{display:inline-block;margin-top:20px;background:linear-gradient(135deg,#4361ee,#7b2cbf);color:#fff;text-decoration:none;font-weight:800;padding:12px 22px;border-radius:99px;box-shadow:0 5px 0 rgba(67,97,238,.35)}
+</style>
+</head>
+<body>
+<div class="box">
+  <div class="em" id="em">🚧</div>
+  <h1 id="t">Coming soon</h1>
+  <p>This subject will be added next. Until then, try English or Hindi!</p>
+  <a href="../">🏠 Back to subjects</a>
+</div>
+<script>
+const map = {
+  malayalam: ['📗', 'Malayalam'],
+  science: ['🔬', 'Science'],
+  social: ['🌍', 'Social'],
+  computer: ['💻', 'Computer'],
+  gk: ['🧠', 'GK'],
+  value: ['💛', 'Value Education'],
+};
+const key = location.pathname.replace(/\/+$/, '').split('/').pop();
+if (map[key]) {
+  document.getElementById('em').textContent = map[key][0];
+  document.getElementById('t').textContent = map[key][1] + ' — Coming soon';
+  document.title = map[key][1] + ' · Coming soon';
+}
+</script>
+</body>
+</html>
