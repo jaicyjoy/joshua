@@ -1,40 +1,57 @@
 <!doctype html>
-<html lang="en">
+<html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Coming soon · Joshua</title>
+<title>Subject</title>
 <style>
-body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:"Avenir Next","Segoe UI",system-ui,sans-serif;background:linear-gradient(160deg,#e0f7fa,#fff3e0);color:#2b2350;text-align:center;padding:24px}
-.box{background:#fff;border-radius:28px;padding:36px 28px;box-shadow:0 10px 0 #e6dff7;max-width:420px}
-.em{font-size:64px}
-h1{margin:8px 0 6px;font-size:28px}
-p{margin:0;color:#6a5f8f;font-size:17px}
-a{display:inline-block;margin-top:20px;background:linear-gradient(135deg,#4361ee,#7b2cbf);color:#fff;text-decoration:none;font-weight:800;padding:12px 22px;border-radius:99px;box-shadow:0 5px 0 rgba(67,97,238,.35)}
+*{box-sizing:border-box}body{margin:0;font-family:"Avenir Next","Segoe UI",system-ui,sans-serif;background:linear-gradient(180deg,#e8f4ff,#fff5eb);min-height:100vh;color:#1f2340}
+body.hi{font-family:"Noto Sans Devanagari","Mangal",system-ui,sans-serif}
+body.ml{font-family:"Noto Sans Malayalam","Malayalam MN",system-ui,sans-serif}
+.wrap{max-width:720px;margin:0 auto;padding:18px 14px 50px}
+.top a{width:44px;height:44px;border-radius:50%;background:#fff;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;font-size:20px;box-shadow:0 4px 0 #e6e3f7}
+.hero{text-align:center;padding:12px}.hero .big{font-size:56px}h1{margin:4px 0;font-size:30px;color:var(--c2,#333)}p{color:#6a5f8f}
+.grid{display:grid;gap:12px;margin-top:16px}
+.card{display:block;border-radius:22px;padding:18px;color:#fff;text-decoration:none;box-shadow:0 7px 0 rgba(0,0,0,.15)}
+.card b{display:block;font-size:22px;margin-top:6px}.card small{display:block;opacity:.95;margin-top:4px}
 </style>
 </head>
 <body>
-<div class="box">
-  <div class="em" id="em">🚧</div>
-  <h1 id="t">Coming soon</h1>
-  <p>This subject will be added next. Until then, try English or Hindi!</p>
-  <a href="../">🏠 Back to subjects</a>
+<div class="wrap">
+  <div class="top"><a href="../">🏠</a></div>
+  <div class="hero"><div class="big" id="em">📘</div><h1 id="t">Subject</h1><p id="s">Choose what to practise</p></div>
+  <div class="grid" id="g"></div>
 </div>
 <script>
-const map = {
-  malayalam: ['📗', 'Malayalam'],
-  science: ['🔬', 'Science'],
-  social: ['🌍', 'Social'],
-  computer: ['💻', 'Computer'],
-  gk: ['🧠', 'GK'],
-  value: ['💛', 'Value Education'],
+const Q = new URLSearchParams(location.search);
+const cfg = {
+  'joshua-en': {em:'📘', t:'English · Class 3', s:'Lessons, grammar, dictation and reading', c1:'#ff4f8b', c2:'#c2185b', lang:'en',
+    cards:[[`📖 Read with me`,'read/','Big words · listen · follow'],[`📚 Lessons & games`,'lessons/','Stories · grammar · spelling'],[`📝 Dictation`,'dictation/','Listen and write']]},
+  'joshua-hi': {em:'📕', t:'हिंदी · कक्षा 3', s:'पढ़ना, पाठ और अभ्यास', c1:'#fb8500', c2:'#dc2f02', lang:'hi',
+    cards:[[`📖 पढ़ो`,'read/','शब्द सुनो और साथ में पढ़ो'],[`📚 मधुकिरण`,'lessons/','पाठ 1–6']]},
+  'joshua-ml': {em:'📗', t:'മലയാളം · ക്ലാസ് 3', s:'വായനയും അക്ഷരങ്ങളും', c1:'#2a9d8f', c2:'#007f5f', lang:'ml',
+    cards:[[`📖 വായിക്കാം`,'read/','അക്ഷരം · വാക്ക് · വാക്യം']]},
+  'eshan-en': {em:'📘', t:'English · Class 8', s:'Poorvi dictation and reading', c1:'#4361ee', c2:'#7b2cbf', lang:'en',
+    cards:[[`📖 Read with me`,'read/','Follow lines · hard words'],[`📝 Dictation`,'dictation/','Poorvi spelling practice']]},
+  'eshan-hi': {em:'📕', t:'हिंदी · कक्षा 8', s:'श्रुतलेख, पढ़ना और रिवीज़न', c1:'#e85d04', c2:'#9d0208', lang:'hi',
+    cards:[[`📖 पढ़ो`,'read/','श्रुतलेख शब्द · पठन'],[`📝 श्रुतलेख`,'dictation/','सुनो और लिखो'],[`📚 पूरा रिवीज़न`,'../hindi-revision/','Malhar app']]},
+  'eshan-ml': {em:'📗', t:'മലയാളം · ക്ലാസ് 8', s:'വായനയും റിവിഷനും', c1:'#2a9d8f', c2:'#007f5f', lang:'ml',
+    cards:[[`📖 വായിക്കാം`,'read/','സാരം · അർത്ഥം · വാക്യം'],[`📚 മുഴുവൻ റിവിഷൻ`,'revision/','നാളത്തെ പരീക്ഷ notes']]},
 };
-const key = location.pathname.replace(/\/+$/, '').split('/').pop();
-if (map[key]) {
-  document.getElementById('em').textContent = map[key][0];
-  document.getElementById('t').textContent = map[key][1] + ' — Coming soon';
-  document.title = map[key][1] + ' · Coming soon';
-}
+const id = 'joshua-ml';
+const C = cfg[id] || cfg['joshua-en'];
+document.body.style.setProperty('--c2', C.c2);
+if (C.lang === 'hi') document.body.classList.add('hi');
+if (C.lang === 'ml') document.body.classList.add('ml');
+document.title = C.t;
+document.getElementById('em').textContent = C.em;
+document.getElementById('t').textContent = C.t;
+document.getElementById('s').textContent = C.s;
+document.getElementById('g').innerHTML = C.cards.map(([title, href, sub], i) => {
+  const colors = [[C.c1,C.c2],['#4361ee','#7b2cbf'],['#06d6a0','#118ab2'],['#ff9f1c','#e76f51']];
+  const [a,b] = colors[i % colors.length];
+  return `<a class="card" style="background:linear-gradient(135deg,${a},${b})" href="${href}"><b>${title}</b><small>${sub}</small></a>`;
+}).join('');
 </script>
 </body>
 </html>
