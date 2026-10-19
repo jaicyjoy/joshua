@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>We Eat Stories · Class 3</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:"Chalkboard SE","Comic Sans MS","Avenir Next",system-ui,sans-serif;color:#1f2340;background:linear-gradient(180deg,#ffe3ef,#fff3d6 50%,#d9f4ff);min-height:100vh;line-height:1.45}
+button,input{font-family:inherit;cursor:pointer}
+#app{max-width:900px;margin:0 auto;padding:12px 14px 70px}
+.top{position:sticky;top:6px;z-index:10;display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:22px;color:#fff;background:linear-gradient(135deg,#ff4f8b,#c2185b);box-shadow:0 6px 0 rgba(0,0,0,.12)}
+.top a,.top button{border:0;background:#fff;width:44px;height:44px;border-radius:50%;font-size:20px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:#333;flex:none}
+.top .tt{flex:1}.top .tt small{display:block;font-size:12px;font-weight:700;opacity:.9}.top .tt b{display:block;font-size:17px}
+.chip{background:rgba(255,255,255,.25);border-radius:99px;padding:4px 10px;font-weight:800;font-size:13px}
+.banner{border-radius:18px;padding:12px 14px;margin:12px 0;font-weight:800}
+.banner.great{background:#c9f7d6;color:#145233}.banner.ok{background:#fff1b8;color:#7a5200}.banner.practice{background:#ffe8e8;color:#9b2226}.banner.start{background:#fff;color:#4a4f7a}
+.hero{text-align:center}.hero .big{font-size:48px}.hero h1{margin:2px 0;font-size:26px;color:#c2185b}.hero p{margin:0;color:#5b5f86}
+.gtiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.gt{border:0;border-radius:20px;padding:14px;text-align:left;color:#fff;background:var(--b);box-shadow:0 6px 0 rgba(0,0,0,.16);width:100%}
+.gt .i{font-size:28px}.gt b{display:block;font-size:16px;margin-top:4px}.gt small{display:block;font-size:12px;opacity:.95}.gt .st{display:inline-block;margin-top:8px;background:rgba(0,0,0,.15);padding:3px 10px;border-radius:99px}
+.ov{position:fixed;inset:0;z-index:40;display:none;flex-direction:column;background:linear-gradient(165deg,#fff0f5,#fff8ef)}
+.ov.show{display:flex}
+.ovtop{display:flex;align-items:center;gap:10px;padding:12px 14px;color:#fff;background:linear-gradient(135deg,#ff4f8b,#c2185b)}
+.ovtop button{border:0;background:#fff;width:42px;height:42px;border-radius:50%;font-weight:900;font-size:18px}
+.ovtop .t{flex:1;font-weight:800}.ovtop .sc{background:rgba(255,255,255,.25);border-radius:99px;padding:4px 10px;font-weight:800}
+.ovb{flex:1;overflow-y:auto;padding:14px;max-width:860px;width:100%;margin:0 auto}
+.card{background:#fff;border-radius:22px;padding:16px;box-shadow:0 7px 0 #ffd0e0}
+.qtext{font-size:18px;font-weight:800;margin:10px 0}
+.opts{display:grid;gap:10px}.opt{border:2px solid #ffd0e0;background:#fff5f8;border-radius:16px;padding:12px;font-size:16px;font-weight:700;text-align:left;width:100%;box-shadow:0 4px 0 #ffd0e0}
+.opt.ok{background:#c9f7d6;border-color:#2fbf71}.opt.bad{background:#ffd3d3;border-color:#e5484d}
+.fb{text-align:center;font-weight:800;margin-top:10px}.fb.good{color:#1f9d55}.fb.bad{color:#d9480f}
+.nx{border:0;border-radius:99px;padding:11px 22px;font-weight:800;color:#fff;background:linear-gradient(135deg,#ff4f8b,#c2185b);margin:8px 4px}
+.nx.alt{background:#fff;color:#c2185b;border:2px solid #ffb3c9}
+.prog{font-weight:800;color:#5b5f86;margin-bottom:8px}
+.fillrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;margin:12px 0;font-weight:800;font-size:17px}
+.fillrow input{width:120px;padding:8px;border:3px solid #ffb3c9;border-radius:12px;font-size:16px;font-weight:800;text-align:center}
+.match{display:grid;gap:10px;margin-top:10px}
+.mrow{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:center}
+.mrow select{padding:10px;border-radius:12px;border:2px solid #ffd0e0;font-weight:700;font-size:15px}
+.end{text-align:center}.stars{font-size:32px;letter-spacing:2px}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div class="ov" id="ov"><div class="ovtop"><button type="button" onclick="closeOv()">✕</button><div class="t" id="ovt"></div><div class="sc" id="ovs"></div></div><div class="ovb" id="ovb"></div></div>
+<script>
+const SKEY='joshua_en_stories_v1';
+const CH=[
+{id:'c1',title:'Hans from Holland',emoji:'🌊',color:'linear-gradient(135deg,#0077b6,#00b4d8)',
+ items:[
+  {type:'mcq',q:'Why did the hole in the sea wall become bigger?',o:['The strong pressure of the sea made it larger and larger','Hans dug it bigger','Birds pecked it','Rain only'],a:0},
+  {type:'mcq',q:'How did the workman help Hans in the morning?',o:['Closed the hole with stones and soil, then carried Hans home','Threw Hans in the sea','Ignored the hole','Called only the king'],a:0},
+  {type:'fill',prompt:'The villagers of ____ had erected a sea wall to save their village from ____.',answers:['holland','flood'],hint:'Holland · flood'},
+  {type:'fill',prompt:'The people of Holland brought wonderful ____ to Hans as a present.',answers:['presents','present','gifts','gift'],hint:'presents / gifts'},
+  {type:'mcq',q:'What is courage?',o:['Overcoming fear and doing something new / brave','Running away from difficulties','Never feeling anything','Being weak always'],a:0},
+  {type:'mcq',q:'Is it okay to be scared?',o:['It is natural to feel scared','It shows that you are weak','Never be scared','Only villains feel scared'],a:0},
+  {type:'mcq',q:'When you do something courageous, you feel…',o:['Proud and happy','Scared and weak','Angry only','Bored only'],a:0}
+ ]},
+{id:'c2',title:'The Four Friends',emoji:'🐘',color:'linear-gradient(135deg,#2a9d8f,#007f5f)',
+ items:[
+  {type:'mcq',q:'Why did the farm animals have a quarrel?',o:['About the ownership of a tree','About a football','About homework','About a taxi'],a:0},
+  {type:'mcq',q:'What was the cooperative idea of sharing?',o:['Climb on each other\'s backs to pluck fruit one after the other','Fight for the tree','Cut the tree','Leave forever'],a:0},
+  {type:'match',q:'Match the animal to what it did',
+    left:['Rabbit','Partridge','Monkey','Elephant'],
+    right:['Saw the tree first','Ate / sowed the seed of the tree','Feeding on the fruits of the tree','Munching the leaves of the tree'],
+    ans:[0,1,2,3]},
+  {type:'mcq',q:'To cooperate with others means…',o:['To work as a team','To compete with others','To hide alone','To shout'],a:0},
+  {type:'mcq',q:'You can show cooperation in the classroom by…',o:['Listening to your classmates\' ideas','Not listening to them','Ignoring everyone','Breaking pencils'],a:0},
+  {type:'mcq',q:'You can create a cooperative environment at home by…',o:['Helping with household tasks','Doing only your own things and never helping','Quarrelling','Hiding toys'],a:0}
+ ]},
+{id:'c3',title:'Androcles and the Lion',emoji:'🦁',color:'linear-gradient(135deg,#e85d04,#9d0208)',
+ items:[
+  {type:'mcq',q:'Why did the lion not attack Androcles in the forest?',o:['It was hurt and its paws were covered with blood','It was full','It was sleeping','The emperor ordered it'],a:0},
+  {type:'mcq',q:'Why did the emperor pardon Androcles?',o:['The lion showed gratitude and did not harm him in the arena','Androcles paid money','It rained','The crowd left'],a:0},
+  {type:'tf',q:'Androcles\' master was very kind.',a:false},
+  {type:'tf',q:'The lion jumped angrily on Androcles in the arena.',a:false},
+  {type:'mcq',q:'Gratitude means…',o:['Thankfulness','Timelessness','Hatred','Fear'],a:0},
+  {type:'mcq',q:'Gratitude can be expressed in daily life by…',o:['Saying thank you','Ignoring acts of kindness','Shouting','Hiding'],a:0}
+ ]},
+{id:'c4',title:'The Happy Prince',emoji:'👑',color:'linear-gradient(135deg,#7b2cbf,#4361ee)',
+ items:[
+  {type:'mcq',q:'How did the Happy Prince help the writer?',o:['By giving a sapphire to sell for food and firewood','By writing for him','By giving a car','By sending him away'],a:0},
+  {type:'mcq',q:'How did the Happy Prince become blind?',o:['He gave both his eyes to help the poor and needy','Dust blew in','He fell','He never became blind'],a:0},
+  {type:'tf',q:'The statue of the Happy Prince was covered with gold.',a:true},
+  {type:'tf',q:'When the Happy Prince realised his loyal friend had died, he cried.',a:true},
+  {type:'mcq',q:'Your friend shares with you. You will…',o:['Listen attentively','Change the topic rudely','Walk away','Be angry'],a:0},
+  {type:'mcq',q:'You see your friend falling down. You will…',o:['Help him','Walk away','Laugh only','Hide'],a:0},
+  {type:'mcq',q:'You see your friend crying. You will feel…',o:['Sad (and want to help)','Happy','Bored','Proud of tears'],a:0},
+  {type:'mcq',q:'Sympathy means…',o:['Feeling pity / care for others\' misfortune','Hatred for others','Ignoring friends','Competing always'],a:0}
+ ]},
+{id:'c5',title:'Prakash\'s Small Initiative',emoji:'🚕',color:'linear-gradient(135deg,#ff9f1c,#e76f51)',
+ items:[
+  {type:'mcq',q:'How did Prakash feel when he saw the poor children at school?',o:['Love and sympathy','Anger','Hatred','Boredom'],a:0},
+  {type:'mcq',q:'How did he help them?',o:['He collected money by using his car like a taxi','He closed the school','He ignored them','He sold their bags'],a:0},
+  {type:'fill',prompt:'Prakash lived near / studied about helping children at a ____ school in ____.',answers:['government','ramnagar'],hint:'government · Ramnagar'},
+  {type:'mcq',q:'Initiative means…',o:['Taking the first step','Doing nothing','Waiting forever','Hiding problems'],a:0},
+  {type:'mcq',q:'You can show initiative at home by…',o:['Helping without being asked','Waiting for parents to say everything','Never helping','Only watching TV'],a:0}
+ ]}
+];
+
+let store=JSON.parse(localStorage.getItem(SKEY)||'{}');
+if(!store.stars)store.stars={}; if(!store.tried)store.tried={};
+const save=()=>localStorage.setItem(SKEY,JSON.stringify(store));
+const getStar=id=>store.stars[id]||0;
+const setStar=(id,n)=>{if(n>(store.stars[id]||0)){store.stars[id]=n;save();}};
+const starStr=n=>'⭐'.repeat(n)+'☆'.repeat(3-n);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const app=document.getElementById('app'),ov=document.getElementById('ov');
+let G=null;
+
+function banner(){
+  const ids=CH.map(c=>c.id);
+  const tried=ids.every(id=>store.tried[id]);
+  const good=ids.every(id=>getStar(id)>=2);
+  if(tried&&good)return{cls:'great',text:'🎉 All We Eat chapters done with great stars!'};
+  if(tried)return{cls:'ok',text:'✅ All chapters tried — replay weak ones for more stars.'};
+  if(ids.some(id=>store.tried[id]))return{cls:'practice',text:'📚 Keep going — finish every chapter.'};
+  return{cls:'start',text:'👋 Answer questions from Hans to Prakash. Stars show progress!'};
+}
+function home(){
+  const b=banner();
+  const sum=CH.reduce((s,c)=>s+getStar(c.id),0);
+  app.innerHTML=`<div class="top">
+    <a href="../../index.html">🏠</a>
+    <button type="button" onclick="history.back()">←</button>
+    <div class="tt"><small>English · Class 3</small><b>📚 We Eat Stories</b></div>
+    <span class="chip">${sum}/${CH.length*3}★</span>
+  </div>
+  <div class="hero"><div class="big">📘</div><h1>We Eat · Chapters 1–5</h1><p>Questions · fill blanks · match · true/false</p></div>
+  <div class="banner ${b.cls}">${esc(b.text)}</div>
+  <div class="gtiles">${CH.map(c=>`<button class="gt" style="--b:${c.color}" onclick="openCh('${c.id}')">
+    <span class="i">${c.emoji}</span><b>${esc(c.title)}</b><small>Quiz with stars</small>
+    <span class="st">${starStr(getStar(c.id))}</span></button>`).join('')}</div>`;
+}
+function openCh(id){
+  const c=CH.find(x=>x.id===id);
+  G={id, items:c.items.slice(), i:0, correct:0, total:0};
+  document.getElementById('ovt').textContent=c.emoji+' '+c.title;
+  document.getElementById('ovs').textContent=starStr(getStar(id));
+  ov.classList.add('show');
+  showItem();
+}
+function closeOv(){ov.classList.remove('show');G=null;home();}
+function showItem(){
+  if(G.i>=G.items.length)return finish();
+  const it=G.items[G.i];
+  document.getElementById('ovb').innerHTML='';
+  const prog=`<div class="prog">${G.i+1} / ${G.items.length}</div>`;
+  if(it.type==='mcq'){
+    const opts=shuffle(it.o.map((t,i)=>({t,i})));
+    document.getElementById('ovb').innerHTML=`<div class="card">${prog}<div class="qtext">${esc(it.q)}</div>
+      <div class="opts" id="opts">${opts.map(o=>`<button class="opt" data-i="${o.i}">${esc(o.t)}</button>`).join('')}</div>
+      <div class="fb" id="fb"></div></div>`;
+    document.querySelectorAll('#opts .opt').forEach(b=>b.onclick=()=>{
+      const ok=+b.dataset.i===it.a; lock(ok,b,it.a); nextSoon();
+    });
+  } else if(it.type==='tf'){
+    document.getElementById('ovb').innerHTML=`<div class="card">${prog}<div class="qtext">${esc(it.q)}</div>
+      <div class="opts"><button class="opt" data-v="true">True</button><button class="opt" data-v="false">False</button></div>
+      <div class="fb" id="fb"></div></div>`;
+    document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{
+      const ok=(b.dataset.v==='true')===it.a;
+      document.querySelectorAll('.opt').forEach(x=>x.disabled=true);
+      b.classList.add(ok?'ok':'bad');
+      document.querySelectorAll('.opt').forEach(el=>{if((el.dataset.v==='true')===it.a)el.classList.add('ok');});
+      fb(ok); G.total++; if(ok)G.correct++; nextSoon();
+    });
+  } else if(it.type==='fill'){
+    const parts=it.prompt.split('____');
+    let html=prog+`<div class="qtext">Fill in the blanks</div><div class="fillrow">`;
+    parts.forEach((p,i)=>{html+=`<span>${esc(p)}</span>`; if(i<parts.length-1)html+=`<input id="f${i}" autocomplete="off">`;});
+    html+=`</div><p style="text-align:center;color:#6a5f8f;font-weight:700">Hint: ${esc(it.hint||'')}</p>
+      <div style="text-align:center"><button class="nx" id="chk">Check</button></div><div class="fb" id="fb"></div>`;
+    document.getElementById('ovb').innerHTML=`<div class="card">${html}</div>`;
+    document.getElementById('chk').onclick=()=>{
+      const vals=[...document.querySelectorAll('.fillrow input')].map(i=>(i.value||'').trim().toLowerCase());
+      // accept if each blank matches any answer token in order loosely
+      const ans=it.answers.map(a=>a.toLowerCase());
+      let ok=vals.length===ans.length && vals.every((v,i)=>ans[i].split('|').some(a=>v===a||v.includes(a)||a.includes(v)));
+      // for multi-accept answers array as sequential required
+      ok=vals.length>=1 && vals.every((v,i)=>{
+        const need=Array.isArray(it.answers)?it.answers:[];
+        if(i>=need.length)return true;
+        const opts=String(need[i]).toLowerCase().split('/');
+        return opts.some(o=>v===o.trim()||v.includes(o.trim()));
+      }) && vals.length===it.prompt.split('____').length-1;
+      // simpler: check each blank against answers[i]
+      const nBlanks=it.prompt.split('____').length-1;
+      ok=true;
+      for(let i=0;i<nBlanks;i++){
+        const v=(document.getElementById('f'+i).value||'').trim().toLowerCase();
+        const accept=it.answers.slice(); // for prompt with 2 blanks, answers[0] and answers[1]; for 1 blank multiple accepts
+        if(nBlanks===1){ ok=it.answers.some(a=>v===a.toLowerCase()||v.includes(a.toLowerCase())); break; }
+        const a=it.answers[i];
+        if(!a || !(v===a.toLowerCase()||v.includes(a.toLowerCase())||a.toLowerCase().includes(v))) ok=false;
+      }
+      fb(ok); G.total++; if(ok)G.correct++;
+      document.getElementById('chk').disabled=true;
+      nextSoon();
+    };
+  } else if(it.type==='match'){
+    const rights=it.right.slice();
+    document.getElementById('ovb').innerHTML=`<div class="card">${prog}<div class="qtext">${esc(it.q)}</div>
+      <div class="match" id="match">${it.left.map((L,i)=>`<div class="mrow"><b>${esc(L)}</b>
+        <select id="m${i}">${shuffle(rights.map((r,ri)=>({r,ri}))).map(o=>`<option value="${o.ri}">${esc(o.r)}</option>`).join('')}</select>
+      </div>`).join('')}</div>
+      <div style="text-align:center"><button class="nx" id="chk">Check match</button></div><div class="fb" id="fb"></div></div>`;
+    document.getElementById('chk').onclick=()=>{
+      let ok=true;
+      it.ans.forEach((a,i)=>{ if(+document.getElementById('m'+i).value!==a) ok=false; });
+      fb(ok); G.total++; if(ok)G.correct++;
+      document.getElementById('chk').disabled=true;
+      nextSoon();
+    };
+  }
+}
+function lock(ok,b,ai){
+  document.querySelectorAll('#opts .opt').forEach(x=>x.disabled=true);
+  b.classList.add(ok?'ok':'bad');
+  if(!ok)document.querySelectorAll('#opts .opt').forEach(el=>{if(+el.dataset.i===ai)el.classList.add('ok');});
+  fb(ok); G.total++; if(ok)G.correct++;
+}
+function fb(ok){const el=document.getElementById('fb');el.className='fb '+(ok?'good':'bad');el.textContent=ok?'Correct! 🌟':'Not quite — try to remember the lesson.';}
+function nextSoon(){setTimeout(()=>{G.i++;showItem();},900);}
+function finish(){
+  const p=G.total?G.correct/G.total:0;
+  const stars=p>=0.9?3:p>=0.7?2:p>=0.5?1:0;
+  store.tried[G.id]=true; setStar(G.id,stars); save();
+  document.getElementById('ovs').textContent=starStr(getStar(G.id));
+  document.getElementById('ovb').innerHTML=`<div class="card end"><div style="font-size:56px">🎉</div>
+    <h2>Chapter complete!</h2><div class="stars">${starStr(stars)}</div>
+    <p>${G.correct}/${G.total} correct</p>
+    <button class="nx" onclick="openCh(G.id)">🔁 Again</button>
+    <button class="nx alt" onclick="closeOv()">Home</button></div>`;
+}
+home();
+</script>
+</body>
+</html>

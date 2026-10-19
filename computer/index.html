@@ -3,38 +3,218 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Coming soon · Joshua</title>
+<title>Computer · Class 3</title>
 <style>
-body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:"Avenir Next","Segoe UI",system-ui,sans-serif;background:linear-gradient(160deg,#e0f7fa,#fff3e0);color:#2b2350;text-align:center;padding:24px}
-.box{background:#fff;border-radius:28px;padding:36px 28px;box-shadow:0 10px 0 #e6dff7;max-width:420px}
-.em{font-size:64px}
-h1{margin:8px 0 6px;font-size:28px}
-p{margin:0;color:#6a5f8f;font-size:17px}
-a{display:inline-block;margin-top:20px;background:linear-gradient(135deg,#4361ee,#7b2cbf);color:#fff;text-decoration:none;font-weight:800;padding:12px 22px;border-radius:99px;box-shadow:0 5px 0 rgba(67,97,238,.35)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:"Chalkboard SE","Comic Sans MS","Avenir Next",system-ui,sans-serif;color:#1f2340;background:linear-gradient(180deg,#d9f4ff,#e8f1ff 50%,#fff5eb);min-height:100vh;line-height:1.45}
+button{font-family:inherit;cursor:pointer}
+#app{max-width:900px;margin:0 auto;padding:12px 14px 70px}
+.top{position:sticky;top:6px;z-index:10;display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:22px;color:#fff;background:linear-gradient(135deg,#4361ee,#0077b6);box-shadow:0 6px 0 rgba(0,0,0,.12)}
+.top button,.top a{border:0;background:#fff;width:44px;height:44px;border-radius:50%;font-size:20px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:#333;flex:none}
+.top .tt{flex:1;min-width:0}.top .tt small{display:block;font-size:12px;font-weight:700;opacity:.9}.top .tt b{display:block;font-size:18px}
+.chip{background:rgba(255,255,255,.25);border-radius:99px;padding:4px 10px;font-weight:800;font-size:13px}
+.banner{border-radius:18px;padding:12px 14px;margin:12px 0;font-weight:800;box-shadow:0 4px 0 rgba(0,0,0,.06)}
+.banner.great{background:#c9f7d6;color:#145233}.banner.ok{background:#fff1b8;color:#7a5200}.banner.practice{background:#ffe8e8;color:#9b2226}.banner.start{background:#fff;color:#4a4f7a}
+.hero{text-align:center;padding:8px}.hero .big{font-size:48px}.hero h1{margin:2px 0;font-size:26px;color:#0077b6}.hero p{margin:0;color:#5b5f86}
+.gtiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.gt{border:0;border-radius:20px;padding:16px;text-align:left;color:#fff;background:var(--b);box-shadow:0 6px 0 rgba(0,0,0,.16);width:100%}
+.gt .i{font-size:32px}.gt b{display:block;font-size:18px;margin-top:4px}.gt small{display:block;opacity:.95;font-size:13px}.gt .st{display:inline-block;margin-top:8px;background:rgba(0,0,0,.15);padding:3px 10px;border-radius:99px}
+.ov{position:fixed;inset:0;z-index:40;display:none;flex-direction:column;background:linear-gradient(165deg,#eef4ff,#fff8ef)}
+.ov.show{display:flex}
+.ovtop{display:flex;align-items:center;gap:10px;padding:12px 14px;color:#fff;background:linear-gradient(135deg,#4361ee,#0077b6)}
+.ovtop button{border:0;background:#fff;width:42px;height:42px;border-radius:50%;font-size:18px;font-weight:900}
+.ovtop .t{flex:1;font-weight:800}.ovtop .sc{background:rgba(255,255,255,.25);border-radius:99px;padding:4px 10px;font-weight:800}
+.ovb{flex:1;overflow-y:auto;padding:14px;max-width:860px;width:100%;margin:0 auto}
+.card{background:#fff;border-radius:22px;padding:16px;box-shadow:0 7px 0 #dce9ff;margin-bottom:12px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.tab{border:0;border-radius:99px;padding:10px 16px;font-weight:800;background:#e8f1ff;box-shadow:0 3px 0 #c5d8ff}
+.tab.on{background:#4361ee;color:#fff}
+.learn h3{margin:0 0 6px;color:#0077b6}.learn p{margin:0 0 12px;color:#4a4f7a}
+.chipw{display:inline-block;background:#e8f1ff;border-radius:99px;padding:6px 12px;margin:4px;font-weight:800;color:#0077b6}
+.qtext{font-size:18px;font-weight:800;margin:10px 0}
+.opts{display:grid;gap:10px}.opt{border:2px solid #dce9ff;background:#f5f9ff;border-radius:16px;padding:12px;font-size:16px;font-weight:700;text-align:left;box-shadow:0 4px 0 #dce9ff;width:100%}
+.opt.ok{background:#c9f7d6;border-color:#2fbf71}.opt.bad{background:#ffd3d3;border-color:#e5484d}
+.fb{text-align:center;font-weight:800;margin-top:10px}.fb.good{color:#1f9d55}.fb.bad{color:#d9480f}
+.nx{border:0;border-radius:99px;padding:11px 22px;font-size:16px;font-weight:800;color:#fff;background:linear-gradient(135deg,#4361ee,#0077b6);margin:8px 4px;box-shadow:0 4px 0 rgba(0,0,0,.12)}
+.nx.alt{background:#fff;color:#4361ee;border:2px solid #cfd6ff;box-shadow:0 4px 0 #e3e0f7}
+.prog{font-weight:800;color:#5b5f86;margin-bottom:8px}
+.end{text-align:center}.stars{font-size:32px;letter-spacing:2px}
 </style>
 </head>
 <body>
-<div class="box">
-  <div class="em" id="em">🚧</div>
-  <h1 id="t">Coming soon</h1>
-  <p>This subject will be added next. Until then, try English or Hindi!</p>
-  <a href="../">🏠 Back to subjects</a>
-</div>
+<div id="app"></div>
+<div class="ov" id="ov"><div class="ovtop"><button type="button" onclick="closeOv()">✕</button><div class="t" id="ovt"></div><div class="sc" id="ovs"></div></div><div class="ovb" id="ovb"></div></div>
 <script>
-const map = {
-  malayalam: ['📗', 'Malayalam'],
-  science: ['🔬', 'Science'],
-  social: ['🌍', 'Social'],
-  computer: ['💻', 'Computer'],
-  gk: ['🧠', 'GK'],
-  value: ['💛', 'Value Education'],
-};
-const key = location.pathname.replace(/\/+$/, '').split('/').pop();
-if (map[key]) {
-  document.getElementById('em').textContent = map[key][0];
-  document.getElementById('t').textContent = map[key][1] + ' — Coming soon';
-  document.title = map[key][1] + ' · Coming soon';
+const HOME = '../index.html';
+const SKEY = 'joshua_it_v1';
+const LESSONS = [
+  {
+    id: 'sys',
+    title: 'Computer System',
+    sub: 'Chapter 1',
+    emoji: '💻',
+    color: 'linear-gradient(135deg,#4361ee,#0077b6)',
+    words: ['computer','hardware','input devices','processing device','output device','storage device','software','application'],
+    learn: [
+      {h:'Computer', t:'A machine that takes input, processes it, and gives output.'},
+      {h:'Hardware', t:'The physical parts of a computer you can touch.'},
+      {h:'Input devices', t:'Devices that send data into the computer — e.g. keyboard, mouse.'},
+      {h:'Processing device', t:'The CPU processes instructions and controls all operations.'},
+      {h:'Output devices', t:'Show results — e.g. monitor, speaker.'},
+      {h:'Storage devices', t:'Keep data safely — e.g. pen drive, DVD.'},
+      {h:'System software', t:'Controls and manages computer hardware. Example: operating system.'},
+      {h:'Application software', t:'Does a specific task for the user. Example: MS Word, Paint.'}
+    ],
+    quiz: [
+      {q:'Name any two input devices.', o:['Keyboard and mouse','Monitor and speaker','Pen drive and DVD','CPU and OS'], a:0},
+      {q:'Name any two output devices.', o:['Monitor and speaker','Keyboard and mouse','Pen drive and DVD','Only CPU'], a:0},
+      {q:'Name any two storage devices.', o:['Pen drive and DVD','Keyboard and mouse','Monitor and speaker','Only Paint'], a:0},
+      {q:'What is the role of the CPU?', o:['It processes instructions and controls all operations of a computer','It only prints paper','It is a speaker','It is only a mouse'], a:0},
+      {q:'System software…', o:['Controls and manages computer hardware (e.g. operating system)','Only draws pictures','Is always a pen drive','Is the monitor'], a:0},
+      {q:'Application software…', o:['Performs a specific task for the user (e.g. MS Word, Paint)','Builds the CPU from metal','Is only the keyboard','Turns off rain'], a:0},
+      {q:'Hardware means…', o:['Physical parts you can touch','Only songs','Only websites','Invisible ideas only'], a:0},
+      {q:'Which is an input device?', o:['Mouse','Monitor','Speaker','DVD player output only'], a:0}
+    ]
+  },
+  {
+    id: 'paint',
+    title: 'Introduction to Paint',
+    sub: 'Chapter 2',
+    emoji: '🎨',
+    color: 'linear-gradient(135deg,#06d6a0,#118ab2)',
+    words: ['components','tools','paint window','rounded rectangle','free hand drawing'],
+    learn: [
+      {h:'Paint window', t:'The Paint program window where tools and the drawing area appear.'},
+      {h:'Drawing area', t:'The space where we draw and create in Paint.'},
+      {h:'Colour group', t:'Used to choose a colour for drawing.'},
+      {h:'Save command', t:'Used to save the drawing so we can open it later.'},
+      {h:'Free hand tools', t:'Pencil and brush tools are used to draw free hand.'},
+      {h:'Rounded rectangle', t:'A shape tool to draw rectangles with rounded corners.'}
+    ],
+    quiz: [
+      {q:'Which command is used to save a drawing?', o:['The Save command','The Delete command','The Flood command','The Hide command'], a:0},
+      {q:'Which group is used to choose a colour?', o:['Colour group','Only CPU group','Storage group','Arena group'], a:0},
+      {q:'What is the use of the drawing area in Paint?', o:['It is the space where we draw and create','It only saves files','It is the keyboard','It is the speaker'], a:0},
+      {q:'Name the tools used to draw free hand.', o:['Pencil and brush tools','Only Save and Open','Only Monitor and DVD','Only Keyboard'], a:0},
+      {q:'Paint is an example of…', o:['Application software','A sea wall','A storage cable only','An input keyboard only'], a:0},
+      {q:'Components and tools help us…', o:['Draw and edit pictures in Paint','Cook food','Drive a taxi','Build a sea wall'], a:0}
+    ]
+  }
+];
+
+let store = JSON.parse(localStorage.getItem(SKEY) || '{}');
+if (!store.stars) store.stars = {};
+if (!store.tried) store.tried = {};
+const save = () => localStorage.setItem(SKEY, JSON.stringify(store));
+const getStar = id => store.stars[id] || 0;
+const setStar = (id, n) => { if (n > (store.stars[id] || 0)) { store.stars[id] = n; save(); } };
+const starStr = n => '⭐'.repeat(n) + '☆'.repeat(3 - n);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+
+const app = document.getElementById('app');
+const ov = document.getElementById('ov');
+let G = null;
+
+function banner() {
+  const ids = LESSONS.map(l => l.id);
+  const tried = ids.every(id => store.tried[id]);
+  const good = ids.every(id => getStar(id) >= 2);
+  if (tried && good) return { cls:'great', text:'🎉 Both chapters done with great stars!' };
+  if (tried) return { cls:'ok', text:'✅ You tried both chapters. Replay for more stars.' };
+  if (ids.some(id => store.tried[id])) return { cls:'practice', text:'📚 Keep practising — finish both chapters.' };
+  return { cls:'start', text:'👋 Learn the words, then take the quiz for stars!' };
 }
+
+function home() {
+  const b = banner();
+  const sum = LESSONS.reduce((s, l) => s + getStar(l.id), 0);
+  app.innerHTML = `
+    <div class="top">
+      <a href="${HOME}" title="Home">🏠</a>
+      <button type="button" onclick="history.back()" title="Back">←</button>
+      <div class="tt"><small>Joshua · Class 3</small><b>💻 Computer</b></div>
+      <span class="chip">${sum}/6★</span>
+    </div>
+    <div class="hero"><div class="big">💻</div><h1>Computer</h1><p>System · Paint · stars for Mum</p></div>
+    <div class="banner ${b.cls}">${esc(b.text)}</div>
+    <div class="gtiles">${LESSONS.map(l => `
+      <button class="gt" style="--b:${l.color}" onclick="openLesson('${l.id}')">
+        <span class="i">${l.emoji}</span><b>${esc(l.title)}</b><small>${esc(l.sub)}</small>
+        <span class="st">${starStr(getStar(l.id))}</span>
+      </button>`).join('')}</div>`;
+}
+
+function openLesson(id) {
+  G = { id, tab: 'learn' };
+  const L = LESSONS.find(x => x.id === id);
+  document.getElementById('ovt').textContent = L.emoji + ' ' + L.title;
+  document.getElementById('ovs').textContent = starStr(getStar(id));
+  ov.classList.add('show');
+  renderLesson();
+}
+function closeOv() { ov.classList.remove('show'); G = null; home(); }
+
+function renderLesson() {
+  const L = LESSONS.find(x => x.id === G.id);
+  const tabs = `<div class="tabs">
+    <button class="tab ${G.tab==='learn'?'on':''}" onclick="G.tab='learn';renderLesson()">📚 Learn</button>
+    <button class="tab ${G.tab==='quiz'?'on':''}" onclick="startQuiz()">🎯 Quiz</button>
+  </div>`;
+  if (G.tab === 'learn') {
+    document.getElementById('ovb').innerHTML = tabs + `<div class="card learn">
+      <p><b>New words:</b> ${L.words.map(w => `<span class="chipw">${esc(w)}</span>`).join('')}</p>
+      ${L.learn.map(x => `<h3>${esc(x.h)}</h3><p>${esc(x.t)}</p>`).join('')}
+      <button class="nx" onclick="startQuiz()">Start quiz →</button>
+      <button class="nx alt" onclick="closeOv()">Home</button>
+    </div>`;
+  }
+}
+
+function startQuiz() {
+  const L = LESSONS.find(x => x.id === G.id);
+  G.tab = 'quiz';
+  G.qi = 0; G.correct = 0; G.qs = shuffle(L.quiz);
+  showQ();
+}
+function showQ() {
+  const L = LESSONS.find(x => x.id === G.id);
+  if (G.qi >= G.qs.length) return finish();
+  const q = G.qs[G.qi];
+  const opts = shuffle(q.o.map((t, i) => ({ t, i })));
+  document.getElementById('ovb').innerHTML = `<div class="card">
+    <div class="prog">Q ${G.qi + 1} / ${G.qs.length}</div>
+    <div class="qtext">${esc(q.q)}</div>
+    <div class="opts" id="opts">${opts.map(o => `<button class="opt" data-i="${o.i}">${esc(o.t)}</button>`).join('')}</div>
+    <div class="fb" id="fb"></div>
+  </div>`;
+  document.querySelectorAll('#opts .opt').forEach(b => b.onclick = () => {
+    const ok = +b.dataset.i === q.a;
+    document.querySelectorAll('#opts .opt').forEach(x => x.disabled = true);
+    b.classList.add(ok ? 'ok' : 'bad');
+    if (!ok) document.querySelectorAll('#opts .opt').forEach(el => { if (+el.dataset.i === q.a) el.classList.add('ok'); });
+    document.getElementById('fb').className = 'fb ' + (ok ? 'good' : 'bad');
+    document.getElementById('fb').textContent = ok ? 'Correct! 🌟' : 'Not quite — see the green answer.';
+    if (ok) G.correct++;
+    setTimeout(() => { G.qi++; showQ(); }, 850);
+  });
+}
+function finish() {
+  const L = LESSONS.find(x => x.id === G.id);
+  const p = G.correct / G.qs.length;
+  const stars = p >= 0.9 ? 3 : p >= 0.7 ? 2 : p >= 0.5 ? 1 : 0;
+  store.tried[G.id] = true; setStar(G.id, stars); save();
+  document.getElementById('ovs').textContent = starStr(getStar(G.id));
+  document.getElementById('ovb').innerHTML = `<div class="card end">
+    <div style="font-size:56px">🎉</div>
+    <h2>${esc(L.title)} done!</h2>
+    <div class="stars">${starStr(stars)}</div>
+    <p>Score: ${G.correct}/${G.qs.length}</p>
+    <button class="nx" onclick="startQuiz()">🔁 Try again</button>
+    <button class="nx alt" onclick="closeOv()">Home</button>
+  </div>`;
+}
+home();
 </script>
 </body>
 </html>

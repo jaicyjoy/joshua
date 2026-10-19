@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>हिंदी श्रुतलेख · Class 3</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:"Noto Sans Devanagari","Mangal","Avenir Next",system-ui,sans-serif;color:#1f2340;background:linear-gradient(180deg,#ffe8d6,#fff5f0 55%,#ffe3ef);min-height:100vh;line-height:1.45}
+button,input{font-family:inherit}
+#app{max-width:880px;margin:0 auto;padding:14px 14px 70px}
+.top{position:sticky;top:6px;z-index:10;display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:22px;color:#fff;background:linear-gradient(135deg,#fb8500,#dc2f02);box-shadow:0 6px 0 rgba(0,0,0,.12)}
+.top a,.top button.icon{border:0;background:#fff;width:44px;height:44px;border-radius:50%;font-size:20px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:#333;flex:none;cursor:pointer}
+.top .tt{flex:1;min-width:0}.top .tt small{display:block;font-size:13px;font-weight:700;opacity:.9}
+.top .tt b{display:block;font-size:18px}
+.chip{background:rgba(255,255,255,.25);border-radius:99px;padding:4px 10px;font-weight:800;font-size:14px}
+.hero{text-align:center;padding:16px 8px 8px}.hero .big{font-size:52px}.hero h1{margin:4px 0;font-size:28px;color:#dc2f02}.hero p{margin:0;color:#6a5f8f}
+.starbox{background:#fff;border-radius:22px;padding:14px 16px;margin:12px 0;box-shadow:0 6px 0 #f0d9c8}
+.starbox .row{display:flex;justify-content:space-between;font-weight:800;font-size:17px}
+.bar{height:14px;background:#f3e6dc;border-radius:99px;overflow:hidden;margin-top:8px}.bar i{display:block;height:100%;background:linear-gradient(90deg,#ffd60a,#06d6a0);border-radius:99px}
+.gtiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:14px}
+.gt{border:0;border-radius:20px;padding:16px;text-align:left;color:#fff;background:var(--b);box-shadow:0 6px 0 rgba(0,0,0,.18);cursor:pointer;width:100%}
+.gt .i{font-size:30px;display:block}.gt b{display:block;font-size:17px;margin-top:4px}.gt small{display:block;opacity:.95;font-size:13px}
+.sec{background:#fff;border-radius:22px;padding:14px;margin-top:14px;box-shadow:0 6px 0 #f0d9c8}
+.sec h3{margin:0 0 10px;color:#dc2f02}.wlist{display:flex;flex-wrap:wrap;gap:8px}
+.wlist button{border:2px solid #f0d9c8;background:#fff8f2;border-radius:99px;padding:8px 12px;font-size:16px;font-weight:700;cursor:pointer;color:#9d0208}
+.wlist button.got{background:#c9f7d6;border-color:#2fbf71}
+.ov{position:fixed;inset:0;z-index:40;display:none;flex-direction:column;background:linear-gradient(160deg,#fff0e8,#fff8ef)}
+.ov.show{display:flex}
+.ovtop{display:flex;align-items:center;gap:10px;padding:12px 14px;color:#fff;background:linear-gradient(135deg,#fb8500,#dc2f02)}
+.ovtop button{border:0;background:#fff;width:42px;height:42px;border-radius:50%;font-size:18px;font-weight:900;cursor:pointer}
+.ovtop .t{flex:1;font-weight:800}.ovtop .sc{background:rgba(255,255,255,.25);border-radius:99px;padding:4px 12px;font-weight:800}
+.ovb{flex:1;overflow-y:auto;padding:16px 14px 40px;max-width:820px;width:100%;margin:0 auto}
+.card{background:#fff;border-radius:24px;padding:18px;box-shadow:0 7px 0 #f0d9c8;text-align:center}
+.say{border:0;width:78px;height:78px;border-radius:50%;font-size:34px;background:#ffe0c8;cursor:pointer}
+.clue{margin-top:10px;font-size:16px;font-weight:700;color:#5b5f86}
+.opts{display:grid;gap:10px;margin-top:14px;text-align:left}
+.opt{border:2px solid #f0d9c8;background:#fff8f2;border-radius:16px;padding:12px 14px;font-size:20px;font-weight:700;cursor:pointer;box-shadow:0 4px 0 #f0d9c8}
+.opt.ok{background:#c9f7d6;border-color:#2fbf71}.opt.bad{background:#ffd3d3;border-color:#e5484d}
+.typein{display:block;width:100%;max-width:420px;margin:12px auto 0;font-size:26px;font-weight:800;text-align:center;padding:12px;border:4px solid #ffb703;border-radius:16px}
+.typein.ok{border-color:#2fbf71;background:#e7fbef}.typein.bad{border-color:#e5484d}
+.fb{margin-top:12px;font-weight:800;font-size:18px}.fb.good{color:#1f9d55}.fb.bad{color:#d9480f}
+.nx{display:inline-block;margin:14px 6px 0;border:0;border-radius:99px;padding:12px 28px;font-size:17px;font-weight:800;color:#fff;background:linear-gradient(135deg,#fb8500,#dc2f02);cursor:pointer;box-shadow:0 5px 0 rgba(0,0,0,.15)}
+.nx.alt{background:#fff;color:#dc2f02;border:2px solid #ffd0a8;box-shadow:0 5px 0 #f0d9c8}
+.prog{font-weight:800;color:#4a4f7a;margin-bottom:10px}
+.bigword{font-size:42px;font-weight:900;color:#dc2f02;margin:12px 0}
+.end .big{font-size:64px}.stars{font-size:36px;letter-spacing:3px}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div class="ov" id="ov"><div class="ovtop"><button type="button" onclick="closeOv()">✕</button><div class="t" id="ovt"></div><div class="sc" id="ovs"></div></div><div class="ovb" id="ovb"></div></div>
+<script type="application/json" id="data">{"words": [{"w": "बादल", "clue": "cloud / clouds", "vid": "hi-w-0", "opts": ["बादल", "हरियाली", "मौसम", "किसान"]}, {"w": "हरियाली", "clue": "greenery", "vid": "hi-w-1", "opts": ["हरियाली", "बादल", "मौसम", "किसान"]}, {"w": "मौसम", "clue": "weather / season", "vid": "hi-w-2", "opts": ["मौसम", "बादल", "हरियाली", "किसान"]}, {"w": "किसान", "clue": "farmer", "vid": "hi-w-3", "opts": ["किसान", "बादल", "हरियाली", "मौसम"]}, {"w": "धरती", "clue": "earth / land", "vid": "hi-w-4", "opts": ["धरती", "बादल", "हरियाली", "मौसम"]}, {"w": "गाँव", "clue": "village", "vid": "hi-w-5", "opts": ["गाँव", "बादल", "हरियाली", "मौसम"]}, {"w": "कक्षा", "clue": "classroom", "vid": "hi-w-6", "opts": ["कक्षा", "बादल", "हरियाली", "मौसम"]}, {"w": "ज्ञान", "clue": "knowledge", "vid": "hi-w-7", "opts": ["ज्ञान", "बादल", "हरियाली", "मौसम"]}, {"w": "शुरू", "clue": "start / begin", "vid": "hi-w-8", "opts": ["शुरू", "बादल", "हरियाली", "मौसम"]}, {"w": "मित्र", "clue": "friend", "vid": "hi-w-9", "opts": ["मित्र", "बादल", "हरियाली", "मौसम"]}, {"w": "श्रम", "clue": "hard work / labour", "vid": "hi-w-10", "opts": ["श्रम", "बादल", "हरियाली", "मौसम"]}, {"w": "बेटा", "clue": "son", "vid": "hi-w-11", "opts": ["बेटा", "बादल", "हरियाली", "मौसम"]}, {"w": "मुरगा", "clue": "rooster / cock", "vid": "hi-w-12", "opts": ["मुरगा", "बादल", "हरियाली", "मौसम"]}, {"w": "मक्खी", "clue": "fly (insect)", "vid": "hi-w-13", "opts": ["मक्खी", "बादल", "हरियाली", "मौसम"]}, {"w": "चुहिया", "clue": "mouse / little mouse", "vid": "hi-w-14", "opts": ["चुहिया", "बादल", "हरियाली", "मौसम"]}, {"w": "मक्खन", "clue": "butter", "vid": "hi-w-15", "opts": ["मक्खन", "बादल", "हरियाली", "मौसम"]}, {"w": "ध्यान", "clue": "attention / focus", "vid": "hi-w-16", "opts": ["ध्यान", "बादल", "हरियाली", "मौसम"]}, {"w": "नाश्ता", "clue": "breakfast", "vid": "hi-w-17", "opts": ["नाश्ता", "बादल", "हरियाली", "मौसम"]}, {"w": "स्वास्थ्य", "clue": "health", "vid": "hi-w-18", "opts": ["स्वास्थ्य", "बादल", "हरियाली", "मौसम"]}, {"w": "जल्दी", "clue": "quickly / early", "vid": "hi-w-19", "opts": ["जल्दी", "बादल", "हरियाली", "मौसम"]}, {"w": "चीनी", "clue": "sugar", "vid": "hi-w-20", "opts": ["चीनी", "बादल", "हरियाली", "मौसम"]}, {"w": "खीरा", "clue": "cucumber", "vid": "hi-w-21", "opts": ["खीरा", "बादल", "हरियाली", "मौसम"]}, {"w": "गाजर", "clue": "carrot", "vid": "hi-w-22", "opts": ["गाजर", "बादल", "हरियाली", "मौसम"]}, {"w": "स्वच्छता", "clue": "cleanliness", "vid": "hi-w-23", "opts": ["स्वच्छता", "बादल", "हरियाली", "मौसम"]}, {"w": "शाम", "clue": "evening", "vid": "hi-w-24", "opts": ["शाम", "बादल", "हरियाली", "मौसम"]}]}</script>
+<script>
+const D=JSON.parse(document.getElementById('data').textContent);
+const WORDS=D.words;
+const app=document.getElementById('app');
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const SKEY='joshua-dict-hi';
+let S=JSON.parse(localStorage.getItem(SKEY)||'{}');
+const save=()=>localStorage.setItem(SKEY,JSON.stringify(S));
+const award=(w,n)=>{if((S[w]||0)<n){S[w]=n;save();}};
+const gotStars=()=>WORDS.reduce((s,x)=>s+(S[x.w]||0),0);
+const totalStars=()=>WORDS.length*3;
+function speak(t){
+  try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='hi-IN';u.rate=0.9;speechSynthesis.speak(u);}catch(e){}
+}
+function home(){
+  const g=gotStars(),t=totalStars(),pct=t?Math.round(g/t*100):0;
+  app.innerHTML=`<div class="top">
+    <a class="icon" href="../../index.html" title="Home">🏠</a>
+    <button type="button" class="icon" onclick="history.back()" title="Back">←</button>
+    <div class="tt"><small>हिंदी · कक्षा 3</small><b>📝 श्रुतलेख</b></div>
+    <span class="chip">⭐ ${g}/${t}</span>
+  </div>
+  <div class="hero"><div class="big">📝</div><h1>हिंदी श्रुतलेख</h1><p>क्रम: फ्लैश → चुनो → लिखो</p></div>
+  <div class="starbox"><div class="row"><span>⭐ मेरे सितारे</span><span>${g}/${t} · ${pct}%</span></div><div class="bar"><i style="width:${pct}%"></i></div></div>
+  <div class="gtiles">
+    <button class="gt" style="--b:linear-gradient(135deg,#ff9f1c,#e76f51)" onclick="startDrill('flash')"><span class="i">🃏</span><b>1 · फ्लैशकार्ड</b><small>सुनो, फिर शब्द देखो</small></button>
+    <button class="gt" style="--b:linear-gradient(135deg,#06d6a0,#118ab2)" onclick="startDrill('mcq')"><span class="i">🎯</span><b>2 · सही शब्द चुनो</b><small>सुनो और सही वर्तनी चुनो</small></button>
+    <button class="gt" style="--b:linear-gradient(135deg,#4361ee,#7b2cbf)" onclick="startDrill('type')"><span class="i">⌨️</span><b>3 · लिखकर अभ्यास</b><small>सुनो और लिखो</small></button>
+  </div>
+  <div class="sec"><h3>📋 सभी शब्द</h3><div class="wlist">${WORDS.map(x=>`<button class="${(S[x.w]||0)>=3?'got':''}" onclick="speak('${esc(x.w)}')">${esc(x.w)} ${'⭐'.repeat(S[x.w]||0)}</button>`).join('')}</div></div>`;
+}
+const ov=document.getElementById('ov');
+let G=null;
+function openOv(title){document.getElementById('ovt').textContent=title;document.getElementById('ovs').textContent='';ov.classList.add('show');}
+function closeOv(){try{speechSynthesis.cancel();}catch(e){}ov.classList.remove('show');G=null;home();}
+function startDrill(mode){
+  G={mode,queue:shuffle(WORDS),i:0,got:0};
+  const titles={flash:'🃏 1 · फ्लैशकार्ड',mcq:'🎯 2 · सही शब्द चुनो',type:'⌨️ 3 · लिखकर अभ्यास'};
+  openOv(titles[mode]);
+  if(mode==='flash')showFlash();else if(mode==='mcq')showMcq();else showType();
+}
+function showFlash(){
+  if(G.i>=G.queue.length)return endDrill();
+  const x=G.queue[G.i];speak(x.w);
+  window._flashWord=x.w;
+  document.getElementById('ovb').innerHTML=`<div class="card"><div class="prog">${G.i+1}/${G.queue.length}</div>
+    <button class="say" type="button" onclick="speak(window._flashWord)">🔊</button>
+    <div class="clue">💡 ${esc(x.clue)}</div>
+    <div id="reveal" style="display:none" class="bigword">${esc(x.w)}</div>
+    <div id="after"><button class="nx" type="button" onclick="revealFlash()">👀 शब्द दिखाओ</button></div></div>`;
+}
+function revealFlash(){
+  document.getElementById('reveal').style.display='block';
+  document.getElementById('after').innerHTML='<button class="nx" type="button" onclick="knowFlash()">✅ अगला</button>';
+}
+function knowFlash(){
+  award(window._flashWord,3);G.got+=3;G.i++;showFlash();
+}
+function showMcq(){
+  if(G.i>=G.queue.length)return endDrill();
+  const x=G.queue[G.i];speak(x.w);
+  const opts=shuffle(x.opts.map((t,i)=>({t,i:t===x.w?0:i+1})));
+  // fix: correct index by value
+  const options=shuffle(x.opts.slice());
+  document.getElementById('ovb').innerHTML=`<div class="card"><div class="prog">${G.i+1}/${G.queue.length}</div>
+    <button class="say" onclick="speak('${esc(x.w)}')">🔊</button>
+    <div class="clue">💡 ${esc(x.clue)}</div>
+    <div class="opts" id="opts">${options.map(t=>`<button class="opt" data-t="${esc(t)}">${esc(t)}</button>`).join('')}</div>
+    <div class="fb" id="fb"></div></div>`;
+  document.querySelectorAll('#opts .opt').forEach(b=>b.onclick=()=>{
+    const ok=b.dataset.t===x.w;document.querySelectorAll('#opts .opt').forEach(x=>x.disabled=true);
+    b.classList.add(ok?'ok':'bad');
+    if(!ok){document.querySelectorAll('#opts .opt').forEach(el=>{if(el.dataset.t===x.w)el.classList.add('ok');});}
+    document.getElementById('fb').className='fb '+(ok?'good':'bad');
+    document.getElementById('fb').textContent=ok?'शाबाश! 🌟':'सही शब्द: '+x.w;
+    if(ok){award(x.w,2);G.got+=2;}
+    setTimeout(()=>{G.i++;showMcq();},900);
+  });
+}
+function showType(){
+  if(G.i>=G.queue.length)return endDrill();
+  const x=G.queue[G.i];speak(x.w);
+  document.getElementById('ovb').innerHTML=`<div class="card"><div class="prog">${G.i+1}/${G.queue.length}</div>
+    <button class="say" onclick="speak('${esc(x.w)}')">🔊</button>
+    <div class="clue">💡 ${esc(x.clue)}</div>
+    <input class="typein" id="inp" autocomplete="off" autocapitalize="off">
+    <div class="fb" id="fb"></div>
+    <button class="nx" onclick="checkType()">जाँचो ✓</button></div>`;
+  document.getElementById('inp').focus();
+  document.getElementById('inp').onkeydown=e=>{if(e.key==='Enter')checkType();};
+}
+function checkType(){
+  const x=G.queue[G.i];const inp=document.getElementById('inp');
+  const v=(inp.value||'').trim();
+  const ok=v===x.w;
+  inp.className='typein '+(ok?'ok':'bad');
+  document.getElementById('fb').className='fb '+(ok?'good':'bad');
+  document.getElementById('fb').textContent=ok?'सही! 💯':'सही वर्तनी: '+x.w;
+  if(ok){award(x.w,3);G.got+=3;}
+  setTimeout(()=>{G.i++;showType();},1000);
+}
+function endDrill(){
+  const max=G.queue.length*3;const pct=max?Math.round(G.got/max*100):0;
+  const stars=pct>=85?3:pct>=65?2:pct>=40?1:0;
+  document.getElementById('ovb').innerHTML=`<div class="card end"><div class="big">🎉</div><h2>समाप्त!</h2>
+    <div class="stars">${'⭐'.repeat(stars)}${'☆'.repeat(3-stars)}</div>
+    <p>इस राउंड में ${G.got}/${max} ⭐</p>
+    <button class="nx" onclick="startDrill(G.mode)">🔁 फिर खेलो</button>
+    <button class="nx alt" onclick="closeOv()">होम</button></div>`;
+}
+home();
+</script>
+</body>
+</html>
