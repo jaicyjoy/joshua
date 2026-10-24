@@ -52,7 +52,7 @@ button,input{font-family:inherit}
 .la-row .la-say{margin-top:2px}
 
 </style>
-<script src="../../assets/learn-audio.js"></script>
+<script src="../../assets/learn-audio.js?v=2"></script>
 </head>
 <body>
 <div id="app"></div>
@@ -70,7 +70,8 @@ const save=()=>localStorage.setItem(SKEY,JSON.stringify(S));
 const award=(w,n)=>{if((S[w]||0)<n){S[w]=n;save();}};
 const gotStars=()=>WORDS.reduce((s,x)=>s+(S[x.w]||0),0);
 const totalStars=()=>WORDS.length*3;
-function speak(t){
+function speak(t, el){
+  if (window.LearnAudio) return LearnAudio.speak(t, 'hi-IN', 0.9, el || null);
   try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='hi-IN';u.rate=0.9;speechSynthesis.speak(u);}catch(e){}
 }
 function home(){
@@ -93,7 +94,7 @@ function home(){
 const ov=document.getElementById('ov');
 let G=null;
 function openOv(title){document.getElementById('ovt').textContent=title;document.getElementById('ovs').textContent='';ov.classList.add('show');}
-function closeOv(){try{speechSynthesis.cancel();}catch(e){}ov.classList.remove('show');G=null;home();}
+function closeOv(){if(window.LearnAudio)LearnAudio.stop();try{speechSynthesis.cancel();}catch(e){}ov.classList.remove('show');G=null;home();}
 function startDrill(mode){
   G={mode,queue:shuffle(WORDS),i:0,got:0};
   const titles={flash:'🃏 1 · फ्लैशकार्ड',mcq:'🎯 2 · सही शब्द चुनो',type:'⌨️ 3 · लिखकर अभ्यास'};
