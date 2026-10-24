@@ -211,24 +211,33 @@ function allStars() {
 const BADGES = [[0, '🌱', 'Little Learner'], [0.1, '🐣', 'Rising Star'], [0.3, '🥉', 'Bronze Star'], [0.55, '🥈', 'Silver Star'], [0.8, '🥇', 'Gold Star'], [1, '🏆', 'English Champion']];
 const badgeOf = p => BADGES.filter(b => p >= b[0]).pop();
 
-const sp = new Audio();
+let sp = null;
 let ptok = 0;
 const rate = () => slow ? 0.75 : 1;
-function stopAudio() { ptok++; sp.pause(); document.querySelectorAll('.playing').forEach(e => e.classList.remove('playing')); }
+function stopAudio() {
+  ptok++;
+  if (sp) {
+    try { sp.onended = null; sp.onerror = null; sp.pause(); } catch (e) {}
+    sp = null;
+  }
+  document.querySelectorAll('.playing').forEach(e => e.classList.remove('playing'));
+}
 function clip(id, mine) {
   return new Promise(res => {
     if (mine !== ptok) return res(false);
     let remote = false;
+    sp = new Audio('voice/' + id + '.mp3');
+    sp.defaultPlaybackRate = sp.playbackRate = rate();
     sp.onended = () => res(mine === ptok);
     sp.onerror = () => {
       if (mine !== ptok || remote || !TXT[id]) return res(false);
       remote = true;
-      sp.src = 'https://translate.googleapis.com/translate_tts?ie=UTF-8&client=gtx&tl=en-IN&q=' + encodeURIComponent(TXT[id]);
+      sp = new Audio('https://translate.googleapis.com/translate_tts?ie=UTF-8&client=gtx&tl=en-IN&q=' + encodeURIComponent(TXT[id]));
       sp.defaultPlaybackRate = sp.playbackRate = rate();
-      sp.play().catch(() => {});
+      sp.onended = () => res(mine === ptok);
+      sp.onerror = () => res(false);
+      sp.play().catch(() => res(false));
     };
-    sp.src = 'voice/' + id + '.mp3';
-    sp.defaultPlaybackRate = sp.playbackRate = rate();
     sp.play().catch(e => { if (e.name === 'NotAllowedError') res(false); });
   });
 }
@@ -242,7 +251,7 @@ async function play(ids, el) {
 function toggleSlow() {
   slow = !slow;
   localStorage.setItem('e3-slow', slow ? '1' : '0');
-  sp.defaultPlaybackRate = sp.playbackRate = rate();
+  if (sp) { sp.defaultPlaybackRate = sp.playbackRate = rate(); }
   document.querySelectorAll('.slowbtn').forEach(b => b.classList.toggle('on', slow));
 }
 const slowBtn = () => `<button class="slowbtn ${slow ? 'on' : ''}" onclick="toggleSlow()">🐢 Slow</button>`;

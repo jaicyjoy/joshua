@@ -70,9 +70,27 @@ const save=()=>localStorage.setItem(SKEY,JSON.stringify(S));
 const award=(w,n)=>{if((S[w]||0)<n){S[w]=n;save();}};
 const gotStars=()=>WORDS.reduce((s,x)=>s+(S[x.w]||0),0);
 const totalStars=()=>WORDS.length*3;
-function speak(t, el){
-  if (window.LearnAudio) return LearnAudio.speak(t, 'hi-IN', 0.9, el || null);
-  try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='hi-IN';u.rate=0.9;speechSynthesis.speak(u);}catch(e){}
+const VID=Object.fromEntries(WORDS.map(x=>[x.w,x.vid]));
+let sp=null,ptok=0;
+function stopAudio(){
+  ptok++;
+  if(sp){try{sp.onended=null;sp.onerror=null;sp.pause();}catch(e){}sp=null;}
+  document.querySelectorAll('.playing').forEach(e=>e.classList.remove('playing'));
+  if(window.LearnAudio)try{LearnAudio.stop();}catch(e){}
+}
+/** Fresh Audio each click so 🔊 replays (same src would otherwise be silent). */
+function speak(textOrVid, el){
+  stopAudio();
+  const mine=ptok;
+  if(el) el.classList.add('playing');
+  const id=VID[textOrVid]||textOrVid;
+  sp=new Audio('voice/'+id+'.mp3');
+  sp.playbackRate=0.95;
+  return new Promise(res=>{
+    sp.onended=()=>{if(el&&mine===ptok)el.classList.remove('playing');res(mine===ptok);};
+    sp.onerror=()=>{if(el&&mine===ptok)el.classList.remove('playing');res(false);};
+    sp.play().catch(()=>{if(el&&mine===ptok)el.classList.remove('playing');res(false);});
+  });
 }
 function home(){
   const g=gotStars(),t=totalStars(),pct=t?Math.round(g/t*100):0;
@@ -89,12 +107,12 @@ function home(){
     <button class="gt" style="--b:linear-gradient(135deg,#06d6a0,#118ab2)" onclick="startDrill('mcq')"><span class="i">🎯</span><b>2 · सही शब्द चुनो</b><small>सुनो और सही वर्तनी चुनो</small></button>
     <button class="gt" style="--b:linear-gradient(135deg,#4361ee,#7b2cbf)" onclick="startDrill('type')"><span class="i">⌨️</span><b>3 · लिखकर अभ्यास</b><small>सुनो और लिखो</small></button>
   </div>
-  <div class="sec"><h3>📋 सभी शब्द</h3><div class="wlist">${WORDS.map(x=>`<button class="${(S[x.w]||0)>=3?'got':''}" onclick="speak('${esc(x.w)}')">${esc(x.w)} ${'⭐'.repeat(S[x.w]||0)}</button>`).join('')}</div></div>`;
+  <div class="sec"><h3>📋 सभी शब्द</h3><div class="wlist">${WORDS.map(x=>`<button class="${(S[x.w]||0)>=3?'got':''}" onclick="speak('${esc(x.w)}',this)">${esc(x.w)} ${'⭐'.repeat(S[x.w]||0)}</button>`).join('')}</div></div>`;
 }
 const ov=document.getElementById('ov');
 let G=null;
 function openOv(title){document.getElementById('ovt').textContent=title;document.getElementById('ovs').textContent='';ov.classList.add('show');}
-function closeOv(){if(window.LearnAudio)LearnAudio.stop();try{speechSynthesis.cancel();}catch(e){}ov.classList.remove('show');G=null;home();}
+function closeOv(){stopAudio();ov.classList.remove('show');G=null;home();}
 function startDrill(mode){
   G={mode,queue:shuffle(WORDS),i:0,got:0};
   const titles={flash:'🃏 1 · फ्लैशकार्ड',mcq:'🎯 2 · सही शब्द चुनो',type:'⌨️ 3 · लिखकर अभ्यास'};
@@ -106,7 +124,7 @@ function showFlash(){
   const x=G.queue[G.i];speak(x.w);
   window._flashWord=x.w;
   document.getElementById('ovb').innerHTML=`<div class="card"><div class="prog">${G.i+1}/${G.queue.length}</div>
-    <button class="say" type="button" onclick="speak(window._flashWord)">🔊</button>
+    <button class="say" type="button" onclick="speak(window._flashWord,this)">🔊</button>
     <div class="clue">💡 ${esc(x.clue)}</div>
     <div id="reveal" style="display:none" class="bigword">${esc(x.w)}</div>
     <div id="after"><button class="nx" type="button" onclick="revealFlash()">👀 शब्द दिखाओ</button></div></div>`;
@@ -126,7 +144,7 @@ function showMcq(){
   // fix: correct index by value
   const options=shuffle(x.opts.slice());
   document.getElementById('ovb').innerHTML=`<div class="card"><div class="prog">${G.i+1}/${G.queue.length}</div>
-    <button class="say" onclick="speak('${esc(x.w)}')">🔊</button>
+    <button class="say" onclick="speak('${esc(x.w)}',this)">🔊</button>
     <div class="clue">💡 ${esc(x.clue)}</div>
     <div class="opts" id="opts">${options.map(t=>`<button class="opt" data-t="${esc(t)}">${esc(t)}</button>`).join('')}</div>
     <div class="fb" id="fb"></div></div>`;
@@ -145,7 +163,7 @@ function showType(){
   if(G.i>=G.queue.length)return endDrill();
   const x=G.queue[G.i];speak(x.w);
   document.getElementById('ovb').innerHTML=`<div class="card"><div class="prog">${G.i+1}/${G.queue.length}</div>
-    <button class="say" onclick="speak('${esc(x.w)}')">🔊</button>
+    <button class="say" onclick="speak('${esc(x.w)}',this)">🔊</button>
     <div class="clue">💡 ${esc(x.clue)}</div>
     <input class="typein" id="inp" autocomplete="off" autocapitalize="off">
     <div class="fb" id="fb"></div>

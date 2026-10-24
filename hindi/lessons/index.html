@@ -142,11 +142,14 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':
 const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 const others = (arr, n, not) => shuffle(arr.filter(x => x !== not && x.hi !== not.hi)).slice(0, n);
 
-const speaker = new Audio();
+let speaker = null;
 let token = 0, pend = null;
 function stopAudio() {
   token++;
-  speaker.pause();
+  if (speaker) {
+    try { speaker.onended = null; speaker.onerror = null; speaker.pause(); } catch (e) {}
+    speaker = null;
+  }
   if (pend) { const p = pend; pend = null; p(false); }
 }
 function say(id) {
@@ -157,20 +160,22 @@ function say(id) {
     let remote = false;
     const fin = ok => {
       if (my !== token) return;
-      speaker.onended = speaker.onerror = null;
+      if (speaker) { speaker.onended = speaker.onerror = null; }
       pend = null;
       resolve(ok);
     };
+    speaker = new Audio('voice/' + id + '.mp3');
     speaker.onended = () => fin(true);
     speaker.onerror = () => {
       if (my !== token) return;
       if (!remote && TEXT[id]) {
         remote = true;
-        speaker.src = 'https://translate.googleapis.com/translate_tts?ie=UTF-8&client=gtx&tl=hi&q=' + encodeURIComponent(TEXT[id]);
+        speaker = new Audio('https://translate.googleapis.com/translate_tts?ie=UTF-8&client=gtx&tl=hi&q=' + encodeURIComponent(TEXT[id]));
+        speaker.onended = () => fin(true);
+        speaker.onerror = () => fin(false);
         speaker.play().catch(e => { if (e.name === 'NotAllowedError') fin(false); });
       } else fin(false);
     };
-    speaker.src = 'voice/' + id + '.mp3';
     speaker.play().catch(e => { if (e.name === 'NotAllowedError') fin(false); });
   });
 }
