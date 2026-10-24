@@ -39,7 +39,14 @@ button,input{font-family:inherit;cursor:pointer}
 .mrow{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:center}
 .mrow select{padding:10px;border-radius:12px;border:2px solid #ffd0e0;font-weight:700;font-size:15px}
 .end{text-align:center}.stars{font-size:32px;letter-spacing:2px}
+
+.la-say{border:0;background:#efeaff;width:40px;height:40px;border-radius:50%;font-size:18px;cursor:pointer;flex:none;vertical-align:middle;margin-left:6px;box-shadow:0 3px 0 #e3e0f7}
+.la-say.playing,.la-say:active{background:#ffb703}
+.la-row{display:flex;gap:8px;align-items:flex-start}
+.la-row .la-say{margin-top:2px}
+
 </style>
+<script src="../../assets/learn-audio.js"></script>
 </head>
 <body>
 <div id="app"></div>
@@ -150,16 +157,18 @@ function showItem(){
   const prog=`<div class="prog">${G.i+1} / ${G.items.length}</div>`;
   if(it.type==='mcq'){
     const opts=shuffle(it.o.map((t,i)=>({t,i})));
-    document.getElementById('ovb').innerHTML=`<div class="card">${prog}<div class="qtext">${esc(it.q)}</div>
+    document.getElementById('ovb').innerHTML=`<div class="card">${prog}<div class="qtext la-row"><span style="flex:1">${esc(it.q)}</span>${LearnAudio.btn(it.q,'en-IN')}</div>
       <div class="opts" id="opts">${opts.map(o=>`<button class="opt" data-i="${o.i}">${esc(o.t)}</button>`).join('')}</div>
       <div class="fb" id="fb"></div></div>`;
+    LearnAudio.speak(it.q,'en-IN');
     document.querySelectorAll('#opts .opt').forEach(b=>b.onclick=()=>{
       const ok=+b.dataset.i===it.a; lock(ok,b,it.a); nextSoon();
     });
   } else if(it.type==='tf'){
-    document.getElementById('ovb').innerHTML=`<div class="card">${prog}<div class="qtext">${esc(it.q)}</div>
+    document.getElementById('ovb').innerHTML=`<div class="card">${prog}<div class="qtext la-row"><span style="flex:1">${esc(it.q)}</span>${LearnAudio.btn(it.q,'en-IN')}</div>
       <div class="opts"><button class="opt" data-v="true">True</button><button class="opt" data-v="false">False</button></div>
       <div class="fb" id="fb"></div></div>`;
+    LearnAudio.speak(it.q,'en-IN');
     document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{
       const ok=(b.dataset.v==='true')===it.a;
       document.querySelectorAll('.opt').forEach(x=>x.disabled=true);
@@ -169,7 +178,8 @@ function showItem(){
     });
   } else if(it.type==='fill'){
     const parts=it.prompt.split('____');
-    let html=prog+`<div class="qtext">Fill in the blanks</div><div class="fillrow">`;
+    let html=prog+`<div class="qtext la-row"><span style="flex:1">Fill in the blanks</span>${LearnAudio.btn(it.prompt.replace(/____/g,' blank '),'en-IN')}</div><div class="fillrow">`;
+    LearnAudio.speak(it.prompt.replace(/____/g,' blank '),'en-IN');
     parts.forEach((p,i)=>{html+=`<span>${esc(p)}</span>`; if(i<parts.length-1)html+=`<input id="f${i}" autocomplete="off">`;});
     html+=`</div><p style="text-align:center;color:#6a5f8f;font-weight:700">Hint: ${esc(it.hint||'')}</p>
       <div style="text-align:center"><button class="nx" id="chk">Check</button></div><div class="fb" id="fb"></div>`;
@@ -202,7 +212,7 @@ function showItem(){
     };
   } else if(it.type==='match'){
     const rights=it.right.slice();
-    document.getElementById('ovb').innerHTML=`<div class="card">${prog}<div class="qtext">${esc(it.q)}</div>
+    document.getElementById('ovb').innerHTML=`<div class="card">${prog}<div class="qtext la-row"><span style="flex:1">${esc(it.q)}</span>${LearnAudio.btn(it.q,'en-IN')}</div>
       <div class="match" id="match">${it.left.map((L,i)=>`<div class="mrow"><b>${esc(L)}</b>
         <select id="m${i}">${shuffle(rights.map((r,ri)=>({r,ri}))).map(o=>`<option value="${o.ri}">${esc(o.r)}</option>`).join('')}</select>
       </div>`).join('')}</div>
@@ -222,7 +232,7 @@ function lock(ok,b,ai){
   if(!ok)document.querySelectorAll('#opts .opt').forEach(el=>{if(+el.dataset.i===ai)el.classList.add('ok');});
   fb(ok); G.total++; if(ok)G.correct++;
 }
-function fb(ok){const el=document.getElementById('fb');el.className='fb '+(ok?'good':'bad');el.textContent=ok?'Correct! 🌟':'Not quite — try to remember the lesson.';}
+function fb(ok){LearnAudio.result(ok);const el=document.getElementById('fb');el.className='fb '+(ok?'good':'bad');el.textContent=ok?'Correct! 🌟':'Not quite — try to remember the lesson.';}
 function nextSoon(){setTimeout(()=>{G.i++;showItem();},900);}
 function finish(){
   const p=G.total?G.correct/G.total:0;

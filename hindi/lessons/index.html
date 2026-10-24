@@ -122,7 +122,13 @@ button{font-family:inherit;color:inherit;cursor:pointer}
 .conf{position:fixed;top:-40px;font-size:30px;pointer-events:none;z-index:30;animation:fall 1.6s ease-in forwards}
 @keyframes fall{to{transform:translateY(110vh) rotate(540deg);opacity:.6}}
 @media (max-width:560px){.tab{font-size:16px}.mbtn{font-size:20px}}
+
+.la-say{border:0;background:#efeaff;width:40px;height:40px;border-radius:50%;font-size:18px;cursor:pointer;flex:none;vertical-align:middle;margin-left:6px;box-shadow:0 3px 0 #e3e0f7}
+.la-say:active{background:#ffb703}
+.la-row{display:flex;gap:8px;align-items:flex-start}
+
 </style>
+<script src="../../assets/learn-audio.js"></script>
 </head>
 <body>
 <div id="app"></div>
@@ -308,11 +314,13 @@ function fillPick(k, btn, w) {
     card.querySelector('.blank').textContent = w;
     btn.classList.add('ok');
     card.querySelectorAll('.fopt').forEach(x => x.disabled = true);
+    if (window.LearnAudio) LearnAudio.ding();
     confetti();
     say(b.vid);
     if (fillDone.size === c.blanks.length) setTimeout(() => { render(); window.scrollTo(0, 0); say('pr-ok1'); }, 2600);
   } else {
     btn.classList.add('bad');
+    if (window.LearnAudio) LearnAudio.buzz();
     setTimeout(() => btn.classList.remove('bad'), 450);
     say('pr-try');
   }
@@ -439,11 +447,13 @@ function answer(btn, j) {
     btn.classList.add('ok');
     Q.score++;
     document.getElementById('sc').textContent = Q.score;
+    if (window.LearnAudio) LearnAudio.ding();
     confetti();
     say('pr-ok' + Math.floor(Math.random() * 3));
   } else {
     btn.classList.add('bad');
     btns.forEach((b, k) => { if (q.opts[k].k === q.ans) b.classList.add('ok'); });
+    if (window.LearnAudio) LearnAudio.buzz();
     say('pr-no');
   }
   document.getElementById('next').classList.add('show');

@@ -45,7 +45,14 @@ button,input{font-family:inherit}
 .prog{font-weight:800;color:#4a4f7a;margin-bottom:10px}
 .bigword{font-size:42px;font-weight:900;color:#dc2f02;margin:12px 0}
 .end .big{font-size:64px}.stars{font-size:36px;letter-spacing:3px}
+
+.la-say{border:0;background:#efeaff;width:40px;height:40px;border-radius:50%;font-size:18px;cursor:pointer;flex:none;vertical-align:middle;margin-left:6px;box-shadow:0 3px 0 #e3e0f7}
+.la-say.playing,.la-say:active{background:#ffb703}
+.la-row{display:flex;gap:8px;align-items:flex-start}
+.la-row .la-say{margin-top:2px}
+
 </style>
+<script src="../../assets/learn-audio.js"></script>
 </head>
 <body>
 <div id="app"></div>
@@ -108,6 +115,7 @@ function revealFlash(){
   document.getElementById('after').innerHTML='<button class="nx" type="button" onclick="knowFlash()">✅ अगला</button>';
 }
 function knowFlash(){
+  LearnAudio.ding();
   award(window._flashWord,3);G.got+=3;G.i++;showFlash();
 }
 function showMcq(){
@@ -127,6 +135,7 @@ function showMcq(){
     if(!ok){document.querySelectorAll('#opts .opt').forEach(el=>{if(el.dataset.t===x.w)el.classList.add('ok');});}
     document.getElementById('fb').className='fb '+(ok?'good':'bad');
     document.getElementById('fb').textContent=ok?'शाबाश! 🌟':'सही शब्द: '+x.w;
+    LearnAudio.result(ok);
     if(ok){award(x.w,2);G.got+=2;}
     setTimeout(()=>{G.i++;showMcq();},900);
   });
@@ -150,6 +159,7 @@ function checkType(){
   inp.className='typein '+(ok?'ok':'bad');
   document.getElementById('fb').className='fb '+(ok?'good':'bad');
   document.getElementById('fb').textContent=ok?'सही! 💯':'सही वर्तनी: '+x.w;
+  LearnAudio.result(ok);
   if(ok){award(x.w,3);G.got+=3;}
   setTimeout(()=>{G.i++;showType();},1000);
 }
