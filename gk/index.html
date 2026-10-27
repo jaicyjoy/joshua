@@ -3,38 +3,338 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Coming soon · Joshua</title>
+<title>GK · Class 3 · Joshua</title>
 <style>
-body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:"Avenir Next","Segoe UI",system-ui,sans-serif;background:linear-gradient(160deg,#e0f7fa,#fff3e0);color:#2b2350;text-align:center;padding:24px}
-.box{background:#fff;border-radius:28px;padding:36px 28px;box-shadow:0 10px 0 #e6dff7;max-width:420px}
-.em{font-size:64px}
-h1{margin:8px 0 6px;font-size:28px}
-p{margin:0;color:#6a5f8f;font-size:17px}
-a{display:inline-block;margin-top:20px;background:linear-gradient(135deg,#4361ee,#7b2cbf);color:#fff;text-decoration:none;font-weight:800;padding:12px 22px;border-radius:99px;box-shadow:0 5px 0 rgba(67,97,238,.35)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:"Chalkboard SE","Comic Sans MS","Avenir Next",system-ui,sans-serif;color:#1f2340;background:linear-gradient(180deg,#fff3b0 0%,#ffe8d6 40%,#e7f5ff 100%);min-height:100vh;line-height:1.4}
+button,a{font-family:inherit}
+#app{max-width:920px;margin:0 auto;padding:12px 14px 80px}
+.top{position:sticky;top:6px;z-index:10;display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:22px;color:#fff;background:linear-gradient(135deg,#f77f00,#9b2226);box-shadow:0 6px 0 rgba(0,0,0,.12)}
+.top a,.top button.icon{border:0;background:#fff;width:44px;height:44px;border-radius:50%;font-size:20px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:#333;flex:none;cursor:pointer}
+.top .tt{flex:1;min-width:0}.top .tt small{display:block;font-size:12px;font-weight:700;opacity:.92}.top .tt b{display:block;font-size:18px}
+.chip{background:rgba(255,255,255,.28);border-radius:99px;padding:4px 10px;font-weight:800;font-size:13px;white-space:nowrap}
+.hero{text-align:center;padding:14px 8px 6px}.hero .big{font-size:56px;display:inline-block;animation:bob 2.4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-7px) rotate(-4deg)}}
+.hero h1{margin:4px 0;font-size:30px;color:#9b2226}.hero p{margin:0;color:#6a5f8f;font-size:16px}
+.starbox{background:#fff;border-radius:22px;padding:14px 16px;margin:12px 0;box-shadow:0 6px 0 #f0d9c8}
+.starbox .row{display:flex;justify-content:space-between;font-weight:800;font-size:16px}
+.bar{height:14px;background:#f3e6dc;border-radius:99px;overflow:hidden;margin-top:8px}.bar i{display:block;height:100%;background:linear-gradient(90deg,#ffd60a,#06d6a0);border-radius:99px;width:0;transition:width .35s}
+.gtiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:12px}
+.gt{border:0;border-radius:20px;padding:14px;text-align:left;color:#fff;background:var(--b);box-shadow:0 6px 0 rgba(0,0,0,.16);cursor:pointer;width:100%}
+.gt .i{font-size:34px;display:block}.gt b{display:block;font-size:17px;margin-top:4px;line-height:1.2}.gt small{display:block;opacity:.95;font-size:12px;margin-top:2px}
+.gt .st{display:inline-block;margin-top:8px;background:rgba(0,0,0,.18);padding:3px 10px;border-radius:99px;font-weight:800;font-size:13px}
+.ov{position:fixed;inset:0;z-index:40;display:none;flex-direction:column;background:linear-gradient(165deg,#fff8ef,#e7f5ff)}
+.ov.show{display:flex}
+.ovtop{display:flex;align-items:center;gap:10px;padding:12px 14px;color:#fff;background:linear-gradient(135deg,#f77f00,#9b2226)}
+.ovtop button{border:0;background:#fff;width:42px;height:42px;border-radius:50%;font-size:18px;font-weight:900;cursor:pointer}
+.ovtop .t{flex:1;font-weight:800;font-size:15px}.ovtop .sc{background:rgba(255,255,255,.25);border-radius:99px;padding:4px 10px;font-weight:800}
+.ovb{flex:1;overflow-y:auto;padding:14px;max-width:860px;width:100%;margin:0 auto}
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.mode{border:0;border-radius:20px;padding:18px 14px;color:#fff;font-weight:800;cursor:pointer;box-shadow:0 6px 0 rgba(0,0,0,.14);text-align:left}
+.mode .x{font-size:32px;display:block}.mode small{display:block;font-weight:700;opacity:.95;margin-top:4px}
+.card{background:#fff;border-radius:22px;padding:18px;box-shadow:0 7px 0 #f0d9c8;text-align:center;margin-bottom:12px}
+.card .em{font-size:64px;line-height:1}.card h2{margin:8px 0 4px;font-size:24px;color:#9b2226}.card p{margin:0;color:#4a4f7a;font-size:17px;font-weight:700}
+.say{border:0;width:78px;height:78px;border-radius:50%;font-size:34px;background:#ffe0c8;cursor:pointer;box-shadow:0 5px 0 #f0d9c8;margin:6px}
+.say.playing,.say:active{background:#ffb703;transform:scale(.96)}
+.say.sm{width:48px;height:48px;font-size:22px;margin:0 4px;vertical-align:middle}
+.qtext{font-size:20px;font-weight:800;margin:10px 0;color:#1f2340;display:flex;gap:8px;align-items:flex-start;justify-content:center;text-align:left}
+.opts{display:grid;gap:10px;margin-top:12px;text-align:left}
+.opt{border:2px solid #f0d9c8;background:#fff8f2;border-radius:16px;padding:14px;font-size:17px;font-weight:700;cursor:pointer;box-shadow:0 4px 0 #f0d9c8;width:100%;display:flex;align-items:center;gap:8px}
+.opt.ok{background:#c9f7d6;border-color:#2fbf71}.opt.bad{background:#ffd3d3;border-color:#e5484d}
+.opt .say.sm{flex:none}
+.fb{margin-top:12px;font-weight:800;font-size:18px}.fb.good{color:#1f9d55}.fb.bad{color:#d9480f}
+.nx{display:inline-block;margin:12px 6px 0;border:0;border-radius:99px;padding:12px 26px;font-size:16px;font-weight:800;color:#fff;background:linear-gradient(135deg,#f77f00,#9b2226);cursor:pointer;box-shadow:0 5px 0 rgba(0,0,0,.14)}
+.nx.alt{background:#fff;color:#9b2226;border:2px solid #ffd0a8;box-shadow:0 5px 0 #f0d9c8}
+.prog{font-weight:800;color:#5b5f86;margin-bottom:8px}
+.learn-nav{display:flex;justify-content:space-between;gap:8px;margin-top:14px;flex-wrap:wrap}
+.dots{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+.dots i{width:10px;height:10px;border-radius:50%;background:#f0d9c8}.dots i.on{background:#f77f00}
+.end{text-align:center}.end .big{font-size:64px}.stars{font-size:36px;letter-spacing:3px}
+.tip{text-align:center;color:#6a5f8f;font-size:14px;margin-top:16px}
 </style>
+<script src="../assets/learn-audio.js?v=3"></script>
 </head>
 <body>
-<div class="box">
-  <div class="em" id="em">🚧</div>
-  <h1 id="t">Coming soon</h1>
-  <p>This subject will be added next. Until then, try English or Hindi!</p>
-  <a href="../">🏠 Back to subjects</a>
+<div id="app"></div>
+<div class="ov" id="ov">
+  <div class="ovtop">
+    <button type="button" onclick="closeOv()">✕</button>
+    <div class="t" id="ovt"></div>
+    <div class="sc" id="ovs"></div>
+  </div>
+  <div class="ovb" id="ovb"></div>
 </div>
+<script type="application/json" id="data">{"topics":[{"id":"planets","title":"What's That Planet?","emoji":"🪐","grad":"linear-gradient(135deg,#3a0ca3,#4361ee)","blurb":"Solar system names & facts","learn":[{"em":"☀️","t":"Our Solar System","s":"Our solar system has the Sun and eight planets.","vid":"v-87c4ccdddd","titleVid":"v-2ddd20af23"},{"em":"☿","t":"Mercury","s":"Mercury is the smallest planet and closest to the Sun.","vid":"v-dcdd12a2cf","titleVid":"v-34dae487e3"},{"em":"♀","t":"Venus","s":"Venus is the brightest planet in the sky.","vid":"v-32923ee9a2","titleVid":"v-0bdc508a17"},{"em":"🌍","t":"Earth","s":"Earth is our home. It is the only planet with life as we know it.","vid":"v-7321dea550","titleVid":"v-5cdd21c97f"},{"em":"♂","t":"Mars","s":"Mars is called the red planet.","vid":"v-d015b9c5b6","titleVid":"v-671f028142"},{"em":"♃","t":"Jupiter","s":"Jupiter is the largest planet in our solar system.","vid":"v-de4f2fe7d0","titleVid":"v-89c5c30498"},{"em":"♄","t":"Saturn","s":"Saturn has the largest and most beautiful rings.","vid":"v-bd31c46e45","titleVid":"v-233ea1805d"},{"em":"♅","t":"Uranus","s":"Uranus is a big planet with rings. It is the seventh planet.","vid":"v-2a09c03a54","titleVid":"v-76b840d32f"},{"em":"♆","t":"Neptune","s":"Neptune is the eighth planet in our solar system.","vid":"v-2dc2386a9b","titleVid":"v-f8d3b65d84"},{"em":"💍","t":"Rings","s":"Jupiter, Saturn, Uranus and Neptune have rings. Saturn's rings are the most beautiful.","vid":"v-ff4c81497b","titleVid":"v-727163e4d8"}],"quiz":[{"q":"Which is the eighth planet in our solar system?","o":["Earth","Uranus","Neptune"],"a":2,"qVid":"v-9d6c3c0b74","oVids":["v-5cdd21c97f","v-76b840d32f","v-f8d3b65d84"],"aVid":"v-4b1a4b5a2e"},{"q":"Which is the largest planet?","o":["Earth","Jupiter","Mars"],"a":1,"qVid":"v-75a33f5ef4","oVids":["v-5cdd21c97f","v-89c5c30498","v-671f028142"],"aVid":"v-cd188683f4"},{"q":"Which is the smallest planet?","o":["Mercury","Venus","Neptune"],"a":0,"qVid":"v-bd66160bee","oVids":["v-34dae487e3","v-0bdc508a17","v-f8d3b65d84"],"aVid":"v-886c18436b"},{"q":"Venus is the ______ planet.","o":["brightest","largest","farthest"],"a":0,"qVid":"v-748c58587a","oVids":["v-653084ed21","v-f39ed5b6d0","v-69643cebe1"],"aVid":"v-3aa9c3c518"},{"q":"Which planet is known for beautiful rings?","o":["Mars","Saturn","Earth"],"a":1,"qVid":"v-289095e530","oVids":["v-671f028142","v-233ea1805d","v-5cdd21c97f"],"aVid":"v-a2376aabef"},{"q":"Earth is the ______ planet.","o":["largest","smallest","home"],"a":2,"qVid":"v-485e9b0947","oVids":["v-f39ed5b6d0","v-a9a92beab8","v-106a6c241b"],"aVid":"v-f63b1bf8c9"}],"titleVid":"v-a61186dfeb","blurbVid":"v-888dfc50bc"},{"id":"body","title":"The Human Machine","emoji":"🦴","grad":"linear-gradient(135deg,#e63946,#f4a261)","blurb":"Amazing facts about your body","learn":[{"em":"🦴","t":"Ribcage","s":"The ribcage protects the lungs and the heart.","vid":"v-355fd711e3","titleVid":"v-0150dee2aa"},{"em":"🧵","t":"Spine","s":"The spine or backbone supports the upper part of our body.","vid":"v-5b994766ec","titleVid":"v-299a206018"},{"em":"🤧","t":"Sneezing","s":"Sneezing clears our nose of dust, pollen and germs. We never sneeze while we are sleeping.","vid":"v-41629fd755","titleVid":"v-d83ffdcfc7"},{"em":"👁️","t":"Blinking","s":"We blink to keep our eyes moist and safe. We always blink when we sneeze.","vid":"v-a215152a5c","titleVid":"v-d366ecd8db"},{"em":"👂","t":"Hearing","s":"Our ears can hear even when we sleep. Our brain ignores those sounds while we are asleep.","vid":"v-b224180579","titleVid":"v-67ac195a92"},{"em":"💡","t":"Brain power","s":"Our brain generates enough electricity to power a light bulb.","vid":"v-3937e5a1de","titleVid":"v-5e2df973b6"},{"em":"👅","t":"Taste and smell","s":"We taste food with the taste buds on our tongue. We can taste better only if we can smell the food.","vid":"v-56c8e1d0ae","titleVid":"v-4c1067de92"}],"quiz":[{"q":"What supports the upper part of our body?","o":["Brain","Heart","Spine"],"a":2,"qVid":"v-623d271ae7","oVids":["v-71bb21a648","v-f4a6ceffc0","v-299a206018"],"aVid":"v-e1b4517aa5"},{"q":"What does the ribcage protect?","o":["Lungs and heart","Only toes","Only hair"],"a":0,"qVid":"v-f0047db407","oVids":["v-5ae21b9a31","v-3c31cae263","v-6aeb783f04"],"aVid":"v-0a14dc4c49"},{"q":"Sneezing clears our nose of…","o":["Dust, pollen and germs","Toys","Books"],"a":0,"qVid":"v-ff1da78a2b","oVids":["v-dbd2e1cddb","v-66d0af2d5d","v-6225eb5bf8"],"aVid":"v-ffb30cc503"},{"q":"Do we sneeze while sleeping?","o":["Yes always","No","Only at night"],"a":1,"qVid":"v-e929beb508","oVids":["v-094a360c06","v-bafd7322c6","v-78ea84d886"],"aVid":"v-9395fdafea"},{"q":"We blink to keep our eyes…","o":["Moist and safe","Cold","Silent"],"a":0,"qVid":"v-acdcd0e6e8","oVids":["v-9ecbcd8755","v-1a3c2e99e5","v-1e3332b2cd"],"aVid":"v-e79fcb41d5"}],"titleVid":"v-e8d918f3d9","blurbVid":"v-162400d772"},{"id":"sports","title":"Time for Sports","emoji":"🏅","grad":"linear-gradient(135deg,#06d6a0,#118ab2)","blurb":"Balls, games & Olympic sports","learn":[{"em":"🏀","t":"Basketball","s":"Basketball uses a big orange ball with black lines.","vid":"v-56ace25637","titleVid":"v-c71a18083d"},{"em":"⛳","t":"Golf","s":"Golf uses a small white dimpled ball.","vid":"v-1ffc2a00b0","titleVid":"v-690c3b1042"},{"em":"🏓","t":"Table tennis","s":"Table tennis uses a small light white ball.","vid":"v-e291d1f61d","titleVid":"v-a60f5b89e1"},{"em":"🏏","t":"Cricket","s":"Cricket balls can be red, pink or white. Red is for day Test matches. Pink is for night Tests. White is for One Day and T-Twenty.","vid":"v-0b52eacf05","titleVid":"v-a90edc84fa"},{"em":"🏑","t":"Hockey","s":"Hockey uses a hard white ball.","vid":"v-8a9c8c5881","titleVid":"v-6081becaf0"},{"em":"⚾","t":"Baseball","s":"Baseball uses a white ball with red stitching.","vid":"v-b694838f15","titleVid":"v-ea94a7ff1f"},{"em":"⚽","t":"Football","s":"Football, or soccer, uses a black and white ball.","vid":"v-78e6cc8b5b","titleVid":"v-449a5f6d01"},{"em":"🎾","t":"Tennis","s":"Tennis uses a bright yellow-green fuzzy ball.","vid":"v-009de0af6a","titleVid":"v-0c493d20a1"},{"em":"🥋","t":"Other sports","s":"We also play kabaddi, boxing, weightlifting, discus throw, pole vault and javelin throw.","vid":"v-b25ae498fb","titleVid":"v-bf61f49cee"}],"quiz":[{"q":"A cricket ball could be red, pink or _______.","o":["blue","white","green"],"a":1,"qVid":"v-803244777d","oVids":["v-48d6215903","v-d508fe45ce","v-9f27410725"],"aVid":"v-6edf541c55"},{"q":"Which sport uses a big orange ball?","o":["Golf","Basketball","Table tennis"],"a":1,"qVid":"v-670d8adeca","oVids":["v-690c3b1042","v-c71a18083d","v-a60f5b89e1"],"aVid":"v-b38dbf5b51"},{"q":"Look: athlete throws a long spear. Which sport?","o":["Discus throw","Javelin throw","Boxing"],"a":1,"qVid":"v-36e1da5c63","oVids":["v-7ef3baa25e","v-c88ffaa760","v-19bf99f6ab"],"aVid":"v-644ff7852e"},{"q":"Two people fight with gloves in a ring. Which sport?","o":["Boxing","Kabaddi","Golf"],"a":0,"qVid":"v-43834b7210","oVids":["v-19bf99f6ab","v-534305be27","v-690c3b1042"],"aVid":"v-606bd9f72c"},{"q":"Lifting a heavy barbell is…","o":["Pole vault","Weightlifting","Football"],"a":1,"qVid":"v-905381ed5f","oVids":["v-91d86a14be","v-690520754a","v-449a5f6d01"],"aVid":"v-f7ed156a86"},{"q":"Which sport is a traditional Indian team game?","o":["Kabaddi","Golf","Baseball"],"a":0,"qVid":"v-1a7ce4a943","oVids":["v-534305be27","v-690c3b1042","v-ea94a7ff1f"],"aVid":"v-65df2d53cf"}],"titleVid":"v-8a9866095e","blurbVid":"v-86e5026e50"},{"id":"animals","title":"Animal Heroes","emoji":"🐾","grad":"linear-gradient(135deg,#ff9f1c,#e76f51)","blurb":"Famous story & cartoon animals","learn":[{"em":"🦉","t":"Hedwig","s":"Hedwig is Harry Potter's pet owl. She carries mail for Harry.","vid":"v-d81d2161a2","titleVid":"v-657cd4a401"},{"em":"🦆","t":"Donald Duck","s":"Donald Duck wears a sailor shirt, a cap and a bow tie. Mickey Mouse is his friend.","vid":"v-809b616341","titleVid":"v-4f7ad45c10"},{"em":"🐶","t":"Snowy","s":"Snowy is Tintin's best friend. He follows Tintin everywhere and is afraid of spiders.","vid":"v-a957965085","titleVid":"v-db3e8d805f"},{"em":"🐻","t":"Winnie the Pooh","s":"Winnie the Pooh lives in the Hundred Acre Wood. He loves honey.","vid":"v-ba965a7d80","titleVid":"v-c98167bc87"},{"em":"🐺","t":"Akela","s":"Akela is the wolf leader of his pack. He protects Mowgli.","vid":"v-4767d2cf0f","titleVid":"v-8a70e5e1a4"},{"em":"🐕","t":"Scooby-Doo","s":"Scooby-Doo is the loyal companion of Shaggy. Together they solve mysteries.","vid":"v-2724b58035","titleVid":"v-627acfbeff"}],"quiz":[{"q":"Who is Harry Potter's pet owl?","o":["Snowy","Hedwig","Akela"],"a":1,"qVid":"v-51fe389360","oVids":["v-db3e8d805f","v-657cd4a401","v-8a70e5e1a4"],"aVid":"v-d06e155354"},{"q":"Which bear loves honey?","o":["Winnie the Pooh","Scooby-Doo","Donald Duck"],"a":0,"qVid":"v-cd1d7ddb80","oVids":["v-c98167bc87","v-627acfbeff","v-4f7ad45c10"],"aVid":"v-9a401e65b3"},{"q":"Tintin's dog friend is…","o":["Snowy","Hedwig","Akela"],"a":0,"qVid":"v-ad9c3251c0","oVids":["v-db3e8d805f","v-657cd4a401","v-8a70e5e1a4"],"aVid":"v-57f7b5c2cd"},{"q":"Which wolf protects Mowgli?","o":["Akela","Scooby-Doo","Snowy"],"a":0,"qVid":"v-25bb05891d","oVids":["v-8a70e5e1a4","v-627acfbeff","v-db3e8d805f"],"aVid":"v-5706a2738e"},{"q":"Scooby-Doo solves mysteries with…","o":["Shaggy","Tintin","Harry"],"a":0,"qVid":"v-252051c435","oVids":["v-9144b4f0da","v-bb378a544f","v-db05833c29"],"aVid":"v-b9514f0172"}],"titleVid":"v-fb167c0a37","blurbVid":"v-5dd84a0b58"},{"id":"books","title":"Popular Characters","emoji":"📚","grad":"linear-gradient(135deg,#7b2cbf,#c77dff)","blurb":"Story heroes and their books","learn":[{"em":"👠","t":"Dorothy","s":"Dorothy is from The Wonderful Wizard of Oz.","vid":"v-5ed41f6f44","titleVid":"v-08b7593cde"},{"em":"🧒","t":"Mowgli","s":"Mowgli is from The Jungle Book.","vid":"v-b865d62392","titleVid":"v-d20cf1e453"},{"em":"🐇","t":"Alice","s":"Alice is from Alice in Wonderland.","vid":"v-ea323ef09b","titleVid":"v-64489c85dc"},{"em":"🧚","t":"Tinker Bell","s":"Tinker Bell is from Peter Pan.","vid":"v-94892cd88d","titleVid":"v-dce7f9891b"},{"em":"🍫","t":"Charlie","s":"Charlie is from Charlie and the Chocolate Factory.","vid":"v-42332fed5a","titleVid":"v-ea2bfa79cd"},{"em":"🏏","t":"Swami","s":"Swami is from Malgudi Days.","vid":"v-ed5cc9094d","titleVid":"v-2dfb87412a"}],"quiz":[{"q":"Dorothy is from which book?","o":["Peter Pan","The Wonderful Wizard of Oz","Malgudi Days"],"a":1,"qVid":"v-1d9d7b71e6","oVids":["v-b1f7e8c5c5","v-ea6899c126","v-5771fda0d5"],"aVid":"v-1947d4bde0"},{"q":"Mowgli is from…","o":["The Jungle Book","Alice in Wonderland","Peter Pan"],"a":0,"qVid":"v-9e75af10c4","oVids":["v-20ec4fc42d","v-50e9fcc391","v-b1f7e8c5c5"],"aVid":"v-2b3fe10777"},{"q":"Alice is from…","o":["Alice in Wonderland","Malgudi Days","Jungle Book"],"a":0,"qVid":"v-fcafca1561","oVids":["v-50e9fcc391","v-5771fda0d5","v-89bb20cfa2"],"aVid":"v-f05f57c36a"},{"q":"Tinker Bell is from…","o":["Peter Pan","Wizard of Oz","Chocolate Factory"],"a":0,"qVid":"v-581e084d36","oVids":["v-b1f7e8c5c5","v-c027999c6d","v-507391d465"],"aVid":"v-4cc8da569b"},{"q":"Swami is from…","o":["Malgudi Days","Peter Pan","Jungle Book"],"a":0,"qVid":"v-515513784a","oVids":["v-5771fda0d5","v-b1f7e8c5c5","v-89bb20cfa2"],"aVid":"v-f384be5af4"}],"titleVid":"v-0525908999","blurbVid":"v-22a338376c"},{"id":"nature","title":"Wonders of Nature","emoji":"🏔️","grad":"linear-gradient(135deg,#2a9d8f,#264653)","blurb":"Highest, longest, deepest…","learn":[{"em":"💧","t":"Highest waterfall","s":"Angel Falls is the highest waterfall in the world.","vid":"v-50058e4aba","titleVid":"v-e6cdbba9c1"},{"em":"🏜️","t":"Largest hot desert","s":"The Sahara Desert is the largest hot desert in the world.","vid":"v-b8bc572a77","titleVid":"v-3f8895457f"},{"em":"🌊","t":"Longest river","s":"The Nile is the longest river in the world.","vid":"v-82ab60e5e7","titleVid":"v-55aa870a42"},{"em":"🏞️","t":"Deepest lake","s":"Lake Baikal is the deepest lake in the world.","vid":"v-47920899b0","titleVid":"v-8d24010f9f"},{"em":"⛰️","t":"Tallest mountain","s":"Mount Everest is the tallest mountain peak in the world.","vid":"v-74e3b88c22","titleVid":"v-528077315b"}],"quiz":[{"q":"The highest waterfall is…","o":["Angel Falls","Niagara Falls","Thar Falls"],"a":0,"qVid":"v-ecc07855c9","oVids":["v-0dea3d0b66","v-9ca87d0d00","v-0a85e38871"],"aVid":"v-0d3f864453"},{"q":"The largest hot desert is…","o":["Thar Desert","Sahara Desert","Gobi"],"a":1,"qVid":"v-ad2a0a9b86","oVids":["v-88fae513cb","v-add566c4bd","v-6cc3ffad49"],"aVid":"v-72ea3b0daf"},{"q":"The longest river in the world is the…","o":["Amazon","Ganga","Nile"],"a":2,"qVid":"v-ed0078516d","oVids":["v-b3b3a6ac74","v-910ab001c3","v-3d6ff25ab6"],"aVid":"v-f9a847c3ce"},{"q":"The deepest lake is…","o":["Lake Baikal","Lake Victoria","Dal Lake"],"a":0,"qVid":"v-5ff1191ec1","oVids":["v-635d5e7f2c","v-370fe458e9","v-65eb1c1049"],"aVid":"v-0d1d317620"},{"q":"The tallest mountain peak is…","o":["Mont Blanc","Mount Everest","Nilgiri"],"a":1,"qVid":"v-b6bd0acddb","oVids":["v-1f1422696f","v-f9e9402766","v-ee8b29407b"],"aVid":"v-f63741591b"}],"titleVid":"v-27f1fa2c1e","blurbVid":"v-31be07125b"},{"id":"india","title":"Wonders of India","emoji":"🕌","grad":"linear-gradient(135deg,#fb8500,#dc2f02)","blurb":"Famous monuments & states","learn":[{"em":"🕌","t":"Charminar","s":"Charminar is in Telangana, in the city of Hyderabad.","vid":"v-4ae72f8e80","titleVid":"v-086d5a1aec"},{"em":"🏰","t":"Gwalior Fort","s":"Gwalior Fort is in Madhya Pradesh.","vid":"v-7d808b4651","titleVid":"v-78264607e1"},{"em":"🪨","t":"Rock Memorial","s":"The Rock Memorial at Kanniyakumari is in Tamil Nadu.","vid":"v-5723cec17d","titleVid":"v-19baef4617"},{"em":"🏛️","t":"Ujjayanta Palace","s":"Ujjayanta Palace is in Tripura.","vid":"v-e0ea377548","titleVid":"v-d25e333f98"},{"em":"🏯","t":"Amber Fort","s":"Amber Fort is in Rajasthan, in Jaipur.","vid":"v-927aea22bf","titleVid":"v-3d27641da9"},{"em":"ドーム","t":"Gol Gumbaz","s":"Gol Gumbaz is in Karnataka.","vid":"v-96da7544d9","titleVid":"v-c95b44d698"},{"em":"🆕","t":"New state","s":"Telangana was formed as a new Indian state in June 2014.","vid":"v-7d7945fd6a","titleVid":"v-2ad00a107b"}],"quiz":[{"q":"Charminar is in which state?","o":["Rajasthan","Telangana","Karnataka"],"a":1,"qVid":"v-602760a75e","oVids":["v-d418e699c9","v-3875893771","v-185a5eb309"],"aVid":"v-db3f66f0f9"},{"q":"Amber Fort is in…","o":["Jaipur","Mumbai","Hyderabad"],"a":0,"qVid":"v-dc1c968baa","oVids":["v-e4b769db2a","v-8ebaad5998","v-02a3427944"],"aVid":"v-850a86985c"},{"q":"Gol Gumbaz is in…","o":["Tripura","Karnataka","Tamil Nadu"],"a":1,"qVid":"v-b7fde1e9cc","oVids":["v-0bad206b82","v-185a5eb309","v-3a2d6295a8"],"aVid":"v-ea4e8b33f7"},{"q":"The Rock Memorial at Kanniyakumari is in…","o":["Tamil Nadu","Goa","Punjab"],"a":0,"qVid":"v-be43f3d85a","oVids":["v-3a2d6295a8","v-904848bc2d","v-3d4a305ac6"],"aVid":"v-92b84c30c9"},{"q":"Gwalior Fort is in…","o":["Madhya Pradesh","Kerala","Assam"],"a":0,"qVid":"v-83aa4937f7","oVids":["v-d2b52f8412","v-e369d9fd2a","v-44e0325f3e"],"aVid":"v-3442a299c7"},{"q":"Where do the Indian Ocean, Bay of Bengal and Arabian Sea meet?","o":["Panaji","Kanniyakumari","Jaipur"],"a":1,"qVid":"v-e029745a5c","oVids":["v-9218c3a73e","v-bfeed88062","v-e4b769db2a"],"aVid":"v-d791ece202"}],"titleVid":"v-8f251bca28","blurbVid":"v-341594843e"},{"id":"birds","title":"Our Winged Friends","emoji":"🦜","grad":"linear-gradient(135deg,#4cc9f0,#4895ef)","blurb":"Name the colourful birds","learn":[{"em":"🦜","t":"Macaw","s":"A macaw is a bright parrot with a long tail. Often red, yellow and blue.","vid":"v-f5908e61fa","titleVid":"v-4163d9b032"},{"em":"🐥","t":"Cockatoo","s":"A cockatoo is often white with a tall crest of feathers on its head.","vid":"v-d25e33bac9","titleVid":"v-29aa289a16"},{"em":"🐦","t":"Blue Jay","s":"A blue jay has blue, black and white feathers.","vid":"v-94bdf2fed4","titleVid":"v-211fdf6436"},{"em":"🦤","t":"Toucan","s":"A toucan has a large colourful beak. Its beak is not white.","vid":"v-344f34efc6","titleVid":"v-3524207b96"},{"em":"🐟","t":"Kingfisher","s":"A kingfisher has bright blue wings and an orange belly. It catches fish.","vid":"v-8325fc5b2a","titleVid":"v-aa66d7428d"},{"em":"👑","t":"Hoopoe","s":"A hoopoe has a crown of feathers and striped black and white wings.","vid":"v-e3608efa7c","titleVid":"v-794eed89f7"}],"quiz":[{"q":"Bright parrot with a long colourful tail?","o":["Macaw","Hoopoe","Toucan"],"a":0,"qVid":"v-bec9235710","oVids":["v-4163d9b032","v-794eed89f7","v-3524207b96"],"aVid":"v-a97e540383"},{"q":"White bird with a crest on its head?","o":["Cockatoo","Blue Jay","Kingfisher"],"a":0,"qVid":"v-1377a2489f","oVids":["v-29aa289a16","v-211fdf6436","v-aa66d7428d"],"aVid":"v-2355f86dbb"},{"q":"Bird with a very large colourful beak?","o":["Toucan","Macaw","Hoopoe"],"a":0,"qVid":"v-ed9d00b8c1","oVids":["v-3524207b96","v-4163d9b032","v-794eed89f7"],"aVid":"v-eb4b0c67c6"},{"q":"A toucan has a white beak. True or false?","o":["True","False","Sometimes"],"a":1,"qVid":"v-d1a77b6dc6","oVids":["v-f827cf462f","v-f8320b26d3","v-40f887f066"],"aVid":"v-5fdc5b578f"},{"q":"Which bird catches fish and has an orange belly?","o":["Kingfisher","Cockatoo","Blue Jay"],"a":0,"qVid":"v-270b66ac6a","oVids":["v-aa66d7428d","v-29aa289a16","v-211fdf6436"],"aVid":"v-97d68315ac"}],"titleVid":"v-98b8387b79","blurbVid":"v-925aa254c8"},{"id":"fruits","title":"Fruit Colours","emoji":"🍎","grad":"linear-gradient(135deg,#ef476f,#ffd166)","blurb":"Real colours of fruits","learn":[{"em":"🍎","t":"Apple","s":"An apple is usually red, green or yellow — not white!","vid":"v-644bb967c4","titleVid":"v-9f6290f443"},{"em":"🥭","t":"Mango","s":"A mango is usually yellow or green — not blue!","vid":"v-7f67114ada","titleVid":"v-95f8c2da33"},{"em":"🍌","t":"Banana","s":"A banana is yellow when ripe.","vid":"v-df2a1ef5f1","titleVid":"v-e6f9c34767"},{"em":"🍇","t":"Grapes","s":"Grapes are usually green or purple.","vid":"v-1acbfa4b36","titleVid":"v-af9d7c5a9a"},{"em":"🍍","t":"Pineapple","s":"A pineapple is yellow-brown, not pink.","vid":"v-a2864b1398","titleVid":"v-7855cca137"},{"em":"🍉","t":"Watermelon","s":"A watermelon is green on the outside.","vid":"v-e6ca128fbb","titleVid":"v-9aa80c5747"}],"quiz":[{"q":"What colour is a ripe banana?","o":["Blue","Yellow","Pink"],"a":1,"qVid":"v-9be719be06","oVids":["v-9594eec95b","v-51e6cd92b6","v-8dc5344bc0"],"aVid":"v-4c87ec10f1"},{"q":"A watermelon outside is usually…","o":["Green","White","Blue"],"a":0,"qVid":"v-872eeadfcb","oVids":["v-d382816a3c","v-25a81701fb","v-9594eec95b"],"aVid":"v-a37c356ce6"},{"q":"This red heart-shaped fruit has seeds outside.","o":["Litchi","Strawberry","Mango"],"a":1,"qVid":"v-4dad6c4b05","oVids":["v-5288e5b9f9","v-72db688c71","v-95f8c2da33"],"aVid":"v-cea0a2ca27"},{"q":"Mangoes are usually…","o":["Blue","Yellow or green","Pink"],"a":1,"qVid":"v-d7ac25f709","oVids":["v-9594eec95b","v-d24b0d5f72","v-8dc5344bc0"],"aVid":"v-e47f79fc5a"},{"q":"Apples can be red, green or…","o":["Yellow","Blue","Black"],"a":0,"qVid":"v-cd5afcae94","oVids":["v-51e6cd92b6","v-9594eec95b","v-e90dfb84e3"],"aVid":"v-4c87ec10f1"}],"titleVid":"v-1c0a4f71b0","blurbVid":"v-30c68729ce"},{"id":"homes","title":"So Many Homes","emoji":"🏡","grad":"linear-gradient(135deg,#8d99ae,#2b2d42)","blurb":"Tents, stilts, houseboats…","learn":[{"em":"⛺","t":"Tent","s":"A tent is a house made of cotton or nylon. It can be put up and taken down.","vid":"v-e3014a813e","titleVid":"v-c751af30f7"},{"em":"🪵","t":"Stilt house","s":"In places where it rains a lot, houses are made on stilts or poles.","vid":"v-12490ee3fa","titleVid":"v-e71a27a5ce"},{"em":"🚐","t":"Caravan","s":"A caravan is a house on wheels. It can be pulled by animals or cars.","vid":"v-45edaa2cdc","titleVid":"v-d7f8c7a175"},{"em":"🌳","t":"Tree house","s":"A tree house is made on a tree. It can keep people safe from animals.","vid":"v-8f96bfae6f","titleVid":"v-3427718bf9"},{"em":"🚤","t":"Houseboat","s":"A houseboat is a house that floats on water. Kerala is famous for beautiful houseboats.","vid":"v-a2252057ce","titleVid":"v-a13065728c"}],"quiz":[{"q":"A house made of cotton or nylon is a…","o":["Tent","Tree house","Fort"],"a":0,"qVid":"v-d1285283ee","oVids":["v-c751af30f7","v-3427718bf9","v-d611bfb203"],"aVid":"v-d4b6362f31"},{"q":"Houses on poles in rainy places are…","o":["Stilt houses","Igloos","Caves"],"a":0,"qVid":"v-0414f3871c","oVids":["v-f35aae36a9","v-bb8b9e855f","v-dfdc9fb752"],"aVid":"v-61df21c5cd"},{"q":"A house on wheels is a…","o":["Caravan","Houseboat","Tent"],"a":0,"qVid":"v-45269ddb40","oVids":["v-d7f8c7a175","v-a13065728c","v-c751af30f7"],"aVid":"v-6e940c1bec"},{"q":"A house that floats on water is a…","o":["Houseboat","Tree house","Caravan"],"a":0,"qVid":"v-aa67f90d45","oVids":["v-a13065728c","v-3427718bf9","v-d7f8c7a175"],"aVid":"v-5f7ca66e9c"},{"q":"Tree houses can keep people safe from…","o":["Animals","Clouds","Stars"],"a":0,"qVid":"v-f957b561eb","oVids":["v-338b6e271a","v-4a8f72b777","v-d37c550d78"],"aVid":"v-c910a75706"}],"titleVid":"v-2a01aff911","blurbVid":"v-9b2a682faf"},{"id":"earth","title":"Earth Day & Care","emoji":"🌍","grad":"linear-gradient(135deg,#2d6a4f,#95d5b2)","blurb":"Save Earth every day","learn":[{"em":"📅","t":"Earth Day","s":"People celebrate Earth Day every year on 22 April.","vid":"v-ec1030cd3b","titleVid":"v-1f9b97f887"},{"em":"🌱","t":"Plant trees","s":"We should plant trees to care for the Earth.","vid":"v-8b313c1514","titleVid":"v-3f905f6602"},{"em":"♻️","t":"Reuse","s":"We should reuse things so we create less waste.","vid":"v-7b5127569d","titleVid":"v-e5c303d82e"},{"em":"🗑️","t":"Reduce waste","s":"We should reduce waste and throw rubbish in the bin, never on the road.","vid":"v-bd2fc8ab8a","titleVid":"v-c3a7267abb"},{"em":"💧","t":"Save water","s":"Use a watering can for plants. Switch off taps. Save water.","vid":"v-d28d707cb1","titleVid":"v-7d35c708dd"},{"em":"💡","t":"Save electricity","s":"Switch off lights and fans when you leave the room.","vid":"v-fc71094b24","titleVid":"v-0f166d0a1e"},{"em":"📄","t":"Save paper","s":"Print on both sides of a sheet to save trees.","vid":"v-998947966b","titleVid":"v-2ecbcbfab6"},{"em":"🔇","t":"Less noise","s":"Keep music volume low. Avoid noise pollution.","vid":"v-ce95de3563","titleVid":"v-f32e6aa8ea"},{"em":"🌸","t":"Protect flowers","s":"Never pluck flowers. They look good on the plants.","vid":"v-1b700cb1db","titleVid":"v-93d9fdf848"},{"em":"💧","t":"World Water Day","s":"World Water Day is celebrated on 22 March.","vid":"v-378f45fe9c","titleVid":"v-d52a3649ba"}],"quiz":[{"q":"When is Earth Day?","o":["22 April","1 January","25 December"],"a":0,"qVid":"v-66f5d7013e","oVids":["v-973e785b7b","v-1e2b5638fb","v-5fdc444240"],"aVid":"v-152a4bbcc3"},{"q":"When is World Water Day?","o":["21 April","22 March","15 August"],"a":1,"qVid":"v-8274b3bbbf","oVids":["v-33807006d5","v-10192e5273","v-e86c0d161c"],"aVid":"v-581d8dd79a"},{"q":"To save water for plants, use a…","o":["Watering can","Fire hose","Ocean"],"a":0,"qVid":"v-a84ee4e50c","oVids":["v-945f29bba6","v-b6cbe7140f","v-f41054884f"],"aVid":"v-9f4204707c"},{"q":"When you leave a room you should…","o":["Switch off lights and fans","Leave them on","Open every tap"],"a":0,"qVid":"v-8d6ae9e765","oVids":["v-5bd814aa2b","v-6a2f7370d1","v-003ad8d83d"],"aVid":"v-c564d8b584"},{"q":"Throw household waste…","o":["On the road","Into the waste bin","Into the river"],"a":1,"qVid":"v-1fffb473ed","oVids":["v-54830fa0da","v-971a524e9f","v-80336315f9"],"aVid":"v-834e20fad5"}],"titleVid":"v-9957047c2e","blurbVid":"v-2c751e7672"},{"id":"habits","title":"Watch Your Habits","emoji":"🧼","grad":"linear-gradient(135deg,#00b4d8,#0077b6)","blurb":"Good hygiene — yes or no?","learn":[{"em":"🙌","t":"Wash hands","s":"Wash your hands before and after eating. That is a good habit.","vid":"v-6e7d2ed333","titleVid":"v-387c79fac7"},{"em":"😁","t":"Brush teeth","s":"Brush your teeth twice a day. That is a good habit.","vid":"v-22663e1082","titleVid":"v-4daaaefd47"},{"em":"🛁","t":"Bath daily","s":"You should bathe every day. Saying there is no need to bathe is wrong.","vid":"v-925fcc2139","titleVid":"v-3219894afb"},{"em":"👟","t":"Clean shoes","s":"Clean and polish your shoes. That is a good habit.","vid":"v-6fba7e68d2","titleVid":"v-5a07ccd742"},{"em":"👕","t":"Fresh clothes","s":"Do not wear the same clothes every day. Wear clean clothes.","vid":"v-c7e450c369","titleVid":"v-6362e4ab19"},{"em":"💇","t":"Wash hair","s":"Wash your hair at least twice a week.","vid":"v-0d4595422a","titleVid":"v-4d9b4b6cf1"},{"em":"😷","t":"Cover sneeze","s":"Cover your mouth while sneezing or coughing.","vid":"v-02914790c8","titleVid":"v-f728d9af44"},{"em":"💅","t":"No nail biting","s":"Do not bite your nails. That is a bad habit.","vid":"v-a3624fd7af","titleVid":"v-e1e6a545a2"},{"em":"🦶","t":"After play","s":"Wash your hands and feet after playing outdoors.","vid":"v-8439ee15ad","titleVid":"v-a047631ee9"}],"quiz":[{"q":"Wash hands before and after eating — good habit?","o":["Yes ✓","No ✗","Only on Sundays"],"a":0,"qVid":"v-4409333d46","oVids":["v-f36b1dd0c2","v-38104ac90e","v-e85dd8ea57"],"aVid":"v-8b90dafc49"},{"q":"Brush teeth twice a day — good habit?","o":["Yes ✓","No ✗","Never"],"a":0,"qVid":"v-69f4f55e16","oVids":["v-f36b1dd0c2","v-38104ac90e","v-6e7b34fa59"],"aVid":"v-8b90dafc49"},{"q":"There is no need to bathe every day — is this right?","o":["Yes","No — bathe every day","Only in winter"],"a":1,"qVid":"v-7c60a31356","oVids":["v-93cba07454","v-1dcaef72ad","v-d91382c257"],"aVid":"v-902111ce27"},{"q":"Wear the same clothes every day — good habit?","o":["Yes","No ✗","Only red clothes"],"a":1,"qVid":"v-24ad437752","oVids":["v-93cba07454","v-38104ac90e","v-06d32ca4cf"],"aVid":"v-970b83d749"},{"q":"Always bite your nails — good habit?","o":["Yes","No ✗","Sometimes"],"a":1,"qVid":"v-e119874ef3","oVids":["v-93cba07454","v-38104ac90e","v-40f887f066"],"aVid":"v-970b83d749"},{"q":"Cover your mouth while sneezing — good habit?","o":["Yes ✓","No","Only at night"],"a":0,"qVid":"v-b80174b6ad","oVids":["v-f36b1dd0c2","v-bafd7322c6","v-78ea84d886"],"aVid":"v-8b90dafc49"}],"titleVid":"v-be106df2e5","blurbVid":"v-c34d466b42"},{"id":"quizmix","title":"Brainy Quiz","emoji":"🧠","grad":"linear-gradient(135deg,#7209b7,#f72585)","blurb":"Mixed GK from your book","learn":[{"em":"🪶","t":"Feathers","s":"All birds have feathers. No other animal has feathers.","vid":"v-4ebe3bdcd3","titleVid":"v-2f332fd601"},{"em":"💎","t":"Diamond","s":"Diamond is the hardest material in the world.","vid":"v-b66d9698ef","titleVid":"v-8f7671185d"},{"em":"📖","t":"Dictionary","s":"A dictionary has an alphabetical list of words and their meanings.","vid":"v-4e84324366","titleVid":"v-3beb75d156"},{"em":"🦁","t":"Gir lions","s":"Lions are found in the Gir National Park in India.","vid":"v-f769b0f08f","titleVid":"v-8ecea9a080"},{"em":"🕺","t":"Bhangra","s":"Bhangra is a folk dance from Punjab.","vid":"v-aa5a4ee166","titleVid":"v-186843be35"},{"em":"🍬","t":"Gulab jamun","s":"Gulab jamun is a very tasty Indian sweet.","vid":"v-72c1e7605e","titleVid":"v-e8a12e9588"},{"em":"🇮🇳","t":"Nehru","s":"Jawaharlal Nehru was the first Prime Minister of India.","vid":"v-66be8e667f","titleVid":"v-5f21fa7c17"},{"em":"❤️","t":"Love grandparents","s":"We can make grandparents happy by helping them — finding spectacles, sharing fruit, making a card, or asking for a story.","vid":"v-7c98f53f6d","titleVid":"v-48e0d2c341"}],"quiz":[{"q":"All birds have them. No other animal has them.","o":["Feathers","Coat","Fins"],"a":0,"qVid":"v-3faf6632e0","oVids":["v-2f332fd601","v-6e162ed9a2","v-3ad8d97824"],"aVid":"v-a1d96d5482"},{"q":"Hardest material in the world?","o":["Gold","Diamond","Wood"],"a":1,"qVid":"v-6b6086cbb8","oVids":["v-9768feb3fd","v-8f7671185d","v-6e4dd7ce4e"],"aVid":"v-5847c62446"},{"q":"Book with words and meanings in A to Z order?","o":["Atlas","Dictionary","Comic"],"a":1,"qVid":"v-a8275be1e3","oVids":["v-a6567816e0","v-3beb75d156","v-3ed856bcf8"],"aVid":"v-a2e16af1bd"},{"q":"Animal found in Gir National Park?","o":["Penguin","Lion","Kangaroo"],"a":1,"qVid":"v-2f2833eaef","oVids":["v-99625fa1ca","v-60d28e7d87","v-9b4e21b488"],"aVid":"v-b385472460"},{"q":"Folk dance from Punjab?","o":["Bhangra","Bharatanatyam","Kathakali"],"a":0,"qVid":"v-5e95865d49","oVids":["v-186843be35","v-a1b02bb0d8","v-798c19b180"],"aVid":"v-2a9d4a67d1"},{"q":"First Prime Minister of India?","o":["Jawaharlal Nehru","Harry Potter","Tintin"],"a":0,"qVid":"v-2773b7d0ed","oVids":["v-8c5e82f718","v-6eb2dc222c","v-bb378a544f"],"aVid":"v-8891dd4c4a"},{"q":"Hedwig was Harry Potter's pet owl.","o":["True","False","Maybe"],"a":0,"qVid":"v-a786ed1346","oVids":["v-f827cf462f","v-f8320b26d3","v-80ba31cc9d"],"aVid":"v-403f02925f"},{"q":"A toucan has a white beak.","o":["True","False","Always"],"a":1,"qVid":"v-f96c994061","oVids":["v-f827cf462f","v-f8320b26d3","v-68eec46437"],"aVid":"v-5fdc5b578f"}],"titleVid":"v-6f40dceffa","blurbVid":"v-240d779661"},{"id":"logic","title":"Figure It Out","emoji":"🔢","grad":"linear-gradient(135deg,#ffd60a,#f77f00)","blurb":"Patterns, codes & odd one out","learn":[{"em":"7️⃣","t":"Number series","s":"In 7, 14, 21, each number goes up by 7. So next is 28.","vid":"v-580f6e498b","titleVid":"v-6232574a09"},{"em":"➖","t":"Count down","s":"In 65, 52, 39, each number goes down by 13. So next is 26.","vid":"v-08a1f23211","titleVid":"v-f9b239cf08"},{"em":"🔤","t":"Letter code","s":"If A is 1, B is 2, C is 3 and D is 4, then D C is 4 3. And 4 2 3 is D B C.","vid":"v-e9dc5a26be","titleVid":"v-cf30c984e9"},{"em":"🧩","t":"Odd one out","s":"Look for the one that does not belong. Rivers are Ganga, Narmada, Kaveri — Vindhya is a mountain range, so it is odd.","vid":"v-131aa7a74c","titleVid":"v-eb61239529"}],"quiz":[{"q":"Series: 7, 14, 21, ? What comes next?","o":["24","28","30"],"a":1,"qVid":"v-ffad2247b0","oVids":["v-1ff1de7740","v-33e75ff09d","v-34173cb38f"],"aVid":"v-0e535510ca"},{"q":"Series: 65, 52, 39, ? What comes next?","o":["26","30","13"],"a":0,"qVid":"v-db5358459f","oVids":["v-4e732ced34","v-34173cb38f","v-c51ce410c1"],"aVid":"v-a643870ad6"},{"q":"If A=1, B=2, C=3, D=4 — write 423 in letters.","o":["DBC","ABC","CBA"],"a":0,"qVid":"v-dcfe03f7aa","oVids":["v-1356e30339","v-902fbdd2b1","v-a61a40943e"],"aVid":"v-01fa75a8a0"},{"q":"If A=1…D=4 — write BADC in figures.","o":["2143","1234","4321"],"a":0,"qVid":"v-11187e8c8b","oVids":["v-9f44e956e3","v-81dc9bdb52","v-d93591bdf7"],"aVid":"v-7e6e2bd0a7"},{"q":"Odd one out: Batman, Human, Spiderman, Superman","o":["Batman","Human","Superman"],"a":1,"qVid":"v-68fd36bb35","oVids":["v-4a4566696c","v-c1bb19b278","v-527d60cd47"],"aVid":"v-44a11386cc"},{"q":"Odd one out: Vindhya, Ganga, Narmada, Kaveri","o":["Vindhya","Ganga","Kaveri"],"a":0,"qVid":"v-7b90adc4c2","oVids":["v-b1b157c306","v-910ab001c3","v-059dc191f6"],"aVid":"v-d9570ea69d"},{"q":"Odd one out: Cow, sheep, horse, deer","o":["Cow","Deer","Horse"],"a":1,"qVid":"v-79ac04d757","oVids":["v-fe0707cc47","v-529ab9b63e","v-38069b4eb6"],"aVid":"v-ea07473652"}],"titleVid":"v-be21f8236b","blurbVid":"v-7c211e3db3"}]}</script>
 <script>
-const map = {
-  malayalam: ['📗', 'Malayalam'],
-  science: ['🔬', 'Science'],
-  social: ['🌍', 'Social'],
-  computer: ['💻', 'Computer'],
-  gk: ['🧠', 'GK'],
-  value: ['💛', 'Value Education'],
-};
-const key = location.pathname.replace(/\/+$/, '').split('/').pop();
-if (map[key]) {
-  document.getElementById('em').textContent = map[key][0];
-  document.getElementById('t').textContent = map[key][1] + ' — Coming soon';
-  document.title = map[key][1] + ' · Coming soon';
+const D = JSON.parse(document.getElementById('data').textContent);
+const TOPICS = D.topics;
+const SKEY = 'joshua-gk-v1';
+let S = JSON.parse(localStorage.getItem(SKEY) || '{}');
+const save = () => localStorage.setItem(SKEY, JSON.stringify(S));
+const app = document.getElementById('app');
+const ov = document.getElementById('ov');
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+
+let sp = null, ptok = 0;
+function stopAudio() {
+  ptok++;
+  if (sp) { try { sp.onended = null; sp.onerror = null; sp.pause(); } catch (e) {} sp = null; }
+  try { if (window.LearnAudio) LearnAudio.stop(); } catch (e) {}
+  document.querySelectorAll('.playing').forEach(e => e.classList.remove('playing'));
 }
+/** Fresh Audio each click — local mp3 first, then online TTS fallback. */
+function say(vidOrText, el) {
+  stopAudio();
+  const mine = ptok;
+  if (el) el.classList.add('playing');
+  const isVid = typeof vidOrText === 'string' && /^v-[a-f0-9]+$/.test(vidOrText);
+  const text = isVid ? null : String(vidOrText || '');
+  const url = isVid ? ('voice/' + vidOrText + '.mp3') : null;
+
+  const playUrl = (src, remoteText) => new Promise(res => {
+    sp = new Audio(src);
+    sp.playbackRate = 0.95;
+    sp.onended = () => { if (el && mine === ptok) el.classList.remove('playing'); res(mine === ptok); };
+    sp.onerror = () => {
+      if (mine !== ptok) return res(false);
+      if (remoteText && window.LearnAudio) {
+        LearnAudio.speak(remoteText, 'en-IN', 0.92, el).then(ok => res(!!ok));
+      } else if (remoteText) {
+        const g = 'https://translate.googleapis.com/translate_tts?ie=UTF-8&client=gtx&tl=en&q=' + encodeURIComponent(remoteText.slice(0, 180));
+        sp = new Audio(g);
+        sp.onended = () => { if (el && mine === ptok) el.classList.remove('playing'); res(mine === ptok); };
+        sp.onerror = () => { if (el && mine === ptok) el.classList.remove('playing'); res(false); };
+        sp.play().catch(() => { if (el && mine === ptok) el.classList.remove('playing'); res(false); });
+      } else {
+        if (el && mine === ptok) el.classList.remove('playing');
+        res(false);
+      }
+    };
+    sp.play().catch(() => { if (el && mine === ptok) el.classList.remove('playing'); res(false); });
+  });
+
+  if (url) return playUrl(url, null);
+  if (window.LearnAudio) return LearnAudio.speak(text, 'en-IN', 0.92, el);
+  return playUrl('https://translate.googleapis.com/translate_tts?ie=UTF-8&client=gtx&tl=en&q=' + encodeURIComponent(text.slice(0, 180)), text);
+}
+function sayVid(vid, text, el) {
+  // Prefer local vid; keep text for fallback via LearnAudio path inside onerror — patch:
+  stopAudio();
+  const mine = ptok;
+  if (el) el.classList.add('playing');
+  if (!vid) return say(text, el);
+  sp = new Audio('voice/' + vid + '.mp3');
+  sp.playbackRate = 0.95;
+  return new Promise(res => {
+    sp.onended = () => { if (el && mine === ptok) el.classList.remove('playing'); res(mine === ptok); };
+    sp.onerror = () => {
+      if (mine !== ptok) return res(false);
+      if (window.LearnAudio) return LearnAudio.speak(text || '', 'en-IN', 0.92, el).then(ok => res(!!ok));
+      if (el) el.classList.remove('playing');
+      res(false);
+    };
+    sp.play().catch(() => {
+      if (mine !== ptok) return res(false);
+      if (window.LearnAudio) return LearnAudio.speak(text || '', 'en-IN', 0.92, el).then(ok => res(!!ok));
+      if (el) el.classList.remove('playing');
+      res(false);
+    });
+  });
+}
+const ding = () => { if (window.LearnAudio) LearnAudio.ding(); };
+const buzz = () => { if (window.LearnAudio) LearnAudio.buzz(); };
+
+function topicStars(id) { return Math.min(3, +(S[id] || 0)); }
+function awardTopic(id, stars) {
+  stars = Math.max(0, Math.min(3, stars));
+  if ((S[id] || 0) < stars) { S[id] = stars; save(); return true; }
+  return false;
+}
+function gotStars() { return TOPICS.reduce((n, t) => n + topicStars(t.id), 0); }
+function totalStars() { return TOPICS.length * 3; }
+function starStr(n) { return '⭐'.repeat(n) + '☆'.repeat(Math.max(0, 3 - n)); }
+
+function home() {
+  stopAudio();
+  const g = gotStars(), t = totalStars(), pct = t ? Math.round(g / t * 100) : 0;
+  app.innerHTML = `
+  <div class="top">
+    <a class="icon" href="../index.html" title="Home">🏠</a>
+    <button type="button" class="icon" onclick="history.back()" title="Back">←</button>
+    <div class="tt"><small>Class 3 · Joshua</small><b>🧠 General Knowledge</b></div>
+    <span class="chip">⭐ ${g}/${t}</span>
+  </div>
+  <div class="hero">
+    <div class="big">🧠</div>
+    <h1>GK Adventure</h1>
+    <p>Tap a topic · Listen · Earn stars!</p>
+  </div>
+  <div class="starbox">
+    <div class="row"><span>⭐ My GK stars</span><span>${g}/${t} · ${pct}%</span></div>
+    <div class="bar"><i style="width:${pct}%"></i></div>
+  </div>
+  <div class="gtiles">
+    ${TOPICS.map(t => `
+      <button type="button" class="gt" style="--b:${t.grad}" onclick="openTopic('${t.id}')">
+        <span class="i">${t.emoji}</span>
+        <b>${esc(t.title)}</b>
+        <small>${esc(t.blurb)}</small>
+        <span class="st">${starStr(topicStars(t.id))}</span>
+      </button>`).join('')}
+  </div>
+  <p class="tip">Tap 🔊 anytime — you can hear it again and again.</p>`;
+}
+
+let CUR = null, G = null;
+
+function openTopic(id) {
+  CUR = TOPICS.find(t => t.id === id);
+  if (!CUR) return;
+  document.getElementById('ovt').textContent = CUR.emoji + ' ' + CUR.title;
+  document.getElementById('ovs').textContent = starStr(topicStars(CUR.id));
+  ov.classList.add('show');
+  document.body.style.overflow = 'hidden';
+  showTopicHome();
+}
+function closeOv() {
+  stopAudio();
+  ov.classList.remove('show');
+  document.body.style.overflow = '';
+  CUR = null; G = null;
+  home();
+}
+function showTopicHome() {
+  stopAudio();
+  const t = CUR;
+  document.getElementById('ovb').innerHTML = `
+    <div class="card">
+      <div class="em">${t.emoji}</div>
+      <h2>${esc(t.title)}</h2>
+      <p>${esc(t.blurb)}</p>
+      <button type="button" class="say" onclick="sayVid('${t.titleVid}','${esc(t.title)}. ${esc(t.blurb)}',this)">🔊</button>
+    </div>
+    <div class="modes">
+      <button type="button" class="mode" style="background:linear-gradient(135deg,#06d6a0,#118ab2)" onclick="startLearn()">
+        <span class="x">🎧</span>Learn<small>Listen to each fact</small>
+      </button>
+      <button type="button" class="mode" style="background:linear-gradient(135deg,#f77f00,#e63946)" onclick="startQuiz()">
+        <span class="x">🎯</span>Quiz<small>Earn up to 3 stars</small>
+      </button>
+    </div>`;
+  sayVid(t.titleVid, t.title + '. ' + t.blurb);
+}
+
+function startLearn() {
+  G = { mode: 'learn', i: 0 };
+  showLearn();
+}
+function showLearn() {
+  const t = CUR, L = t.learn, i = G.i, card = L[i];
+  document.getElementById('ovs').textContent = (i + 1) + '/' + L.length;
+  document.getElementById('ovb').innerHTML = `
+    <div class="prog">Fact ${i + 1} of ${L.length}</div>
+    <div class="card">
+      <div class="em">${card.em}</div>
+      <h2>${esc(card.t)}</h2>
+      <button type="button" class="say" onclick="sayVid('${card.vid}','${esc(card.t)}. ${esc(card.s)}',this)">🔊</button>
+      <p style="margin-top:12px">${esc(card.s)}</p>
+      <div class="dots">${L.map((_, k) => `<i class="${k === i ? 'on' : ''}"></i>`).join('')}</div>
+      <div class="learn-nav">
+        <button type="button" class="nx alt" ${i === 0 ? 'disabled style="opacity:.4"' : ''} onclick="G.i--;showLearn()">← Back</button>
+        ${i < L.length - 1
+          ? `<button type="button" class="nx" onclick="G.i++;showLearn()">Next ➜</button>`
+          : `<button type="button" class="nx" onclick="showTopicHome()">✅ Done</button>`}
+      </div>
+    </div>`;
+  sayVid(card.vid, card.t + '. ' + card.s);
+}
+
+function startQuiz() {
+  const q = shuffle(CUR.quiz.map((x, i) => ({ ...x, _i: i })));
+  G = { mode: 'quiz', queue: q, i: 0, right: 0, done: false };
+  showQuiz();
+}
+function showQuiz() {
+  if (G.i >= G.queue.length) return endQuiz();
+  const x = G.queue[G.i];
+  G.done = false;
+  document.getElementById('ovs').textContent = (G.i + 1) + '/' + G.queue.length + ' · ✓' + G.right;
+  // shuffle options but track answer
+  const opts = x.o.map((t, i) => ({ t, i, vid: x.oVids[i] }));
+  const shuffled = shuffle(opts);
+  G._ans = x.a;
+  G._cur = x;
+  document.getElementById('ovb').innerHTML = `
+    <div class="prog">Question ${G.i + 1} of ${G.queue.length}</div>
+    <div class="card">
+      <div class="qtext">
+        <button type="button" class="say sm" onclick="sayVid('${x.qVid}','${esc(x.q)}',this)">🔊</button>
+        <span>${esc(x.q)}</span>
+      </div>
+      <div class="opts" id="opts">
+        ${shuffled.map((o, k) => `
+          <div class="opt" data-i="${o.i}" role="button" tabindex="0" onclick="pickOpt(this)">
+            <button type="button" class="say sm" onclick="event.stopPropagation();sayVid('${o.vid}','${esc(o.t)}',this)">🔊</button>
+            <span>${esc(o.t)}</span>
+          </div>`).join('')}
+      </div>
+      <div class="fb" id="fb"></div>
+      <div id="after"></div>
+    </div>`;
+  sayVid(x.qVid, x.q);
+}
+
+function pickOpt(btn) {
+  if (!G || G.done) return;
+  G.done = true;
+  const chosen = +btn.getAttribute('data-i');
+  const ok = chosen === G._ans;
+  document.querySelectorAll('.opt').forEach(b => {
+    b.style.pointerEvents = 'none';
+    if (+b.getAttribute('data-i') === G._ans) b.classList.add('ok');
+  });
+  if (ok) {
+    btn.classList.add('ok');
+    G.right++;
+    ding();
+    document.getElementById('fb').className = 'fb good';
+    document.getElementById('fb').textContent = 'Yes! 🌟';
+  } else {
+    btn.classList.add('bad');
+    buzz();
+    document.getElementById('fb').className = 'fb bad';
+    document.getElementById('fb').textContent = 'Almost — listen to the right one';
+  }
+  const x = G._cur;
+  document.getElementById('after').innerHTML = `
+    <button type="button" class="say sm" onclick="sayVid('${x.aVid}','The answer is ${esc(x.o[x.a])}',this)">🔊</button>
+    <button type="button" class="nx" onclick="G.i++;showQuiz()">Next ➜</button>`;
+  sayVid(x.aVid, 'The answer is ' + x.o[x.a]);
+}
+
+function endQuiz() {
+  const total = G.queue.length;
+  const ratio = total ? G.right / total : 0;
+  const stars = ratio >= 0.9 ? 3 : ratio >= 0.6 ? 2 : ratio >= 0.35 ? 1 : 0;
+  const nb = awardTopic(CUR.id, stars);
+  document.getElementById('ovs').textContent = starStr(topicStars(CUR.id));
+  ding();
+  document.getElementById('ovb').innerHTML = `
+    <div class="card end">
+      <div class="big">${stars === 3 ? '🏆' : stars ? '🥳' : '💪'}</div>
+      <h2>Quiz done!</h2>
+      <p style="font-size:18px">You got <b>${G.right}</b> / ${total} right</p>
+      <div class="stars">${starStr(stars)}</div>
+      <p style="margin-top:8px">${nb ? 'New best for this topic!' : 'Keep practising!'}</p>
+      <div>
+        <button type="button" class="nx" onclick="startQuiz()">🔁 Play again</button>
+        <button type="button" class="nx alt" onclick="showTopicHome()">Topics</button>
+      </div>
+    </div>`;
+}
+
+home();
 </script>
 </body>
 </html>

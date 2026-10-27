@@ -121,7 +121,13 @@
               // fall back to online TTS
               playRemote(text, L, el, mine).then(resolve);
             };
-            w.speechSynthesis.speak(u);
+            // Brief delay after cancel so re-tapping 🔊 actually speaks again
+            setTimeout(function () {
+              if (mine !== speakTok) return resolve(false);
+              try { w.speechSynthesis.speak(u); } catch (e2) {
+                playRemote(text, L, el, mine).then(resolve);
+              }
+            }, 40);
           } catch (e) {
             playRemote(text, L, el, mine).then(resolve);
           }
