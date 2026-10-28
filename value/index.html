@@ -51,6 +51,18 @@ button,a{font-family:inherit}
 .dots i{width:10px;height:10px;border-radius:50%;background:#b7e4c7}.dots i.on{background:#f77f00}
 .end{text-align:center}.end .big{font-size:64px}.stars{font-size:36px;letter-spacing:3px}
 .tip{text-align:center;color:#6a5f8f;font-size:14px;margin-top:16px}
+
+.modes{grid-template-columns:1fr 1fr 1fr}
+@media(max-width:560px){.modes{grid-template-columns:1fr}}
+.slots{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:14px 0;min-height:48px}
+.slot{min-width:36px;height:44px;border:3px dashed #95d5b2;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:#1b4332;background:#fff;padding:0 6px}
+.slot.f{border-style:solid;border-color:#2a9d8f;background:#d8f3dc}
+.slot.space{border:0;background:transparent;min-width:14px}
+.letters{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:10px}
+.lett{border:0;min-width:46px;height:50px;border-radius:14px;font-size:22px;font-weight:900;background:#fff;box-shadow:0 4px 0 #b7e4c7;cursor:pointer;color:#1b4332}
+.lett:disabled{opacity:.35}.lett.bad{background:#ffd3d3}
+.flashw{font-size:34px;font-weight:900;letter-spacing:1px;color:#1b4332;margin:12px 0;word-break:break-word}
+.hint{font-size:14px;color:#5b5f86;font-weight:700;margin-top:8px}
 </style>
 <script src="../assets/learn-audio.js?v=3"></script>
 </head>
@@ -64,7 +76,7 @@ button,a{font-family:inherit}
   </div>
   <div class="ovb" id="ovb"></div>
 </div>
-<script type="application/json" id="data">{"topics":[{"id":"hans","title":"Hans from Holland","emoji":"🌊","grad":"linear-gradient(135deg,#00b4d8,#0077b6)","blurb":"Chapter 1 · Courage & responsibility","learn":[{"em":"🇳🇱","t":"The story","s":"Hans was a brave boy from Holland. He found a hole in the dyke that held back the sea.","vid":"v-2659aad5ec"},{"em":"🕳️","t":"The growing hole","s":"The hole in the dyke became bigger and bigger because of the strong pressure of the seawater.","vid":"v-5067b7c783"},{"em":"👆","t":"Hans helps","s":"Hans put his finger in the hole and stayed there all night to stop the water, even though it was cold and hard.","vid":"v-50b3bb9657"},{"em":"👷","t":"Help in the morning","s":"In the morning, the workman closed the hole with stone and soil. Then he carried Hans on his shoulder and took him home.","vid":"v-7f37438262"},{"em":"💛","t":"The value","s":"This story teaches us to be brave and responsible. Even a small act can protect many people.","vid":"v-e082fc941f"}],"quiz":[{"q":"Why did the hole in the dyke become bigger and bigger?","o":["Because of strong seawater pressure","Because Hans dug it","Because of wind only","Because of rain alone"],"a":0,"qVid":"v-71793140e7","oVids":["v-7282b455bf","v-aa0b4bbb2a","v-0108ca06c0","v-b8fcd5d8be"],"aVid":"v-b124c3e72e"},{"q":"How did the workman help Hans in the morning?","o":["He ignored Hans","He closed the hole with stone and soil, then carried Hans home","He left Hans at the sea","He scolded Hans"],"a":1,"qVid":"v-064f2ef7b8","oVids":["v-b97ae21432","v-f0d6803ff8","v-33624d52ba","v-c5c82f58e0"],"aVid":"v-0bda2f78b5"},{"q":"What did Hans do to stop the water?","o":["He ran away","He put his finger in the hole","He called a boat","He slept at home"],"a":1,"qVid":"v-6b57057712","oVids":["v-9c992050c5","v-8e8b2a8864","v-1897e512f7","v-31f57f017e"],"aVid":"v-fa04650245"},{"q":"Hans teaches us to be…","o":["Lazy","Brave and responsible","Afraid always","Selfish"],"a":1,"qVid":"v-731355d386","oVids":["v-46a9ebdb80","v-cb098cdcb7","v-6ce449cbf4","v-05983da67d"],"aVid":"v-5a45f3cafa"}],"titleVid":"v-1f161e2b9b","blurbVid":"v-39ad09c29a"},{"id":"friends","title":"The Four Friends","emoji":"🐒","grad":"linear-gradient(135deg,#06d6a0,#118ab2)","blurb":"Chapter 2 · Sharing & teamwork","learn":[{"em":"🌳","t":"The quarrel","s":"The four animals had a quarrel about the ownership of a tree. Each one wanted the tree for themselves.","vid":"v-d5e6a48f71"},{"em":"🍎","t":"The fruit problem","s":"They wanted to eat the fruits, but none of them could reach the fruits alone.","vid":"v-d1aa297c40"},{"em":"🤝","t":"Cooperative idea","s":"The cooperative idea of sharing was to climb on each other's back to pluck the fruit one after the other.","vid":"v-a2657c0c4b"},{"em":"😊","t":"Happy ending","s":"When they worked together and shared, everyone got fruit and they became friends again.","vid":"v-075d1490b0"},{"em":"💛","t":"The value","s":"Sharing and teamwork make everyone happy. Fighting over ownership helps no one.","vid":"v-f701a50172"}],"quiz":[{"q":"Why did the four animals have a quarrel?","o":["About the ownership of a tree","About a ball","About a house","About a river"],"a":0,"qVid":"v-ba25f57963","oVids":["v-c92d87381e","v-64a4c2d2b8","v-51a036e876","v-389a36cc78"],"aVid":"v-a7fdf6ec9c"},{"q":"What was their cooperative idea of sharing?","o":["To fight harder","To climb on each other's back and pluck fruit one after the other","To leave the tree","To call a human"],"a":1,"qVid":"v-de1af4440f","oVids":["v-d0c2497857","v-9e4a7f8f5c","v-3f51452740","v-831e0ba728"],"aVid":"v-7ff141d07b"},{"q":"What does this story teach?","o":["Never share","Sharing and teamwork","Be selfish","Ignore friends"],"a":1,"qVid":"v-c33dcf32e7","oVids":["v-5d393d0db3","v-a9605ecf89","v-9e83b0c29f","v-befe3e45f4"],"aVid":"v-da5dabe4f9"},{"q":"Could one animal reach the fruit alone?","o":["Yes easily","No — they needed to help each other","Only at night","Only with money"],"a":1,"qVid":"v-7437d45373","oVids":["v-ba5b2e9516","v-99cef27b03","v-78ea84d886","v-16c8c31fa0"],"aVid":"v-01fe653df8"}],"titleVid":"v-7e035f375b","blurbVid":"v-24b54df361"},{"id":"androcles","title":"Androcles and the Lion","emoji":"🦁","grad":"linear-gradient(135deg,#fb8500,#dc2f02)","blurb":"Chapter 3 · Kindness & friendship","learn":[{"em":"🌲","t":"In the forest","s":"Androcles met a lion in the forest. The lion did not attack him.","vid":"v-3ba47dde21"},{"em":"🩹","t":"Why no attack","s":"The lion did not attack Androcles because it was hurt, and its paws were covered with blood.","vid":"v-81f58f512c"},{"em":"🤝","t":"Kindness","s":"Androcles helped the lion by removing the thorn and caring for its wound. They became friends.","vid":"v-34ca6100b6"},{"em":"👑","t":"The emperor","s":"Later, the emperor pardoned Androcles because the lion showed its love by gently touching him with its paw.","vid":"v-0fde86edc3"},{"em":"💛","t":"The value","s":"Kindness is never wasted. When we help others, love comes back to us.","vid":"v-6051dc8787"}],"quiz":[{"q":"Why did the lion not attack Androcles in the forest?","o":["It was sleeping","It was hurt and its paws were covered with blood","It was afraid of trees","It did not see him"],"a":1,"qVid":"v-9b02ef8a86","oVids":["v-8f693748e4","v-f7e77508a9","v-1ce0b19e11","v-fd700d6ac7"],"aVid":"v-99be4b92ce"},{"q":"Why did the emperor pardon Androcles?","o":["Androcles ran fast","The lion showed its love by gently touching him with its paw","Androcles paid money","The crowd shouted"],"a":1,"qVid":"v-dee48f1ac6","oVids":["v-3d0a37cbc5","v-d587ee97c7","v-f5901a1250","v-1b576a3f4e"],"aVid":"v-76e843bf07"},{"q":"What did Androcles do for the lion?","o":["He ran away","He helped and cared for its wound","He shouted at it","He ignored it"],"a":1,"qVid":"v-b4ff3a3539","oVids":["v-9c992050c5","v-f0715bcb15","v-c7dd93862d","v-5af0dab630"],"aVid":"v-1f7f9d0cc4"},{"q":"This story teaches…","o":["Be cruel","Kindness and friendship","Fear animals always","Never help"],"a":1,"qVid":"v-109e90f849","oVids":["v-aa39a85662","v-34c1ff12bd","v-7516234d0d","v-0b95079e93"],"aVid":"v-38f3b639a6"}],"titleVid":"v-f0ce93609d","blurbVid":"v-e94a4b7978"},{"id":"prince","title":"The Happy Prince","emoji":"👑","grad":"linear-gradient(135deg,#7b2cbf,#c77dff)","blurb":"Chapter 4 · Helping the poor","learn":[{"em":"🗽","t":"The statue","s":"The Happy Prince was a beautiful statue covered with gold and precious stones. He could see the suffering of poor people in the city.","vid":"v-25f0e8f7b8"},{"em":"💎","t":"Helping the writer","s":"The Happy Prince helped the poor writer by giving one of his sapphire eyes so that the writer could sell it to buy food and firewood.","vid":"v-de9a9c85a9"},{"em":"👁️","t":"Becoming blind","s":"The Happy Prince became blind because he had given both his eyes to help the poor and the needy.","vid":"v-44f603bd40"},{"em":"🐦","t":"The swallow","s":"A kind swallow helped the Prince carry gifts to people in need, even in the cold.","vid":"v-e7a1f1fdb2"},{"em":"💛","t":"The value","s":"True happiness comes from helping others, not from keeping riches for ourselves.","vid":"v-acbe6b9136"}],"quiz":[{"q":"How did the Happy Prince help the writer?","o":["By singing a song","By giving one sapphire eye to sell for food and firewood","By giving a book","By ignoring him"],"a":1,"qVid":"v-0836de71f9","oVids":["v-f62482b5db","v-0e131ff66e","v-1a45a5a66c","v-7bc01ea548"],"aVid":"v-b89dbe98d4"},{"q":"How did the Happy Prince become blind?","o":["He fell down","He gave both his eyes to help the poor and the needy","He closed his eyes for fun","Dust covered him"],"a":1,"qVid":"v-bbaa8ae7c2","oVids":["v-6c29ee2faf","v-1b3e472090","v-ddd7b5ab77","v-b1827131c6"],"aVid":"v-f232c9bc91"},{"q":"What covered the Happy Prince statue at first?","o":["Mud","Gold and precious stones","Only wood","Only paint"],"a":1,"qVid":"v-0e50a93f6b","oVids":["v-1e1361636e","v-63d289ece9","v-32aa93e97b","v-fbed79cd1f"],"aVid":"v-15591e7ab8"},{"q":"This story teaches that true happiness comes from…","o":["Keeping all riches","Helping others","Being alone","Being angry"],"a":1,"qVid":"v-c8e8d09012","oVids":["v-ec8c029b77","v-da8a10052b","v-28309b92bd","v-e08b487610"],"aVid":"v-172b7ac631"}],"titleVid":"v-78bf029f95","blurbVid":"v-7d09b5b987"},{"id":"prakash","title":"Prakash's Small Initiative","emoji":"🚕","grad":"linear-gradient(135deg,#ef476f,#ffd166)","blurb":"Chapter 5 · Care & action","learn":[{"em":"🏫","t":"At school","s":"Prakash saw poor children at his school who needed help.","vid":"v-a903d58669"},{"em":"❤️","t":"How he felt","s":"When Prakash saw the poor children, he felt love and sympathy for them.","vid":"v-12f5739724"},{"em":"🚗","t":"How he helped","s":"Prakash helped the children by collecting money. He used his car like a taxi to raise funds.","vid":"v-4b06c61280"},{"em":"🌟","t":"Small start","s":"Even a small initiative can make a big difference when it comes from a kind heart.","vid":"v-24b0a8d40b"},{"em":"💛","t":"The value","s":"Do not wait to be big to help. Start with what you have and care for others.","vid":"v-3b6bbd3d80"}],"quiz":[{"q":"How did Prakash feel when he saw the poor children?","o":["Angry","Love and sympathy","Bored","Jealous"],"a":1,"qVid":"v-9f7a58860f","oVids":["v-cc3b72d790","v-a8dd188750","v-a517a3ab66","v-6bd0e07039"],"aVid":"v-e4c723cbaa"},{"q":"How did Prakash help the children?","o":["He ignored them","He collected money by using his car like a taxi","He closed the school","He only watched TV"],"a":1,"qVid":"v-66b54bcdfa","oVids":["v-0ed889e7aa","v-c53990d006","v-0e11f3b028","v-0efdf7f957"],"aVid":"v-e89f2c59e1"},{"q":"Where did Prakash see the poor children?","o":["At the beach","At his school","On the moon","In a movie only"],"a":1,"qVid":"v-22495895be","oVids":["v-a27978f396","v-96b68cdcbf","v-36f019dc9a","v-c6f5a9715f"],"aVid":"v-5f97cc7d75"},{"q":"This story teaches us to…","o":["Never help","Start helping with what we have","Wait forever","Hide from problems"],"a":1,"qVid":"v-3994f3b005","oVids":["v-0b95079e93","v-7556eb6209","v-fd4ad4b39d","v-0fc91e4f0f"],"aVid":"v-5842e7f688"}],"titleVid":"v-d53eb956a8","blurbVid":"v-98076fa59c"}]}</script>
+<script type="application/json" id="data">{"topics":[{"id":"hans","title":"Hans from Holland","emoji":"🌊","grad":"linear-gradient(135deg,#00b4d8,#0077b6)","blurb":"Chapter 1 · Courage & responsibility","learn":[{"em":"🇳🇱","t":"The story","s":"Hans was a brave boy from Holland. He found a hole in the dyke that held back the sea.","vid":"v-2659aad5ec"},{"em":"🕳️","t":"The growing hole","s":"The hole in the dyke became bigger and bigger because of the strong pressure of the seawater.","vid":"v-5067b7c783"},{"em":"👆","t":"Hans helps","s":"Hans put his finger in the hole and stayed there all night to stop the water, even though it was cold and hard.","vid":"v-50b3bb9657"},{"em":"👷","t":"Help in the morning","s":"In the morning, the workman closed the hole with stone and soil. Then he carried Hans on his shoulder and took him home.","vid":"v-7f37438262"},{"em":"💛","t":"The value","s":"This story teaches us to be brave and responsible. Even a small act can protect many people.","vid":"v-e082fc941f"}],"quiz":[{"q":"Why did the hole in the dyke become bigger and bigger?","o":["Because of strong seawater pressure","Because Hans dug it","Because of wind only","Because of rain alone"],"a":0,"qVid":"v-71793140e7","oVids":["v-7282b455bf","v-aa0b4bbb2a","v-0108ca06c0","v-b8fcd5d8be"],"aVid":"v-b124c3e72e"},{"q":"How did the workman help Hans in the morning?","o":["He ignored Hans","He closed the hole with stone and soil, then carried Hans home","He left Hans at the sea","He scolded Hans"],"a":1,"qVid":"v-064f2ef7b8","oVids":["v-b97ae21432","v-f0d6803ff8","v-33624d52ba","v-c5c82f58e0"],"aVid":"v-0bda2f78b5"},{"q":"What did Hans do to stop the water?","o":["He ran away","He put his finger in the hole","He called a boat","He slept at home"],"a":1,"qVid":"v-6b57057712","oVids":["v-9c992050c5","v-8e8b2a8864","v-1897e512f7","v-31f57f017e"],"aVid":"v-fa04650245"},{"q":"Hans teaches us to be…","o":["Lazy","Brave and responsible","Afraid always","Selfish"],"a":1,"qVid":"v-731355d386","oVids":["v-46a9ebdb80","v-cb098cdcb7","v-6ce449cbf4","v-05983da67d"],"aVid":"v-5a45f3cafa"}],"titleVid":"v-1f161e2b9b","blurbVid":"v-39ad09c29a","spell":[{"w":"Holland","clue":"The country Hans is from","vid":"v-67eb2b8d0a","clueVid":"v-c147b5f845"},{"w":"seawater","clue":"Water from the sea that pressed on the hole","vid":"v-5d5d704d81","clueVid":"v-39b712fed6"},{"w":"pressure","clue":"Strong force that made the hole bigger","vid":"v-d99fad96a5","clueVid":"v-0488f8cdda"},{"w":"workman","clue":"The man who helped Hans in the morning","vid":"v-f80f26d574","clueVid":"v-cfb8bb5aa2"},{"w":"shoulder","clue":"He carried Hans on his ______","vid":"v-7a069c2385","clueVid":"v-915600bebc"},{"w":"dyke","clue":"The wall that holds back the sea","vid":"v-7990139b86","clueVid":"v-912f4385a4"},{"w":"Brave and responsible","clue":"Quiz answer","vid":"v-cb098cdcb7","clueVid":"v-11b6f35045"}]},{"id":"friends","title":"The Four Friends","emoji":"🐒","grad":"linear-gradient(135deg,#06d6a0,#118ab2)","blurb":"Chapter 2 · Sharing & teamwork","learn":[{"em":"🌳","t":"The quarrel","s":"The four animals had a quarrel about the ownership of a tree. Each one wanted the tree for themselves.","vid":"v-d5e6a48f71"},{"em":"🍎","t":"The fruit problem","s":"They wanted to eat the fruits, but none of them could reach the fruits alone.","vid":"v-d1aa297c40"},{"em":"🤝","t":"Cooperative idea","s":"The cooperative idea of sharing was to climb on each other's back to pluck the fruit one after the other.","vid":"v-a2657c0c4b"},{"em":"😊","t":"Happy ending","s":"When they worked together and shared, everyone got fruit and they became friends again.","vid":"v-075d1490b0"},{"em":"💛","t":"The value","s":"Sharing and teamwork make everyone happy. Fighting over ownership helps no one.","vid":"v-f701a50172"}],"quiz":[{"q":"Why did the four animals have a quarrel?","o":["About the ownership of a tree","About a ball","About a house","About a river"],"a":0,"qVid":"v-ba25f57963","oVids":["v-c92d87381e","v-64a4c2d2b8","v-51a036e876","v-389a36cc78"],"aVid":"v-a7fdf6ec9c"},{"q":"What was their cooperative idea of sharing?","o":["To fight harder","To climb on each other's back and pluck fruit one after the other","To leave the tree","To call a human"],"a":1,"qVid":"v-de1af4440f","oVids":["v-d0c2497857","v-9e4a7f8f5c","v-3f51452740","v-831e0ba728"],"aVid":"v-7ff141d07b"},{"q":"What does this story teach?","o":["Never share","Sharing and teamwork","Be selfish","Ignore friends"],"a":1,"qVid":"v-c33dcf32e7","oVids":["v-5d393d0db3","v-a9605ecf89","v-9e83b0c29f","v-befe3e45f4"],"aVid":"v-da5dabe4f9"},{"q":"Could one animal reach the fruit alone?","o":["Yes easily","No — they needed to help each other","Only at night","Only with money"],"a":1,"qVid":"v-7437d45373","oVids":["v-ba5b2e9516","v-99cef27b03","v-78ea84d886","v-16c8c31fa0"],"aVid":"v-01fe653df8"}],"titleVid":"v-7e035f375b","blurbVid":"v-24b54df361","spell":[{"w":"quarrel","clue":"The animals had a ______","vid":"v-5392d2b5ef","clueVid":"v-0ed0fc2958"},{"w":"ownership","clue":"They fought about ______ of a tree","vid":"v-b46b517b77","clueVid":"v-fa4b6f459c"},{"w":"cooperative","clue":"Working together is ______","vid":"v-bfb8fe1089","clueVid":"v-53926e2cb5"},{"w":"sharing","clue":"Giving everyone a turn","vid":"v-52d6127375","clueVid":"v-a2200fd67c"},{"w":"climb","clue":"They ______ on each other's back","vid":"v-28b3da6a4c","clueVid":"v-4e5e813d15"},{"w":"fruit","clue":"What they wanted to pluck","vid":"v-e0deff349b","clueVid":"v-bb841ac137"},{"w":"Sharing and teamwork","clue":"Quiz answer","vid":"v-a9605ecf89","clueVid":"v-11b6f35045"}]},{"id":"androcles","title":"Androcles and the Lion","emoji":"🦁","grad":"linear-gradient(135deg,#fb8500,#dc2f02)","blurb":"Chapter 3 · Kindness & friendship","learn":[{"em":"🌲","t":"In the forest","s":"Androcles met a lion in the forest. The lion did not attack him.","vid":"v-3ba47dde21"},{"em":"🩹","t":"Why no attack","s":"The lion did not attack Androcles because it was hurt, and its paws were covered with blood.","vid":"v-81f58f512c"},{"em":"🤝","t":"Kindness","s":"Androcles helped the lion by removing the thorn and caring for its wound. They became friends.","vid":"v-34ca6100b6"},{"em":"👑","t":"The emperor","s":"Later, the emperor pardoned Androcles because the lion showed its love by gently touching him with its paw.","vid":"v-0fde86edc3"},{"em":"💛","t":"The value","s":"Kindness is never wasted. When we help others, love comes back to us.","vid":"v-6051dc8787"}],"quiz":[{"q":"Why did the lion not attack Androcles in the forest?","o":["It was sleeping","It was hurt and its paws were covered with blood","It was afraid of trees","It did not see him"],"a":1,"qVid":"v-9b02ef8a86","oVids":["v-8f693748e4","v-f7e77508a9","v-1ce0b19e11","v-fd700d6ac7"],"aVid":"v-99be4b92ce"},{"q":"Why did the emperor pardon Androcles?","o":["Androcles ran fast","The lion showed its love by gently touching him with its paw","Androcles paid money","The crowd shouted"],"a":1,"qVid":"v-dee48f1ac6","oVids":["v-3d0a37cbc5","v-d587ee97c7","v-f5901a1250","v-1b576a3f4e"],"aVid":"v-76e843bf07"},{"q":"What did Androcles do for the lion?","o":["He ran away","He helped and cared for its wound","He shouted at it","He ignored it"],"a":1,"qVid":"v-b4ff3a3539","oVids":["v-9c992050c5","v-f0715bcb15","v-c7dd93862d","v-5af0dab630"],"aVid":"v-1f7f9d0cc4"},{"q":"This story teaches…","o":["Be cruel","Kindness and friendship","Fear animals always","Never help"],"a":1,"qVid":"v-109e90f849","oVids":["v-aa39a85662","v-34c1ff12bd","v-7516234d0d","v-0b95079e93"],"aVid":"v-38f3b639a6"}],"titleVid":"v-f0ce93609d","blurbVid":"v-e94a4b7978","spell":[{"w":"Androcles","clue":"The kind man in the story","vid":"v-2fdb210017","clueVid":"v-e038c1ec86"},{"w":"lion","clue":"The animal he helped","vid":"v-6b42d00c4c","clueVid":"v-5b00c174d2"},{"w":"paws","clue":"The lion's feet were hurt","vid":"v-b78b84c2e2","clueVid":"v-c28ba015a8"},{"w":"blood","clue":"The paws were covered with ______","vid":"v-6b157916b4","clueVid":"v-5f0414c82d"},{"w":"emperor","clue":"The ruler who pardoned him","vid":"v-f860e26602","clueVid":"v-6442730d0e"},{"w":"pardon","clue":"To forgive someone","vid":"v-7717fdf71b","clueVid":"v-2f99f47ea6"},{"w":"Kindness and friendship","clue":"Quiz answer","vid":"v-34c1ff12bd","clueVid":"v-11b6f35045"}]},{"id":"prince","title":"The Happy Prince","emoji":"👑","grad":"linear-gradient(135deg,#7b2cbf,#c77dff)","blurb":"Chapter 4 · Helping the poor","learn":[{"em":"🗽","t":"The statue","s":"The Happy Prince was a beautiful statue covered with gold and precious stones. He could see the suffering of poor people in the city.","vid":"v-25f0e8f7b8"},{"em":"💎","t":"Helping the writer","s":"The Happy Prince helped the poor writer by giving one of his sapphire eyes so that the writer could sell it to buy food and firewood.","vid":"v-de9a9c85a9"},{"em":"👁️","t":"Becoming blind","s":"The Happy Prince became blind because he had given both his eyes to help the poor and the needy.","vid":"v-44f603bd40"},{"em":"🐦","t":"The swallow","s":"A kind swallow helped the Prince carry gifts to people in need, even in the cold.","vid":"v-e7a1f1fdb2"},{"em":"💛","t":"The value","s":"True happiness comes from helping others, not from keeping riches for ourselves.","vid":"v-acbe6b9136"}],"quiz":[{"q":"How did the Happy Prince help the writer?","o":["By singing a song","By giving one sapphire eye to sell for food and firewood","By giving a book","By ignoring him"],"a":1,"qVid":"v-0836de71f9","oVids":["v-f62482b5db","v-0e131ff66e","v-1a45a5a66c","v-7bc01ea548"],"aVid":"v-b89dbe98d4"},{"q":"How did the Happy Prince become blind?","o":["He fell down","He gave both his eyes to help the poor and the needy","He closed his eyes for fun","Dust covered him"],"a":1,"qVid":"v-bbaa8ae7c2","oVids":["v-6c29ee2faf","v-1b3e472090","v-ddd7b5ab77","v-b1827131c6"],"aVid":"v-f232c9bc91"},{"q":"What covered the Happy Prince statue at first?","o":["Mud","Gold and precious stones","Only wood","Only paint"],"a":1,"qVid":"v-0e50a93f6b","oVids":["v-1e1361636e","v-63d289ece9","v-32aa93e97b","v-fbed79cd1f"],"aVid":"v-15591e7ab8"},{"q":"This story teaches that true happiness comes from…","o":["Keeping all riches","Helping others","Being alone","Being angry"],"a":1,"qVid":"v-c8e8d09012","oVids":["v-ec8c029b77","v-da8a10052b","v-28309b92bd","v-e08b487610"],"aVid":"v-172b7ac631"}],"titleVid":"v-78bf029f95","blurbVid":"v-7d09b5b987","spell":[{"w":"sapphire","clue":"The blue gem from the Prince's eye","vid":"v-94149db1c5","clueVid":"v-68cb3408a2"},{"w":"firewood","clue":"What the writer needed for warmth","vid":"v-63c596dc2a","clueVid":"v-f523d0d728"},{"w":"blind","clue":"The Prince became ______","vid":"v-6013221752","clueVid":"v-9612d8b57d"},{"w":"needy","clue":"He helped the poor and the ______","vid":"v-b236573cb9","clueVid":"v-47e2b48fa3"},{"w":"swallow","clue":"The bird that helped the Prince","vid":"v-72d5962513","clueVid":"v-d5f8ff466f"},{"w":"statue","clue":"The Happy Prince was a ______","vid":"v-a643f0c67d","clueVid":"v-6ea220e677"},{"w":"Gold and precious stones","clue":"Quiz answer","vid":"v-63d289ece9","clueVid":"v-11b6f35045"},{"w":"Helping others","clue":"Quiz answer","vid":"v-da8a10052b","clueVid":"v-11b6f35045"}]},{"id":"prakash","title":"Prakash's Small Initiative","emoji":"🚕","grad":"linear-gradient(135deg,#ef476f,#ffd166)","blurb":"Chapter 5 · Care & action","learn":[{"em":"🏫","t":"At school","s":"Prakash saw poor children at his school who needed help.","vid":"v-a903d58669"},{"em":"❤️","t":"How he felt","s":"When Prakash saw the poor children, he felt love and sympathy for them.","vid":"v-12f5739724"},{"em":"🚗","t":"How he helped","s":"Prakash helped the children by collecting money. He used his car like a taxi to raise funds.","vid":"v-4b06c61280"},{"em":"🌟","t":"Small start","s":"Even a small initiative can make a big difference when it comes from a kind heart.","vid":"v-24b0a8d40b"},{"em":"💛","t":"The value","s":"Do not wait to be big to help. Start with what you have and care for others.","vid":"v-3b6bbd3d80"}],"quiz":[{"q":"How did Prakash feel when he saw the poor children?","o":["Angry","Love and sympathy","Bored","Jealous"],"a":1,"qVid":"v-9f7a58860f","oVids":["v-cc3b72d790","v-a8dd188750","v-a517a3ab66","v-6bd0e07039"],"aVid":"v-e4c723cbaa"},{"q":"How did Prakash help the children?","o":["He ignored them","He collected money by using his car like a taxi","He closed the school","He only watched TV"],"a":1,"qVid":"v-66b54bcdfa","oVids":["v-0ed889e7aa","v-c53990d006","v-0e11f3b028","v-0efdf7f957"],"aVid":"v-e89f2c59e1"},{"q":"Where did Prakash see the poor children?","o":["At the beach","At his school","On the moon","In a movie only"],"a":1,"qVid":"v-22495895be","oVids":["v-a27978f396","v-96b68cdcbf","v-36f019dc9a","v-c6f5a9715f"],"aVid":"v-5f97cc7d75"},{"q":"This story teaches us to…","o":["Never help","Start helping with what we have","Wait forever","Hide from problems"],"a":1,"qVid":"v-3994f3b005","oVids":["v-0b95079e93","v-7556eb6209","v-fd4ad4b39d","v-0fc91e4f0f"],"aVid":"v-5842e7f688"}],"titleVid":"v-d53eb956a8","blurbVid":"v-98076fa59c","spell":[{"w":"Prakash","clue":"The boy who helped poor children","vid":"v-2fb9eb0ff6","clueVid":"v-f27c14848b"},{"w":"sympathy","clue":"Love and ______ for the children","vid":"v-85405d3eb2","clueVid":"v-45b910affc"},{"w":"taxi","clue":"He used his car like a ______","vid":"v-35e768d304","clueVid":"v-c93278ae56"},{"w":"initiative","clue":"A small ______ can help many","vid":"v-fef418a4cd","clueVid":"v-e8f1cd1a98"},{"w":"school","clue":"Where he saw the poor children","vid":"v-7516c3b355","clueVid":"v-7cdca87144"},{"w":"kindness","clue":"Helping others with a good heart","vid":"v-e9d6bfefbe","clueVid":"v-ead7e7a455"},{"w":"Love and sympathy","clue":"Quiz answer","vid":"v-a8dd188750","clueVid":"v-11b6f35045"},{"w":"At his school","clue":"Quiz answer","vid":"v-96b68cdcbf","clueVid":"v-11b6f35045"}]}]}</script>
 <script>
 const D = JSON.parse(document.getElementById('data').textContent);
 const TOPICS = D.topics;
@@ -146,13 +158,20 @@ const ding = () => { if (window.LearnAudio) LearnAudio.ding(); };
 const buzz = () => { if (window.LearnAudio) LearnAudio.buzz(); };
 
 function topicStars(id) { return Math.min(3, +(S[id] || 0)); }
+function spellStars(id) { return Math.min(3, +(S[id + '-spell'] || 0)); }
 function awardTopic(id, stars) {
   stars = Math.max(0, Math.min(3, stars));
   if ((S[id] || 0) < stars) { S[id] = stars; save(); return true; }
   return false;
 }
-function gotStars() { return TOPICS.reduce((n, t) => n + topicStars(t.id), 0); }
-function totalStars() { return TOPICS.length * 3; }
+function awardSpell(id, stars) {
+  stars = Math.max(0, Math.min(3, stars));
+  const k = id + '-spell';
+  if ((S[k] || 0) < stars) { S[k] = stars; save(); return true; }
+  return false;
+}
+function gotStars() { return TOPICS.reduce((n, t) => n + topicStars(t.id) + spellStars(t.id), 0); }
+function totalStars() { return TOPICS.length * 6; }
 function starStr(n) { return '⭐'.repeat(n) + '☆'.repeat(Math.max(0, 3 - n)); }
 
 function home() {
@@ -180,10 +199,10 @@ function home() {
         <span class="i">${t.emoji}</span>
         <b>${esc(t.title)}</b>
         <small>${esc(t.blurb)}</small>
-        <span class="st">${starStr(topicStars(t.id))}</span>
+        <span class="st">🎯${starStr(topicStars(t.id))} · ✍️${starStr(spellStars(t.id))}</span>
       </button>`).join('')}
   </div>
-  <p class="tip">Tap 🔊 anytime — you can hear it again and again.</p>`;
+  <p class="tip">Tap 🔊 anytime. Use <b>Spell</b> to practise hard words letter by letter.</p>`;
 }
 
 let CUR = null, G = null;
@@ -220,6 +239,9 @@ function showTopicHome() {
       </button>
       <button type="button" class="mode" style="background:linear-gradient(135deg,#f77f00,#e63946)" onclick="startQuiz()">
         <span class="x">🎯</span>Quiz<small>Earn up to 3 stars</small>
+      </button>
+      <button type="button" class="mode" style="background:linear-gradient(135deg,#4361ee,#7b2cbf)" onclick="startSpell()">
+        <span class="x">✍️</span>Spell<small>Learn answer spellings</small>
       </button>
     </div>`;
   sayVid(t.titleVid, t.title + '. ' + t.blurb);
@@ -333,6 +355,134 @@ function endQuiz() {
       </div>
     </div>`;
 }
+
+
+function lettersOf(w) { return String(w).split(''); }
+function scrambleLetters(chars) {
+  const letters = chars.filter(c => c !== ' ');
+  const extras = shuffle('AEIOURSTLNMP'.split('')).slice(0, Math.min(4, Math.max(2, 10 - letters.length)));
+  return shuffle(letters.concat(extras));
+}
+function startSpell() {
+  if (!CUR.spell || !CUR.spell.length) { alert('No spelling words yet.'); return; }
+  G = { mode: 'spell', queue: shuffle(CUR.spell.slice()), i: 0, right: 0, miss: 0, phase: 0, built: [] };
+  showSpell();
+}
+function showSpell() {
+  if (G.i >= G.queue.length) return endSpell();
+  const x = G.queue[G.i];
+  G.phase = 0; G.miss = 0; G.built = [];
+  document.getElementById('ovs').textContent = (G.i + 1) + '/' + G.queue.length + ' · ✓' + G.right;
+  document.getElementById('ovb').innerHTML = `
+    <div class="prog">Spell ${G.i + 1} of ${G.queue.length}</div>
+    <div class="card">
+      <p class="hint">Listen, look carefully, then build the letters</p>
+      <button type="button" class="say" onclick="sayVid('${x.vid}','${esc(x.w)}',this)">🔊</button>
+      <div class="flashw" id="flashw">${esc(x.w)}</div>
+      <p style="font-weight:700;color:#5b5f86">${esc(x.clue)}</p>
+      <button type="button" class="say sm" onclick="sayVid('${x.clueVid}','${esc(x.clue)}',this)">🔊 clue</button>
+      <div><button type="button" class="nx" onclick="spellBuild()">✍️ Ready — spell it</button></div>
+    </div>`;
+  sayVid(x.vid, x.w);
+}
+function spellBuild() {
+  const x = G.queue[G.i];
+  G.phase = 1; G.built = [];
+  const chars = lettersOf(x.w);
+  G._chars = chars;
+  const bag = scrambleLetters(chars);
+  document.getElementById('ovb').innerHTML = `
+    <div class="prog">Tap letters in order · misses: <span id="missn">0</span></div>
+    <div class="card">
+      <button type="button" class="say" onclick="sayVid('${x.vid}','${esc(x.w)}',this)">🔊</button>
+      <p class="hint">${esc(x.clue)}</p>
+      <div class="slots" id="slots">${chars.map((c,i)=>c===' '?'<div class="slot space"></div>':`<div class="slot" id="sl${i}"></div>`).join('')}</div>
+      <div class="letters" id="letts">${bag.map((c,i)=>`<button type="button" class="lett" data-c="${esc(c)}" onclick="tapLetter(this)">${esc(c)}</button>`).join('')}</div>
+      <div class="fb" id="fb"></div>
+      <div id="after">
+        <button type="button" class="nx alt" onclick="spellHint()">💡 Hint</button>
+        <button type="button" class="nx alt" onclick="spellBuild()">↺ Reset</button>
+      </div>
+    </div>`;
+  sayVid(x.vid, x.w);
+}
+function nextEmptySlot() {
+  for (let i = 0; i < G._chars.length; i++) {
+    if (G._chars[i] === ' ') continue;
+    const el = document.getElementById('sl' + i);
+    if (el && !el.classList.contains('f')) return i;
+  }
+  return -1;
+}
+function tapLetter(btn) {
+  if (!G || G.phase !== 1 || btn.disabled) return;
+  const c = btn.getAttribute('data-c');
+  const idx = nextEmptySlot();
+  if (idx < 0) return;
+  const want = G._chars[idx];
+  if (c.toLowerCase() === want.toLowerCase()) {
+    const el = document.getElementById('sl' + idx);
+    el.textContent = want; el.classList.add('f');
+    btn.disabled = true;
+    ding();
+    if (nextEmptySlot() < 0) spellCorrect();
+  } else {
+    G.miss++;
+    const mn = document.getElementById('missn'); if (mn) mn.textContent = G.miss;
+    buzz();
+    btn.classList.add('bad');
+    setTimeout(() => btn.classList.remove('bad'), 350);
+    document.getElementById('fb').className = 'fb bad';
+    document.getElementById('fb').textContent = 'Not that letter — try again 💪';
+  }
+}
+function spellHint() {
+  const idx = nextEmptySlot();
+  if (idx < 0) return;
+  const want = G._chars[idx];
+  G.miss++;
+  const mn = document.getElementById('missn'); if (mn) mn.textContent = G.miss;
+  const btn = [...document.querySelectorAll('.lett')].find(b => !b.disabled && b.getAttribute('data-c').toLowerCase() === want.toLowerCase());
+  if (btn) tapLetter(btn);
+  else {
+    const el = document.getElementById('sl' + idx);
+    el.textContent = want; el.classList.add('f');
+    if (nextEmptySlot() < 0) spellCorrect();
+  }
+}
+function spellCorrect() {
+  G.phase = 2;
+  if (G.miss === 0) G.right++;
+  const x = G.queue[G.i];
+  document.getElementById('fb').className = 'fb good';
+  document.getElementById('fb').textContent = G.miss === 0 ? 'Perfect spelling! 🌟' : 'Nice — you spelled it! ⭐';
+  document.getElementById('after').innerHTML = `
+    <div class="flashw">${esc(x.w)}</div>
+    <button type="button" class="say sm" onclick="sayVid('${x.vid}','${esc(x.w)}',this)">🔊</button>
+    <button type="button" class="nx" onclick="G.i++;showSpell()">Next ➜</button>`;
+  sayVid(x.vid, x.w);
+}
+function endSpell() {
+  const total = G.queue.length;
+  const ratio = total ? G.right / total : 0;
+  const stars = ratio >= 0.85 ? 3 : ratio >= 0.55 ? 2 : ratio >= 0.3 ? 1 : 0;
+  const nb = awardSpell(CUR.id, stars);
+  document.getElementById('ovs').textContent = '✍️ ' + starStr(spellStars(CUR.id));
+  ding();
+  document.getElementById('ovb').innerHTML = `
+    <div class="card end">
+      <div class="big">${stars === 3 ? '🏆' : stars ? '🥳' : '💪'}</div>
+      <h2>Spelling done!</h2>
+      <p style="font-size:18px">Perfect first tries: <b>${G.right}</b> / ${total}</p>
+      <div class="stars">${starStr(stars)}</div>
+      <p style="margin-top:8px">${nb ? 'New spelling best!' : 'Practise again for more stars!'}</p>
+      <div>
+        <button type="button" class="nx" onclick="startSpell()">🔁 Spell again</button>
+        <button type="button" class="nx alt" onclick="showTopicHome()">Topics</button>
+      </div>
+    </div>`;
+}
+
 
 home();
 </script>
