@@ -3,38 +3,338 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Coming soon · Joshua</title>
+<title>Value Education · Class 3 · Joshua</title>
 <style>
-body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:"Avenir Next","Segoe UI",system-ui,sans-serif;background:linear-gradient(160deg,#e0f7fa,#fff3e0);color:#2b2350;text-align:center;padding:24px}
-.box{background:#fff;border-radius:28px;padding:36px 28px;box-shadow:0 10px 0 #e6dff7;max-width:420px}
-.em{font-size:64px}
-h1{margin:8px 0 6px;font-size:28px}
-p{margin:0;color:#6a5f8f;font-size:17px}
-a{display:inline-block;margin-top:20px;background:linear-gradient(135deg,#4361ee,#7b2cbf);color:#fff;text-decoration:none;font-weight:800;padding:12px 22px;border-radius:99px;box-shadow:0 5px 0 rgba(67,97,238,.35)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:"Chalkboard SE","Comic Sans MS","Avenir Next",system-ui,sans-serif;color:#1f2340;background:linear-gradient(180deg,#fff3cd 0%,#d8f3dc 45%,#caf0f8 100%);min-height:100vh;line-height:1.4}
+button,a{font-family:inherit}
+#app{max-width:920px;margin:0 auto;padding:12px 14px 80px}
+.top{position:sticky;top:6px;z-index:10;display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:22px;color:#fff;background:linear-gradient(135deg,#2a9d8f,#1b4332);box-shadow:0 6px 0 rgba(0,0,0,.12)}
+.top a,.top button.icon{border:0;background:#fff;width:44px;height:44px;border-radius:50%;font-size:20px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:#333;flex:none;cursor:pointer}
+.top .tt{flex:1;min-width:0}.top .tt small{display:block;font-size:12px;font-weight:700;opacity:.92}.top .tt b{display:block;font-size:18px}
+.chip{background:rgba(255,255,255,.28);border-radius:99px;padding:4px 10px;font-weight:800;font-size:13px;white-space:nowrap}
+.hero{text-align:center;padding:14px 8px 6px}.hero .big{font-size:56px;display:inline-block;animation:bob 2.4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-7px) rotate(-4deg)}}
+.hero h1{margin:4px 0;font-size:30px;color:#1b4332}.hero p{margin:0;color:#6a5f8f;font-size:16px}
+.starbox{background:#fff;border-radius:22px;padding:14px 16px;margin:12px 0;box-shadow:0 6px 0 #b7e4c7}
+.starbox .row{display:flex;justify-content:space-between;font-weight:800;font-size:16px}
+.bar{height:14px;background:#f3e6dc;border-radius:99px;overflow:hidden;margin-top:8px}.bar i{display:block;height:100%;background:linear-gradient(90deg,#ffd60a,#06d6a0);border-radius:99px;width:0;transition:width .35s}
+.gtiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:12px}
+.gt{border:0;border-radius:20px;padding:14px;text-align:left;color:#fff;background:var(--b);box-shadow:0 6px 0 rgba(0,0,0,.16);cursor:pointer;width:100%}
+.gt .i{font-size:34px;display:block}.gt b{display:block;font-size:17px;margin-top:4px;line-height:1.2}.gt small{display:block;opacity:.95;font-size:12px;margin-top:2px}
+.gt .st{display:inline-block;margin-top:8px;background:rgba(0,0,0,.18);padding:3px 10px;border-radius:99px;font-weight:800;font-size:13px}
+.ov{position:fixed;inset:0;z-index:40;display:none;flex-direction:column;background:linear-gradient(165deg,#fff8ef,#e7f5ff)}
+.ov.show{display:flex}
+.ovtop{display:flex;align-items:center;gap:10px;padding:12px 14px;color:#fff;background:linear-gradient(135deg,#2a9d8f,#1b4332)}
+.ovtop button{border:0;background:#fff;width:42px;height:42px;border-radius:50%;font-size:18px;font-weight:900;cursor:pointer}
+.ovtop .t{flex:1;font-weight:800;font-size:15px}.ovtop .sc{background:rgba(255,255,255,.25);border-radius:99px;padding:4px 10px;font-weight:800}
+.ovb{flex:1;overflow-y:auto;padding:14px;max-width:860px;width:100%;margin:0 auto}
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.mode{border:0;border-radius:20px;padding:18px 14px;color:#fff;font-weight:800;cursor:pointer;box-shadow:0 6px 0 rgba(0,0,0,.14);text-align:left}
+.mode .x{font-size:32px;display:block}.mode small{display:block;font-weight:700;opacity:.95;margin-top:4px}
+.card{background:#fff;border-radius:22px;padding:18px;box-shadow:0 7px 0 #b7e4c7;text-align:center;margin-bottom:12px}
+.card .em{font-size:64px;line-height:1}.card h2{margin:8px 0 4px;font-size:24px;color:#1b4332}.card p{margin:0;color:#4a4f7a;font-size:17px;font-weight:700}
+.say{border:0;width:78px;height:78px;border-radius:50%;font-size:34px;background:#d8f3dc;cursor:pointer;box-shadow:0 5px 0 #b7e4c7;margin:6px}
+.say.playing,.say:active{background:#ffb703;transform:scale(.96)}
+.say.sm{width:48px;height:48px;font-size:22px;margin:0 4px;vertical-align:middle}
+.qtext{font-size:20px;font-weight:800;margin:10px 0;color:#1f2340;display:flex;gap:8px;align-items:flex-start;justify-content:center;text-align:left}
+.opts{display:grid;gap:10px;margin-top:12px;text-align:left}
+.opt{border:2px solid #b7e4c7;background:#f0fff4;border-radius:16px;padding:14px;font-size:17px;font-weight:700;cursor:pointer;box-shadow:0 4px 0 #b7e4c7;width:100%;display:flex;align-items:center;gap:8px}
+.opt.ok{background:#c9f7d6;border-color:#2fbf71}.opt.bad{background:#ffd3d3;border-color:#e5484d}
+.opt .say.sm{flex:none}
+.fb{margin-top:12px;font-weight:800;font-size:18px}.fb.good{color:#1f9d55}.fb.bad{color:#d9480f}
+.nx{display:inline-block;margin:12px 6px 0;border:0;border-radius:99px;padding:12px 26px;font-size:16px;font-weight:800;color:#fff;background:linear-gradient(135deg,#2a9d8f,#1b4332);cursor:pointer;box-shadow:0 5px 0 rgba(0,0,0,.14)}
+.nx.alt{background:#fff;color:#1b4332;border:2px solid #95d5b2;box-shadow:0 5px 0 #b7e4c7}
+.prog{font-weight:800;color:#5b5f86;margin-bottom:8px}
+.learn-nav{display:flex;justify-content:space-between;gap:8px;margin-top:14px;flex-wrap:wrap}
+.dots{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+.dots i{width:10px;height:10px;border-radius:50%;background:#b7e4c7}.dots i.on{background:#f77f00}
+.end{text-align:center}.end .big{font-size:64px}.stars{font-size:36px;letter-spacing:3px}
+.tip{text-align:center;color:#6a5f8f;font-size:14px;margin-top:16px}
 </style>
+<script src="../assets/learn-audio.js?v=3"></script>
 </head>
 <body>
-<div class="box">
-  <div class="em" id="em">🚧</div>
-  <h1 id="t">Coming soon</h1>
-  <p>This subject will be added next. Until then, try English or Hindi!</p>
-  <a href="../">🏠 Back to subjects</a>
+<div id="app"></div>
+<div class="ov" id="ov">
+  <div class="ovtop">
+    <button type="button" onclick="closeOv()">✕</button>
+    <div class="t" id="ovt"></div>
+    <div class="sc" id="ovs"></div>
+  </div>
+  <div class="ovb" id="ovb"></div>
 </div>
+<script type="application/json" id="data">{"topics":[{"id":"hans","title":"Hans from Holland","emoji":"🌊","grad":"linear-gradient(135deg,#00b4d8,#0077b6)","blurb":"Chapter 1 · Courage & responsibility","learn":[{"em":"🇳🇱","t":"The story","s":"Hans was a brave boy from Holland. He found a hole in the dyke that held back the sea.","vid":"v-2659aad5ec"},{"em":"🕳️","t":"The growing hole","s":"The hole in the dyke became bigger and bigger because of the strong pressure of the seawater.","vid":"v-5067b7c783"},{"em":"👆","t":"Hans helps","s":"Hans put his finger in the hole and stayed there all night to stop the water, even though it was cold and hard.","vid":"v-50b3bb9657"},{"em":"👷","t":"Help in the morning","s":"In the morning, the workman closed the hole with stone and soil. Then he carried Hans on his shoulder and took him home.","vid":"v-7f37438262"},{"em":"💛","t":"The value","s":"This story teaches us to be brave and responsible. Even a small act can protect many people.","vid":"v-e082fc941f"}],"quiz":[{"q":"Why did the hole in the dyke become bigger and bigger?","o":["Because of strong seawater pressure","Because Hans dug it","Because of wind only","Because of rain alone"],"a":0,"qVid":"v-71793140e7","oVids":["v-7282b455bf","v-aa0b4bbb2a","v-0108ca06c0","v-b8fcd5d8be"],"aVid":"v-b124c3e72e"},{"q":"How did the workman help Hans in the morning?","o":["He ignored Hans","He closed the hole with stone and soil, then carried Hans home","He left Hans at the sea","He scolded Hans"],"a":1,"qVid":"v-064f2ef7b8","oVids":["v-b97ae21432","v-f0d6803ff8","v-33624d52ba","v-c5c82f58e0"],"aVid":"v-0bda2f78b5"},{"q":"What did Hans do to stop the water?","o":["He ran away","He put his finger in the hole","He called a boat","He slept at home"],"a":1,"qVid":"v-6b57057712","oVids":["v-9c992050c5","v-8e8b2a8864","v-1897e512f7","v-31f57f017e"],"aVid":"v-fa04650245"},{"q":"Hans teaches us to be…","o":["Lazy","Brave and responsible","Afraid always","Selfish"],"a":1,"qVid":"v-731355d386","oVids":["v-46a9ebdb80","v-cb098cdcb7","v-6ce449cbf4","v-05983da67d"],"aVid":"v-5a45f3cafa"}],"titleVid":"v-1f161e2b9b","blurbVid":"v-39ad09c29a"},{"id":"friends","title":"The Four Friends","emoji":"🐒","grad":"linear-gradient(135deg,#06d6a0,#118ab2)","blurb":"Chapter 2 · Sharing & teamwork","learn":[{"em":"🌳","t":"The quarrel","s":"The four animals had a quarrel about the ownership of a tree. Each one wanted the tree for themselves.","vid":"v-d5e6a48f71"},{"em":"🍎","t":"The fruit problem","s":"They wanted to eat the fruits, but none of them could reach the fruits alone.","vid":"v-d1aa297c40"},{"em":"🤝","t":"Cooperative idea","s":"The cooperative idea of sharing was to climb on each other's back to pluck the fruit one after the other.","vid":"v-a2657c0c4b"},{"em":"😊","t":"Happy ending","s":"When they worked together and shared, everyone got fruit and they became friends again.","vid":"v-075d1490b0"},{"em":"💛","t":"The value","s":"Sharing and teamwork make everyone happy. Fighting over ownership helps no one.","vid":"v-f701a50172"}],"quiz":[{"q":"Why did the four animals have a quarrel?","o":["About the ownership of a tree","About a ball","About a house","About a river"],"a":0,"qVid":"v-ba25f57963","oVids":["v-c92d87381e","v-64a4c2d2b8","v-51a036e876","v-389a36cc78"],"aVid":"v-a7fdf6ec9c"},{"q":"What was their cooperative idea of sharing?","o":["To fight harder","To climb on each other's back and pluck fruit one after the other","To leave the tree","To call a human"],"a":1,"qVid":"v-de1af4440f","oVids":["v-d0c2497857","v-9e4a7f8f5c","v-3f51452740","v-831e0ba728"],"aVid":"v-7ff141d07b"},{"q":"What does this story teach?","o":["Never share","Sharing and teamwork","Be selfish","Ignore friends"],"a":1,"qVid":"v-c33dcf32e7","oVids":["v-5d393d0db3","v-a9605ecf89","v-9e83b0c29f","v-befe3e45f4"],"aVid":"v-da5dabe4f9"},{"q":"Could one animal reach the fruit alone?","o":["Yes easily","No — they needed to help each other","Only at night","Only with money"],"a":1,"qVid":"v-7437d45373","oVids":["v-ba5b2e9516","v-99cef27b03","v-78ea84d886","v-16c8c31fa0"],"aVid":"v-01fe653df8"}],"titleVid":"v-7e035f375b","blurbVid":"v-24b54df361"},{"id":"androcles","title":"Androcles and the Lion","emoji":"🦁","grad":"linear-gradient(135deg,#fb8500,#dc2f02)","blurb":"Chapter 3 · Kindness & friendship","learn":[{"em":"🌲","t":"In the forest","s":"Androcles met a lion in the forest. The lion did not attack him.","vid":"v-3ba47dde21"},{"em":"🩹","t":"Why no attack","s":"The lion did not attack Androcles because it was hurt, and its paws were covered with blood.","vid":"v-81f58f512c"},{"em":"🤝","t":"Kindness","s":"Androcles helped the lion by removing the thorn and caring for its wound. They became friends.","vid":"v-34ca6100b6"},{"em":"👑","t":"The emperor","s":"Later, the emperor pardoned Androcles because the lion showed its love by gently touching him with its paw.","vid":"v-0fde86edc3"},{"em":"💛","t":"The value","s":"Kindness is never wasted. When we help others, love comes back to us.","vid":"v-6051dc8787"}],"quiz":[{"q":"Why did the lion not attack Androcles in the forest?","o":["It was sleeping","It was hurt and its paws were covered with blood","It was afraid of trees","It did not see him"],"a":1,"qVid":"v-9b02ef8a86","oVids":["v-8f693748e4","v-f7e77508a9","v-1ce0b19e11","v-fd700d6ac7"],"aVid":"v-99be4b92ce"},{"q":"Why did the emperor pardon Androcles?","o":["Androcles ran fast","The lion showed its love by gently touching him with its paw","Androcles paid money","The crowd shouted"],"a":1,"qVid":"v-dee48f1ac6","oVids":["v-3d0a37cbc5","v-d587ee97c7","v-f5901a1250","v-1b576a3f4e"],"aVid":"v-76e843bf07"},{"q":"What did Androcles do for the lion?","o":["He ran away","He helped and cared for its wound","He shouted at it","He ignored it"],"a":1,"qVid":"v-b4ff3a3539","oVids":["v-9c992050c5","v-f0715bcb15","v-c7dd93862d","v-5af0dab630"],"aVid":"v-1f7f9d0cc4"},{"q":"This story teaches…","o":["Be cruel","Kindness and friendship","Fear animals always","Never help"],"a":1,"qVid":"v-109e90f849","oVids":["v-aa39a85662","v-34c1ff12bd","v-7516234d0d","v-0b95079e93"],"aVid":"v-38f3b639a6"}],"titleVid":"v-f0ce93609d","blurbVid":"v-e94a4b7978"},{"id":"prince","title":"The Happy Prince","emoji":"👑","grad":"linear-gradient(135deg,#7b2cbf,#c77dff)","blurb":"Chapter 4 · Helping the poor","learn":[{"em":"🗽","t":"The statue","s":"The Happy Prince was a beautiful statue covered with gold and precious stones. He could see the suffering of poor people in the city.","vid":"v-25f0e8f7b8"},{"em":"💎","t":"Helping the writer","s":"The Happy Prince helped the poor writer by giving one of his sapphire eyes so that the writer could sell it to buy food and firewood.","vid":"v-de9a9c85a9"},{"em":"👁️","t":"Becoming blind","s":"The Happy Prince became blind because he had given both his eyes to help the poor and the needy.","vid":"v-44f603bd40"},{"em":"🐦","t":"The swallow","s":"A kind swallow helped the Prince carry gifts to people in need, even in the cold.","vid":"v-e7a1f1fdb2"},{"em":"💛","t":"The value","s":"True happiness comes from helping others, not from keeping riches for ourselves.","vid":"v-acbe6b9136"}],"quiz":[{"q":"How did the Happy Prince help the writer?","o":["By singing a song","By giving one sapphire eye to sell for food and firewood","By giving a book","By ignoring him"],"a":1,"qVid":"v-0836de71f9","oVids":["v-f62482b5db","v-0e131ff66e","v-1a45a5a66c","v-7bc01ea548"],"aVid":"v-b89dbe98d4"},{"q":"How did the Happy Prince become blind?","o":["He fell down","He gave both his eyes to help the poor and the needy","He closed his eyes for fun","Dust covered him"],"a":1,"qVid":"v-bbaa8ae7c2","oVids":["v-6c29ee2faf","v-1b3e472090","v-ddd7b5ab77","v-b1827131c6"],"aVid":"v-f232c9bc91"},{"q":"What covered the Happy Prince statue at first?","o":["Mud","Gold and precious stones","Only wood","Only paint"],"a":1,"qVid":"v-0e50a93f6b","oVids":["v-1e1361636e","v-63d289ece9","v-32aa93e97b","v-fbed79cd1f"],"aVid":"v-15591e7ab8"},{"q":"This story teaches that true happiness comes from…","o":["Keeping all riches","Helping others","Being alone","Being angry"],"a":1,"qVid":"v-c8e8d09012","oVids":["v-ec8c029b77","v-da8a10052b","v-28309b92bd","v-e08b487610"],"aVid":"v-172b7ac631"}],"titleVid":"v-78bf029f95","blurbVid":"v-7d09b5b987"},{"id":"prakash","title":"Prakash's Small Initiative","emoji":"🚕","grad":"linear-gradient(135deg,#ef476f,#ffd166)","blurb":"Chapter 5 · Care & action","learn":[{"em":"🏫","t":"At school","s":"Prakash saw poor children at his school who needed help.","vid":"v-a903d58669"},{"em":"❤️","t":"How he felt","s":"When Prakash saw the poor children, he felt love and sympathy for them.","vid":"v-12f5739724"},{"em":"🚗","t":"How he helped","s":"Prakash helped the children by collecting money. He used his car like a taxi to raise funds.","vid":"v-4b06c61280"},{"em":"🌟","t":"Small start","s":"Even a small initiative can make a big difference when it comes from a kind heart.","vid":"v-24b0a8d40b"},{"em":"💛","t":"The value","s":"Do not wait to be big to help. Start with what you have and care for others.","vid":"v-3b6bbd3d80"}],"quiz":[{"q":"How did Prakash feel when he saw the poor children?","o":["Angry","Love and sympathy","Bored","Jealous"],"a":1,"qVid":"v-9f7a58860f","oVids":["v-cc3b72d790","v-a8dd188750","v-a517a3ab66","v-6bd0e07039"],"aVid":"v-e4c723cbaa"},{"q":"How did Prakash help the children?","o":["He ignored them","He collected money by using his car like a taxi","He closed the school","He only watched TV"],"a":1,"qVid":"v-66b54bcdfa","oVids":["v-0ed889e7aa","v-c53990d006","v-0e11f3b028","v-0efdf7f957"],"aVid":"v-e89f2c59e1"},{"q":"Where did Prakash see the poor children?","o":["At the beach","At his school","On the moon","In a movie only"],"a":1,"qVid":"v-22495895be","oVids":["v-a27978f396","v-96b68cdcbf","v-36f019dc9a","v-c6f5a9715f"],"aVid":"v-5f97cc7d75"},{"q":"This story teaches us to…","o":["Never help","Start helping with what we have","Wait forever","Hide from problems"],"a":1,"qVid":"v-3994f3b005","oVids":["v-0b95079e93","v-7556eb6209","v-fd4ad4b39d","v-0fc91e4f0f"],"aVid":"v-5842e7f688"}],"titleVid":"v-d53eb956a8","blurbVid":"v-98076fa59c"}]}</script>
 <script>
-const map = {
-  malayalam: ['📗', 'Malayalam'],
-  science: ['🔬', 'Science'],
-  social: ['🌍', 'Social'],
-  computer: ['💻', 'Computer'],
-  gk: ['🧠', 'GK'],
-  value: ['💛', 'Value Education'],
-};
-const key = location.pathname.replace(/\/+$/, '').split('/').pop();
-if (map[key]) {
-  document.getElementById('em').textContent = map[key][0];
-  document.getElementById('t').textContent = map[key][1] + ' — Coming soon';
-  document.title = map[key][1] + ' · Coming soon';
+const D = JSON.parse(document.getElementById('data').textContent);
+const TOPICS = D.topics;
+const SKEY = 'joshua-ve-v1';
+let S = JSON.parse(localStorage.getItem(SKEY) || '{}');
+const save = () => localStorage.setItem(SKEY, JSON.stringify(S));
+const app = document.getElementById('app');
+const ov = document.getElementById('ov');
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+
+let sp = null, ptok = 0;
+function stopAudio() {
+  ptok++;
+  if (sp) { try { sp.onended = null; sp.onerror = null; sp.pause(); } catch (e) {} sp = null; }
+  try { if (window.LearnAudio) LearnAudio.stop(); } catch (e) {}
+  document.querySelectorAll('.playing').forEach(e => e.classList.remove('playing'));
 }
+/** Fresh Audio each click — local mp3 first, then online TTS fallback. */
+function say(vidOrText, el) {
+  stopAudio();
+  const mine = ptok;
+  if (el) el.classList.add('playing');
+  const isVid = typeof vidOrText === 'string' && /^v-[a-f0-9]+$/.test(vidOrText);
+  const text = isVid ? null : String(vidOrText || '');
+  const url = isVid ? ('voice/' + vidOrText + '.mp3') : null;
+
+  const playUrl = (src, remoteText) => new Promise(res => {
+    sp = new Audio(src);
+    sp.playbackRate = 0.95;
+    sp.onended = () => { if (el && mine === ptok) el.classList.remove('playing'); res(mine === ptok); };
+    sp.onerror = () => {
+      if (mine !== ptok) return res(false);
+      if (remoteText && window.LearnAudio) {
+        LearnAudio.speak(remoteText, 'en-IN', 0.92, el).then(ok => res(!!ok));
+      } else if (remoteText) {
+        const g = 'https://translate.googleapis.com/translate_tts?ie=UTF-8&client=gtx&tl=en&q=' + encodeURIComponent(remoteText.slice(0, 180));
+        sp = new Audio(g);
+        sp.onended = () => { if (el && mine === ptok) el.classList.remove('playing'); res(mine === ptok); };
+        sp.onerror = () => { if (el && mine === ptok) el.classList.remove('playing'); res(false); };
+        sp.play().catch(() => { if (el && mine === ptok) el.classList.remove('playing'); res(false); });
+      } else {
+        if (el && mine === ptok) el.classList.remove('playing');
+        res(false);
+      }
+    };
+    sp.play().catch(() => { if (el && mine === ptok) el.classList.remove('playing'); res(false); });
+  });
+
+  if (url) return playUrl(url, null);
+  if (window.LearnAudio) return LearnAudio.speak(text, 'en-IN', 0.92, el);
+  return playUrl('https://translate.googleapis.com/translate_tts?ie=UTF-8&client=gtx&tl=en&q=' + encodeURIComponent(text.slice(0, 180)), text);
+}
+function sayVid(vid, text, el) {
+  // Prefer local vid; keep text for fallback via LearnAudio path inside onerror — patch:
+  stopAudio();
+  const mine = ptok;
+  if (el) el.classList.add('playing');
+  if (!vid) return say(text, el);
+  sp = new Audio('voice/' + vid + '.mp3');
+  sp.playbackRate = 0.95;
+  return new Promise(res => {
+    sp.onended = () => { if (el && mine === ptok) el.classList.remove('playing'); res(mine === ptok); };
+    sp.onerror = () => {
+      if (mine !== ptok) return res(false);
+      if (window.LearnAudio) return LearnAudio.speak(text || '', 'en-IN', 0.92, el).then(ok => res(!!ok));
+      if (el) el.classList.remove('playing');
+      res(false);
+    };
+    sp.play().catch(() => {
+      if (mine !== ptok) return res(false);
+      if (window.LearnAudio) return LearnAudio.speak(text || '', 'en-IN', 0.92, el).then(ok => res(!!ok));
+      if (el) el.classList.remove('playing');
+      res(false);
+    });
+  });
+}
+const ding = () => { if (window.LearnAudio) LearnAudio.ding(); };
+const buzz = () => { if (window.LearnAudio) LearnAudio.buzz(); };
+
+function topicStars(id) { return Math.min(3, +(S[id] || 0)); }
+function awardTopic(id, stars) {
+  stars = Math.max(0, Math.min(3, stars));
+  if ((S[id] || 0) < stars) { S[id] = stars; save(); return true; }
+  return false;
+}
+function gotStars() { return TOPICS.reduce((n, t) => n + topicStars(t.id), 0); }
+function totalStars() { return TOPICS.length * 3; }
+function starStr(n) { return '⭐'.repeat(n) + '☆'.repeat(Math.max(0, 3 - n)); }
+
+function home() {
+  stopAudio();
+  const g = gotStars(), t = totalStars(), pct = t ? Math.round(g / t * 100) : 0;
+  app.innerHTML = `
+  <div class="top">
+    <a class="icon" href="../index.html" title="Home">🏠</a>
+    <button type="button" class="icon" onclick="history.back()" title="Back">←</button>
+    <div class="tt"><small>Class 3 · Joshua</small><b>💛 Value Education</b></div>
+    <span class="chip">⭐ ${g}/${t}</span>
+  </div>
+  <div class="hero">
+    <div class="big">🧠</div>
+    <h1>Value Stories</h1>
+    <p>Stories that teach kindness · Listen · Earn stars!</p>
+  </div>
+  <div class="starbox">
+    <div class="row"><span>⭐ My value stars</span><span>${g}/${t} · ${pct}%</span></div>
+    <div class="bar"><i style="width:${pct}%"></i></div>
+  </div>
+  <div class="gtiles">
+    ${TOPICS.map(t => `
+      <button type="button" class="gt" style="--b:${t.grad}" onclick="openTopic('${t.id}')">
+        <span class="i">${t.emoji}</span>
+        <b>${esc(t.title)}</b>
+        <small>${esc(t.blurb)}</small>
+        <span class="st">${starStr(topicStars(t.id))}</span>
+      </button>`).join('')}
+  </div>
+  <p class="tip">Tap 🔊 anytime — you can hear it again and again.</p>`;
+}
+
+let CUR = null, G = null;
+
+function openTopic(id) {
+  CUR = TOPICS.find(t => t.id === id);
+  if (!CUR) return;
+  document.getElementById('ovt').textContent = CUR.emoji + ' ' + CUR.title;
+  document.getElementById('ovs').textContent = starStr(topicStars(CUR.id));
+  ov.classList.add('show');
+  document.body.style.overflow = 'hidden';
+  showTopicHome();
+}
+function closeOv() {
+  stopAudio();
+  ov.classList.remove('show');
+  document.body.style.overflow = '';
+  CUR = null; G = null;
+  home();
+}
+function showTopicHome() {
+  stopAudio();
+  const t = CUR;
+  document.getElementById('ovb').innerHTML = `
+    <div class="card">
+      <div class="em">${t.emoji}</div>
+      <h2>${esc(t.title)}</h2>
+      <p>${esc(t.blurb)}</p>
+      <button type="button" class="say" onclick="sayVid('${t.titleVid}','${esc(t.title)}. ${esc(t.blurb)}',this)">🔊</button>
+    </div>
+    <div class="modes">
+      <button type="button" class="mode" style="background:linear-gradient(135deg,#06d6a0,#118ab2)" onclick="startLearn()">
+        <span class="x">🎧</span>Learn<small>Listen to each fact</small>
+      </button>
+      <button type="button" class="mode" style="background:linear-gradient(135deg,#f77f00,#e63946)" onclick="startQuiz()">
+        <span class="x">🎯</span>Quiz<small>Earn up to 3 stars</small>
+      </button>
+    </div>`;
+  sayVid(t.titleVid, t.title + '. ' + t.blurb);
+}
+
+function startLearn() {
+  G = { mode: 'learn', i: 0 };
+  showLearn();
+}
+function showLearn() {
+  const t = CUR, L = t.learn, i = G.i, card = L[i];
+  document.getElementById('ovs').textContent = (i + 1) + '/' + L.length;
+  document.getElementById('ovb').innerHTML = `
+    <div class="prog">Fact ${i + 1} of ${L.length}</div>
+    <div class="card">
+      <div class="em">${card.em}</div>
+      <h2>${esc(card.t)}</h2>
+      <button type="button" class="say" onclick="sayVid('${card.vid}','${esc(card.t)}. ${esc(card.s)}',this)">🔊</button>
+      <p style="margin-top:12px">${esc(card.s)}</p>
+      <div class="dots">${L.map((_, k) => `<i class="${k === i ? 'on' : ''}"></i>`).join('')}</div>
+      <div class="learn-nav">
+        <button type="button" class="nx alt" ${i === 0 ? 'disabled style="opacity:.4"' : ''} onclick="G.i--;showLearn()">← Back</button>
+        ${i < L.length - 1
+          ? `<button type="button" class="nx" onclick="G.i++;showLearn()">Next ➜</button>`
+          : `<button type="button" class="nx" onclick="showTopicHome()">✅ Done</button>`}
+      </div>
+    </div>`;
+  sayVid(card.vid, card.t + '. ' + card.s);
+}
+
+function startQuiz() {
+  const q = shuffle(CUR.quiz.map((x, i) => ({ ...x, _i: i })));
+  G = { mode: 'quiz', queue: q, i: 0, right: 0, done: false };
+  showQuiz();
+}
+function showQuiz() {
+  if (G.i >= G.queue.length) return endQuiz();
+  const x = G.queue[G.i];
+  G.done = false;
+  document.getElementById('ovs').textContent = (G.i + 1) + '/' + G.queue.length + ' · ✓' + G.right;
+  // shuffle options but track answer
+  const opts = x.o.map((t, i) => ({ t, i, vid: x.oVids[i] }));
+  const shuffled = shuffle(opts);
+  G._ans = x.a;
+  G._cur = x;
+  document.getElementById('ovb').innerHTML = `
+    <div class="prog">Question ${G.i + 1} of ${G.queue.length}</div>
+    <div class="card">
+      <div class="qtext">
+        <button type="button" class="say sm" onclick="sayVid('${x.qVid}','${esc(x.q)}',this)">🔊</button>
+        <span>${esc(x.q)}</span>
+      </div>
+      <div class="opts" id="opts">
+        ${shuffled.map((o, k) => `
+          <div class="opt" data-i="${o.i}" role="button" tabindex="0" onclick="pickOpt(this)">
+            <button type="button" class="say sm" onclick="event.stopPropagation();sayVid('${o.vid}','${esc(o.t)}',this)">🔊</button>
+            <span>${esc(o.t)}</span>
+          </div>`).join('')}
+      </div>
+      <div class="fb" id="fb"></div>
+      <div id="after"></div>
+    </div>`;
+  sayVid(x.qVid, x.q);
+}
+
+function pickOpt(btn) {
+  if (!G || G.done) return;
+  G.done = true;
+  const chosen = +btn.getAttribute('data-i');
+  const ok = chosen === G._ans;
+  document.querySelectorAll('.opt').forEach(b => {
+    b.style.pointerEvents = 'none';
+    if (+b.getAttribute('data-i') === G._ans) b.classList.add('ok');
+  });
+  if (ok) {
+    btn.classList.add('ok');
+    G.right++;
+    ding();
+    document.getElementById('fb').className = 'fb good';
+    document.getElementById('fb').textContent = 'Yes! 🌟';
+  } else {
+    btn.classList.add('bad');
+    buzz();
+    document.getElementById('fb').className = 'fb bad';
+    document.getElementById('fb').textContent = 'Almost — listen to the right one';
+  }
+  const x = G._cur;
+  document.getElementById('after').innerHTML = `
+    <button type="button" class="say sm" onclick="sayVid('${x.aVid}','The answer is ${esc(x.o[x.a])}',this)">🔊</button>
+    <button type="button" class="nx" onclick="G.i++;showQuiz()">Next ➜</button>`;
+  sayVid(x.aVid, 'The answer is ' + x.o[x.a]);
+}
+
+function endQuiz() {
+  const total = G.queue.length;
+  const ratio = total ? G.right / total : 0;
+  const stars = ratio >= 0.9 ? 3 : ratio >= 0.6 ? 2 : ratio >= 0.35 ? 1 : 0;
+  const nb = awardTopic(CUR.id, stars);
+  document.getElementById('ovs').textContent = starStr(topicStars(CUR.id));
+  ding();
+  document.getElementById('ovb').innerHTML = `
+    <div class="card end">
+      <div class="big">${stars === 3 ? '🏆' : stars ? '🥳' : '💪'}</div>
+      <h2>Quiz done!</h2>
+      <p style="font-size:18px">You got <b>${G.right}</b> / ${total} right</p>
+      <div class="stars">${starStr(stars)}</div>
+      <p style="margin-top:8px">${nb ? 'New best for this topic!' : 'Keep practising!'}</p>
+      <div>
+        <button type="button" class="nx" onclick="startQuiz()">🔁 Play again</button>
+        <button type="button" class="nx alt" onclick="showTopicHome()">Topics</button>
+      </div>
+    </div>`;
+}
+
+home();
 </script>
 </body>
 </html>
