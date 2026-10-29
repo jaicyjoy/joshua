@@ -360,8 +360,9 @@ function endQuiz() {
 function lettersOf(w) { return String(w).split(''); }
 function scrambleLetters(chars) {
   const letters = chars.filter(c => c !== ' ');
-  const extras = shuffle('AEIOURSTLNMP'.split('')).slice(0, Math.min(4, Math.max(2, 10 - letters.length)));
-  return shuffle(letters.concat(extras));
+  let bag = letters.slice();
+  do { bag = shuffle(bag); } while (bag.join('') === letters.join('') && letters.length > 1);
+  return bag;
 }
 function startSpell() {
   if (!CUR.spell || !CUR.spell.length) { alert('No spelling words yet.'); return; }
