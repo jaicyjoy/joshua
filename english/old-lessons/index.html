@@ -36,7 +36,8 @@ button{font-family:inherit;color:inherit;cursor:pointer}
 .qbtn small{display:block;font-weight:700;font-size:14px;opacity:.95}
 
 .topbar{position:sticky;top:6px;z-index:10;display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:24px;color:#fff;background:linear-gradient(135deg,var(--c1),var(--c2));box-shadow:0 6px 0 rgba(0,0,0,.14)}
-.topbar .home{border:0;background:#fff;width:46px;height:46px;border-radius:50%;font-size:22px;flex:none}
+.topbar .home,.topbar .back{border:0;background:#fff;width:46px;height:46px;border-radius:50%;font-size:22px;flex:none}
+.topbar .back{font-weight:900}
 .topbar b{flex:1;font-size:21px;line-height:1.2}
 .chip{background:rgba(255,255,255,.28);border-radius:99px;padding:5px 11px;font-weight:900;font-size:15px;white-space:nowrap}
 .slowbtn{border:0;border-radius:99px;padding:7px 11px;font-weight:900;font-size:14px;background:rgba(255,255,255,.28);color:#fff;white-space:nowrap}
@@ -307,6 +308,7 @@ function card(c, label) {
 function homeView() {
   const x = allStars(), p = x.got / x.total, b = badgeOf(p), nxt = BADGES.find(z => z[0] > p);
   app.innerHTML = `
+    <div class="topbar" style="--c1:#6c757d;--c2:#495057"><button class="home" onclick="location.href='../../'" title="Home">🏠</button><button class="back" onclick="location.href='../lessons/'" title="Back">←</button><b>📦 Old Lessons</b></div>
     <div class="hero"><div class="big">📦</div><h1>Old Lessons · Term 1</h1><p>Earlier lessons kept for practice · Not this term's syllabus</p></div>
     <div class="starbox"><div class="badge">${b[1]}</div><div class="inf">
       <div class="cnt">⭐ ${x.got} / ${x.total}</div><div class="bn">${b[2]}${nxt ? ` · next: ${nxt[1]} ${nxt[2]} at ${Math.ceil(nxt[0] * x.total)} ⭐` : ' · You got every star! 🎉'}</div>
@@ -319,8 +321,7 @@ function homeView() {
       <button class="qbtn" style="--b:linear-gradient(135deg,#ff9f1c,#ff4f8b)" onclick="startQuiz(null)">🏆 Big Quiz<small>All lessons · ${starStr(S['all-q'] || 0)}</small></button>
       <button class="qbtn" style="--b:linear-gradient(135deg,#2ec4b6,#3a86ff)" onclick="startSpell(null)">✍️ Spelling Bee<small>All tough spellings</small></button>
       <button class="qbtn" style="--b:linear-gradient(135deg,#8338ec,#3a0ca3)" onclick="startBuild(null)">🧩 Build Answers<small>All lessons</small></button>
-      <button class="qbtn" style="--b:linear-gradient(135deg,#6c757d,#495057)" onclick="location.href='../lessons/'">📚 Term 2 Lessons<small>Current lessons</small></button>
-      <button class="qbtn" style="--b:linear-gradient(135deg,#6c757d,#495057)" onclick="location.href='../../'">🏠 Subjects<small>Joshua's home</small></button>
+
     </div>
     <p class="foot">Tip: finish every game with ⭐⭐⭐ to become the English Champion 🏆 · Bookmark this page: <b>.../english/</b></p>`;
 }
@@ -368,7 +369,7 @@ function chapterView() {
       ${c.spell.length ? tile(c.id === 'g9' ? 'linear-gradient(135deg,#e63946,#9d0208)' : 'linear-gradient(135deg,#8338ec,#3a0ca3)', c.id === 'g9' ? '📝' : '✍️', c.id === 'g9' ? 'Dictation' : 'Spelling Bee', `${c.spell.length} words · ⭐ ${sg}/${c.spell.length * 3}`, '', `startSpell('${c.id}')`) : ''}
     </div>`;
   }
-  app.innerHTML = `<div class="topbar"><button class="home" onclick="go({name:'home'})">🏠</button><b>${c.emoji} ${esc(c.title)}</b><span class="chip">⭐ ${y.got}/${y.total}</span>${slowBtn()}</div>
+  app.innerHTML = `<div class="topbar"><button class="home" onclick="location.href='../../'" title="Home">🏠</button><button class="back" onclick="go({name:'home'})" title="Back">←</button><b>${c.emoji} ${esc(c.title)}</b><span class="chip">⭐ ${y.got}/${y.total}</span>${slowBtn()}</div>
     <div class="tabs"><button class="tab ${view.tab === 'learn' ? 'on' : ''}" onclick="go({name:'ch',ch:'${c.id}',tab:'learn'})">📖 Learn</button>
     <button class="tab ${view.tab === 'play' ? 'on' : ''}" onclick="go({name:'ch',ch:'${c.id}',tab:'play'})">🎮 Play & Win ⭐</button></div>${body}`;
 }

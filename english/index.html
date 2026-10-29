@@ -18,14 +18,14 @@ body.ml{font-family:"Noto Sans Malayalam","Malayalam MN",system-ui,sans-serif}
 </head>
 <body>
 <div class="wrap">
-  <div class="top" style="display:flex;gap:8px"><a href="../index.html">🏠</a><a href="javascript:history.back()" style="font-weight:800;font-size:18px">←</a></div>
+  <div class="top" style="display:flex;gap:8px"><a href="../index.html" title="Home">🏠</a><a href="javascript:history.back()" style="font-weight:800;font-size:18px" title="Back">←</a></div>
   <div class="hero"><div class="big" id="em">📘</div><h1 id="t">Subject</h1><p id="s">Choose what to practise</p></div>
   <div class="grid" id="g"></div>
 </div>
 <script>
 const Q = new URLSearchParams(location.search);
 const cfg = {
-  'joshua-en': {em:'📘', t:'English · Class 3', s:'Silent reading · Term 2 lessons', c1:'#ff4f8b', c2:'#c2185b', lang:'en',
+  'joshua-en': {em:'📘', t:'English · Class 3', s:'Reading · Term 2 lessons · Old lessons', c1:'#ff4f8b', c2:'#c2185b', lang:'en',
     cards:[[`📖 Reading practice`,'read/','Words · sentences · passage · poem'],[`📚 Lessons`,'lessons/','Term 2 · Never Ending Story'],[`📦 Old Lessons`,'old-lessons/','Term 1 · keep for practice']]},
   'joshua-hi': {em:'📕', t:'हिंदी · कक्षा 3', s:'पढ़ना, पाठ और अभ्यास', c1:'#fb8500', c2:'#dc2f02', lang:'hi',
     cards:[[`📖 पढ़ो`,'read/','शब्द सुनो और साथ में पढ़ो'],[`📚 मधुकिरण`,'lessons/','पाठ 1–6']]},
