@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>മലയാളം പാഠങ്ങൾ · Class 3</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:"Chalkboard SE","Comic Sans MS","Avenir Next",system-ui,sans-serif;color:#1f2340;background:linear-gradient(180deg,#caf0f8 0%,#e7f5ff 40%,#fff3cd 100%);min-height:100vh;line-height:1.4}
+button,a{font-family:inherit}
+#app{max-width:920px;margin:0 auto;padding:12px 14px 80px}
+.top{position:sticky;top:6px;z-index:10;display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:22px;color:#fff;background:linear-gradient(135deg,#2a9d8f,#007f5f);box-shadow:0 6px 0 rgba(0,0,0,.12)}
+.top a,.top button.icon{border:0;background:#fff;width:44px;height:44px;border-radius:50%;font-size:20px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:#333;flex:none;cursor:pointer;font-weight:900}
+.top .tt{flex:1;min-width:0}.top .tt small{display:block;font-size:12px;font-weight:700;opacity:.92}.top .tt b{display:block;font-size:18px}
+.chip{background:rgba(255,255,255,.28);border-radius:99px;padding:4px 10px;font-weight:800;font-size:13px;white-space:nowrap}
+.hero{text-align:center;padding:14px 8px 6px}.hero .big{font-size:56px;display:inline-block;animation:bob 2.4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-7px) rotate(-4deg)}}
+.hero h1{margin:4px 0;font-size:30px;color:#023e8a}.hero p{margin:0;color:#6a5f8f;font-size:16px}
+.starbox{background:#fff;border-radius:22px;padding:14px 16px;margin:12px 0;box-shadow:0 6px 0 #90e0ef}
+.starbox .row{display:flex;justify-content:space-between;font-weight:800;font-size:16px}
+.bar{height:14px;background:#e8f4f8;border-radius:99px;overflow:hidden;margin-top:8px}.bar i{display:block;height:100%;background:linear-gradient(90deg,#ffd60a,#00b4d8);border-radius:99px;width:0;transition:width .35s}
+.gtiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:12px}
+.gt{border:0;border-radius:20px;padding:14px;text-align:left;color:#fff;background:var(--b);box-shadow:0 6px 0 rgba(0,0,0,.16);cursor:pointer;width:100%}
+.gt .i{font-size:34px;display:block}.gt b{display:block;font-size:17px;margin-top:4px;line-height:1.2}.gt small{display:block;opacity:.95;font-size:12px;margin-top:2px}
+.gt .st{display:inline-block;margin-top:8px;background:rgba(0,0,0,.18);padding:3px 10px;border-radius:99px;font-weight:800;font-size:13px}
+.ov{position:fixed;inset:0;z-index:40;display:none;flex-direction:column;background:linear-gradient(165deg,#e7f5ff,#fff8ef)}
+.ov.show{display:flex}
+.ovtop{display:flex;align-items:center;gap:10px;padding:12px 14px;color:#fff;background:linear-gradient(135deg,#2a9d8f,#007f5f)}
+.ovtop button{border:0;background:#fff;width:42px;height:42px;border-radius:50%;font-size:18px;font-weight:900;cursor:pointer}
+.ovtop .t{flex:1;font-weight:800;font-size:15px}.ovtop .sc{background:rgba(255,255,255,.25);border-radius:99px;padding:4px 10px;font-weight:800}
+.ovb{flex:1;overflow-y:auto;padding:14px;max-width:860px;width:100%;margin:0 auto}
+.modes{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px}
+@media(max-width:560px){.modes{grid-template-columns:1fr}}
+.mode{border:0;border-radius:20px;padding:18px 14px;color:#fff;font-weight:800;cursor:pointer;box-shadow:0 6px 0 rgba(0,0,0,.14);text-align:left}
+.mode .x{font-size:32px;display:block}.mode small{display:block;font-weight:700;opacity:.95;margin-top:4px}
+.card{background:#fff;border-radius:22px;padding:18px;box-shadow:0 7px 0 #90e0ef;text-align:center;margin-bottom:12px}
+.card .em{font-size:64px;line-height:1}.card h2{margin:8px 0 4px;font-size:24px;color:#023e8a}.card p{margin:0;color:#4a4f7a;font-size:17px;font-weight:700}
+.say{border:0;width:78px;height:78px;border-radius:50%;font-size:34px;background:#caf0f8;cursor:pointer;box-shadow:0 5px 0 #90e0ef;margin:6px}
+.say.playing,.say:active{background:#ffb703;transform:scale(.96)}
+.say.sm{width:48px;height:48px;font-size:22px;margin:0 4px;vertical-align:middle}
+.qtext{font-size:20px;font-weight:800;margin:10px 0;color:#1f2340;display:flex;gap:8px;align-items:flex-start;justify-content:center;text-align:left}
+.opts{display:grid;gap:10px;margin-top:12px;text-align:left}
+.opt{border:2px solid #90e0ef;background:#f0fbff;border-radius:16px;padding:14px;font-size:17px;font-weight:700;cursor:pointer;box-shadow:0 4px 0 #90e0ef;width:100%;display:flex;align-items:center;gap:8px}
+.opt.ok{background:#c9f7d6;border-color:#2fbf71}.opt.bad{background:#ffd3d3;border-color:#e5484d}
+.opt .say.sm{flex:none}
+.fb{margin-top:12px;font-weight:800;font-size:18px}.fb.good{color:#1f9d55}.fb.bad{color:#d9480f}
+.nx{display:inline-block;margin:12px 6px 0;border:0;border-radius:99px;padding:12px 26px;font-size:16px;font-weight:800;color:#fff;background:linear-gradient(135deg,#2a9d8f,#007f5f);cursor:pointer;box-shadow:0 5px 0 rgba(0,0,0,.14)}
+.nx.alt{background:#fff;color:#023e8a;border:2px solid #90e0ef;box-shadow:0 5px 0 #caf0f8}
+.prog{font-weight:800;color:#5b5f86;margin-bottom:8px}
+.learn-nav{display:flex;justify-content:space-between;gap:8px;margin-top:14px;flex-wrap:wrap}
+.dots{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+.dots i{width:10px;height:10px;border-radius:50%;background:#caf0f8}.dots i.on{background:#0077b6}
+.end{text-align:center}.end .big{font-size:64px}.stars{font-size:36px;letter-spacing:3px}
+.tip{text-align:center;color:#6a5f8f;font-size:14px;margin-top:16px}
+.qa{border:2px solid #90e0ef;border-radius:18px;padding:14px;margin-bottom:12px;background:#f7fcff;text-align:left}
+.qa .q{display:flex;gap:8px;align-items:flex-start;font-weight:800;font-size:17px}
+.qa .ans{margin-top:10px;background:#e7fbef;border-radius:12px;padding:10px;font-weight:700;display:flex;gap:8px;align-items:flex-start}
+.qa .show{margin-top:10px;border:0;border-radius:99px;padding:8px 16px;font-weight:800;color:#fff;background:#0077b6;cursor:pointer}
+</style>
+<script src="../assets/learn-audio.js?v=3"></script>
+</head>
+<body>
+<div id="app"></div>
+<div class="ov" id="ov">
+  <div class="ovtop">
+    <button type="button" onclick="closeOv()">✕</button>
+    <div class="t" id="ovt"></div>
+    <div class="sc" id="ovs"></div>
+  </div>
+  <div class="ovb" id="ovb"></div>
+</div>
+<script type="application/json" id="data">{"topics": [{"id": "sparrow", "title": "കുരുവിയും കാട്ടുതീയും", "emoji": "🐦", "grad": "linear-gradient(135deg,#2a9d8f,#007f5f)", "blurb": "പാഠം 1 · അർത്ഥം · ചോദ്യോത്തരം", "learn": [{"em": "🐦", "t": "കഥ", "s": "കുരുവിയും കാട്ടുതീയും — ഒരു ചെറിയ കുരുവി കാട്ടുതീ കെടുത്താൻ ശ്രമിക്കുന്നു.", "vid": "v-54972b0cae", "titleVid": "v-a227f701f0"}, {"em": "📖", "t": "അർത്ഥം", "s": "സർവ്വതും എന്നതിനർത്ഥം എല്ലാം.", "vid": "v-c1c7770020", "titleVid": "v-b8b2086830"}, {"em": "😏", "t": "തത്തയുടെ ഭാവം", "s": "ഇത്തിരി പോന്ന നിനക്ക് ഈ കാട്ടുതീ കെടുത്താൻ ആകുമോ? — ഇവിടെ തത്തയുടെ ഭാവം പരിഹാസം ആണ്.", "vid": "v-933094e572", "titleVid": "v-bd17a80d90"}, {"em": "✂️", "t": "പദം പിരിച്ചെഴുതുക", "s": "ജീവനെടുക്കുന്നത് = ജീവൻ + എടുക്കുന്നത്", "vid": "v-e12f3875c5", "titleVid": "v-17eabd10cd"}, {"em": "🏃", "t": "പരക്കം പാഞ്ഞു", "s": "പക്ഷികളും മൃഗങ്ങളും ജീവനുവേണ്ടി പരക്കം പാഞ്ഞു. അർത്ഥം: പരിഭ്രമത്തോടെ ഓടി.", "vid": "v-e3eaa7545c", "titleVid": "v-d8cbfda200"}, {"em": "🌿", "t": "സന്ദേശം", "s": "പ്രകൃതി സംരക്ഷണപ്രവർത്തനങ്ങളിൽ നമ്മൾക്കാവുന്ന രീതിയിൽ ഇടപെടണം. മരങ്ങളെയും പുഴകളെയും കാടിനെയും മലകളെയും സ്നേഹിക്കുകയും സംരക്ഷിക്കുകയും ചെയ്യേണ്ടത് നമ്മളോരോരുത്തരുടെയും ഉത്തരവാദിത്തമാണ്.", "vid": "v-8eb6df7b59", "titleVid": "v-f0965ddbc2"}], "quiz": [{"q": "സർവ്വതും എന്ന പദത്തിന്റെ അർത്ഥം എന്ത്?", "o": ["എല്ലാം", "ഒന്നും", "കുറച്ച്", "വലുത്"], "a": 0, "qVid": "v-f290853fe9", "oVids": ["v-8d30df07a1", "v-00c4edbe84", "v-72d380bcc4", "v-e05126ccd5"], "aVid": "v-52c35a3cad"}, {"q": "തത്തയുടെ ഭാവം എന്ത്?", "o": ["പരിഹാസം", "സന്തോഷം", "ദുഃഖം", "ഭയം"], "a": 0, "qVid": "v-d90d503bcc", "oVids": ["v-96113b9065", "v-898f6b16c6", "v-d1e44aa06c", "v-0b6d138519"], "aVid": "v-6b5ea54c59"}, {"q": "ജീവനെടുക്കുന്നത് പിരിച്ചെഴുതുക", "o": ["ജീവൻ + എടുക്കുന്നത്", "ജീവ + നെടുക്കുന്നത്", "ജീവനെ + ടുക്കുന്നത്", "ജീ + വനെടുക്കുന്നത്"], "a": 0, "qVid": "v-778d623a05", "oVids": ["v-5810d0bf0b", "v-3fcbe05930", "v-4b51a65278", "v-45b6981f9e"], "aVid": "v-93dd248c3a"}, {"q": "പരക്കം പാഞ്ഞു എന്നതിന്റെ അർത്ഥം?", "o": ["പരിഭ്രമത്തോടെ ഓടി", "സാവധാനം നടന്നു", "ചിരിച്ചു", "ഉറങ്ങി"], "a": 0, "qVid": "v-9837cf104a", "oVids": ["v-4c9d97435d", "v-fb6f3cf28c", "v-afee3cb670", "v-688892e1c4"], "aVid": "v-51fc2e51c4"}, {"q": "കഥയുടെ സന്ദേശം?", "o": ["പ്രകൃതി സംരക്ഷിക്കുക", "തീ കത്തിക്കുക", "മരം വെട്ടുക", "മൃഗങ്ങളെ പേടിപ്പിക്കുക"], "a": 0, "qVid": "v-3b379ddc57", "oVids": ["v-f1cbdb46c2", "v-f17b8b05d1", "v-ac39b0f8a0", "v-77b251558a"], "aVid": "v-6668b6d387"}], "qa": [{"q": "തത്തയുടെ ഭാവം എന്താണ്?", "a": "പരിഹാസം", "qVid": "v-dbcfacdd64", "aVid": "v-96113b9065"}, {"q": "പരക്കം പാഞ്ഞു എന്നതിന്റെ അർത്ഥം?", "a": "പരിഭ്രമത്തോടെ ഓടി", "qVid": "v-9837cf104a", "aVid": "v-4c9d97435d"}, {"q": "കുരുവിയും കാട്ടുതീയും നൽകുന്ന സന്ദേശം?", "a": "പ്രകൃതി സംരക്ഷണപ്രവർത്തനങ്ങളിൽ നമ്മൾക്കാവുന്ന രീതിയിൽ ഇടപെടണം. മരങ്ങളെയും പുഴകളെയും കാടിനെയും മലകളെയും സ്നേഹിക്കുകയും സംരക്ഷിക്കുകയും ചെയ്യേണ്ടത് നമ്മളോരോരുത്തരുടെയും ഉത്തരവാദിത്തമാണ്.", "qVid": "v-978daa03fe", "aVid": "v-344c0ed990"}, {"q": "ജീവനെടുക്കുന്നത് പിരിച്ചെഴുതുക", "a": "ജീവൻ + എടുക്കുന്നത്", "qVid": "v-778d623a05", "aVid": "v-5810d0bf0b"}], "spell": [{"w": "സർവ്വതും", "clue": "എല്ലാം", "vid": "v-770a937367", "clueVid": "v-8d30df07a1"}, {"w": "പരിഹാസം", "clue": "തത്തയുടെ ഭാവം", "vid": "v-96113b9065", "clueVid": "v-bd17a80d90"}, {"w": "പരക്കം പാഞ്ഞു", "clue": "പരിഭ്രമത്തോടെ ഓടി", "vid": "v-d8cbfda200", "clueVid": "v-4c9d97435d"}, {"w": "ജീവനെടുക്കുന്നത്", "clue": "ജീവൻ + എടുക്കുന്നത്", "vid": "v-beb42440cf", "clueVid": "v-5810d0bf0b"}, {"w": "കാട്ടുതീ", "clue": "വനത്തിലെ തീ", "vid": "v-4e140cc8ac", "clueVid": "v-e426834f96"}, {"w": "കുരുവി", "clue": "ചെറിയ പക്ഷി", "vid": "v-0ac46e11c0", "clueVid": "v-350f1d47e9"}], "titleVid": "v-0abae30b03", "blurbVid": "v-21714d3291"}, {"id": "ormakal", "title": "ഓർമ്മകളുടെ പടവുകൾ", "emoji": "📚", "grad": "linear-gradient(135deg,#fb8500,#dc2f02)", "blurb": "പുതിയ പദങ്ങൾ · ഡിക്ടേഷൻ", "learn": [{"em": "📝", "t": "പുതിയ പദങ്ങൾ", "s": "ഓർമ്മകളുടെ പടവുകൾ — പുതിയ പദങ്ങൾ ഓർമ്മിക്കുക.", "vid": "v-1e0933ac9d", "titleVid": "v-14a99232b3"}, {"em": "🔤", "t": "വള്ളത്തോൾ", "s": "കവിയുടെ പേര്", "vid": "v-9a24b2d70e", "titleVid": "v-ccc2433e17"}, {"em": "🔤", "t": "തങ്കം", "s": "സ്വർണം / പേര്", "vid": "v-0b8b6d0229", "titleVid": "v-aa44b5d4ef"}, {"em": "🔤", "t": "സുധ", "s": "പേര്", "vid": "v-1e7ed78537", "titleVid": "v-1842dfa147"}, {"em": "🔤", "t": "വെള്ളക്കിടന്ന", "s": "പുതിയ പദം", "vid": "v-657d9613d8", "titleVid": "v-9d91df1d50"}, {"em": "🔤", "t": "മാതൃഗീത", "s": "അമ്മയുടെ ഗീതം", "vid": "v-77fcf4de28", "titleVid": "v-adf350304a"}, {"em": "🔤", "t": "കാരുണ്യത്തിന്റെ", "s": "കാരുണ്യം + ന്റെ", "vid": "v-8a7c16460a", "titleVid": "v-37ba618f03"}], "quiz": [{"q": "സൂചന: കവിയുടെ പേര് — ഏത് പദം?", "o": ["വള്ളത്തോൾ", "തങ്കം", "സുധ", "വെള്ളക്കിടന്ന"], "a": 0, "qVid": "v-ca6f957a8e", "oVids": ["v-ccc2433e17", "v-aa44b5d4ef", "v-1842dfa147", "v-9d91df1d50"], "aVid": "v-fb69151590"}, {"q": "സൂചന: സ്വർണം / പേര് — ഏത് പദം?", "o": ["തങ്കം", "വള്ളത്തോൾ", "സുധ", "വെള്ളക്കിടന്ന"], "a": 0, "qVid": "v-b54cb3ef90", "oVids": ["v-aa44b5d4ef", "v-ccc2433e17", "v-1842dfa147", "v-9d91df1d50"], "aVid": "v-385fe6fc6f"}, {"q": "സൂചന: പേര് — ഏത് പദം?", "o": ["സുധ", "വള്ളത്തോൾ", "തങ്കം", "വെള്ളക്കിടന്ന"], "a": 0, "qVid": "v-cf7d260f4c", "oVids": ["v-1842dfa147", "v-ccc2433e17", "v-aa44b5d4ef", "v-9d91df1d50"], "aVid": "v-ec3ac39729"}, {"q": "സൂചന: പുതിയ പദം — ഏത് പദം?", "o": ["വെള്ളക്കിടന്ന", "വള്ളത്തോൾ", "തങ്കം", "സുധ"], "a": 0, "qVid": "v-91fbd67942", "oVids": ["v-9d91df1d50", "v-ccc2433e17", "v-aa44b5d4ef", "v-1842dfa147"], "aVid": "v-f24e5d050d"}, {"q": "സൂചന: അമ്മയുടെ ഗീതം — ഏത് പദം?", "o": ["മാതൃഗീത", "വള്ളത്തോൾ", "തങ്കം", "സുധ"], "a": 0, "qVid": "v-7af507ed17", "oVids": ["v-adf350304a", "v-ccc2433e17", "v-aa44b5d4ef", "v-1842dfa147"], "aVid": "v-63563e24b4"}, {"q": "സൂചന: കാരുണ്യം + ന്റെ — ഏത് പദം?", "o": ["കാരുണ്യത്തിന്റെ", "വള്ളത്തോൾ", "തങ്കം", "സുധ"], "a": 0, "qVid": "v-6f4004f1f9", "oVids": ["v-37ba618f03", "v-ccc2433e17", "v-aa44b5d4ef", "v-1842dfa147"], "aVid": "v-f9c9aff9ff"}], "qa": [{"q": "വള്ളത്തോൾ എഴുതുക", "a": "വള്ളത്തോൾ", "qVid": "v-f43e7736d4", "aVid": "v-ccc2433e17"}, {"q": "തങ്കം എഴുതുക", "a": "തങ്കം", "qVid": "v-9c6d1ff656", "aVid": "v-aa44b5d4ef"}, {"q": "സുധ എഴുതുക", "a": "സുധ", "qVid": "v-8bb30ad902", "aVid": "v-1842dfa147"}, {"q": "വെള്ളക്കിടന്ന എഴുതുക", "a": "വെള്ളക്കിടന്ന", "qVid": "v-b4c4f9bcee", "aVid": "v-9d91df1d50"}, {"q": "മാതൃഗീത എഴുതുക", "a": "മാതൃഗീത", "qVid": "v-09abfe1dcb", "aVid": "v-adf350304a"}], "spell": [{"w": "വള്ളത്തോൾ", "clue": "കവിയുടെ പേര്", "vid": "v-ccc2433e17", "clueVid": "v-a58b91b456"}, {"w": "തങ്കം", "clue": "സ്വർണം / പേര്", "vid": "v-aa44b5d4ef", "clueVid": "v-1ee18162be"}, {"w": "സുധ", "clue": "പേര്", "vid": "v-1842dfa147", "clueVid": "v-bfcd26c0ec"}, {"w": "വെള്ളക്കിടന്ന", "clue": "പുതിയ പദം", "vid": "v-9d91df1d50", "clueVid": "v-1f84d92b75"}, {"w": "മാതൃഗീത", "clue": "അമ്മയുടെ ഗീതം", "vid": "v-adf350304a", "clueVid": "v-e70c2561ee"}, {"w": "കാരുണ്യത്തിന്റെ", "clue": "കാരുണ്യം + ന്റെ", "vid": "v-37ba618f03", "clueVid": "v-071ee6c3ef"}, {"w": "കേൾക്കുവാൻ", "clue": "ശ്രദ്ധിക്കാൻ", "vid": "v-85df90a09f", "clueVid": "v-9e983429fd"}, {"w": "ഉല്ലാസം", "clue": "സന്തോഷം", "vid": "v-e40422880d", "clueVid": "v-898f6b16c6"}, {"w": "ശബ്ദനാളം", "clue": "ശബ്ദം ഉണ്ടാക്കുന്ന നാളം", "vid": "v-27d0184294", "clueVid": "v-bf357ab6b1"}], "titleVid": "v-cf47f39b80", "blurbVid": "v-9e69ca810a"}, {"id": "guest", "title": "വിരുന്നുകാരൻ", "emoji": "🏡", "grad": "linear-gradient(135deg,#7b2cbf,#4361ee)", "blurb": "പര്യായപദം · അർത്ഥം", "learn": [{"em": "🤝", "t": "വിരുന്നുകാരൻ", "s": "പര്യായപദങ്ങളും അർത്ഥങ്ങളും.", "vid": "v-001db7636c", "titleVid": "v-e67adaf9e9"}, {"em": "🔄", "t": "ഭൂമി", "s": "പര്യായം: ധരണി", "vid": "v-b60b8ac428", "titleVid": "v-166b100c18"}, {"em": "🔄", "t": "സന്ധ്യാനേരം", "s": "പര്യായം: അന്തിനേരം", "vid": "v-7605ec083b", "titleVid": "v-92ef47d48a"}, {"em": "🔄", "t": "പക്ഷി", "s": "പര്യായം: ചിറകുള്ളവ", "vid": "v-9561535c65", "titleVid": "v-e47f8f0ecd"}, {"em": "🔄", "t": "താരകങ്ങൾ", "s": "പര്യായം: നക്ഷത്രങ്ങൾ", "vid": "v-9cbd9c0fd7", "titleVid": "v-c07b78277f"}, {"em": "🔄", "t": "പുലരി", "s": "പര്യായം: പ്രഭാതം", "vid": "v-c7621f87fa", "titleVid": "v-8eca53c787"}, {"em": "🔄", "t": "സൂര്യൻ", "s": "പര്യായം: ദിനകരൻ", "vid": "v-b3ea7a3138", "titleVid": "v-21e7f72786"}, {"em": "🔄", "t": "ആകാശം", "s": "പര്യായം: ഗഗനം", "vid": "v-6fa8a23d7b", "titleVid": "v-0c3f1fe249"}], "quiz": [{"q": "ഭൂമി എന്നതിന്റെ പര്യായം?", "o": ["ധരണി", "അന്തിനേരം", "ചിറകുള്ളവ", "നക്ഷത്രങ്ങൾ"], "a": 0, "qVid": "v-7cd880c9d6", "oVids": ["v-b622fdff48", "v-3d8bd44b34", "v-fa63cd4adb", "v-ed59cd3dfe"], "aVid": "v-1371a42493"}, {"q": "സന്ധ്യാനേരം എന്നതിന്റെ പര്യായം?", "o": ["അന്തിനേരം", "ധരണി", "ചിറകുള്ളവ", "നക്ഷത്രങ്ങൾ"], "a": 0, "qVid": "v-ed03ba5e0c", "oVids": ["v-3d8bd44b34", "v-b622fdff48", "v-fa63cd4adb", "v-ed59cd3dfe"], "aVid": "v-b96b29da1a"}, {"q": "പക്ഷി എന്നതിന്റെ പര്യായം?", "o": ["ചിറകുള്ളവ", "ധരണി", "അന്തിനേരം", "നക്ഷത്രങ്ങൾ"], "a": 0, "qVid": "v-494e338bc0", "oVids": ["v-fa63cd4adb", "v-b622fdff48", "v-3d8bd44b34", "v-ed59cd3dfe"], "aVid": "v-856a321b48"}, {"q": "താരകങ്ങൾ എന്നതിന്റെ പര്യായം?", "o": ["നക്ഷത്രങ്ങൾ", "ധരണി", "അന്തിനേരം", "ചിറകുള്ളവ"], "a": 0, "qVid": "v-5f2123ab2f", "oVids": ["v-ed59cd3dfe", "v-b622fdff48", "v-3d8bd44b34", "v-fa63cd4adb"], "aVid": "v-43eb8f2a35"}, {"q": "പുലരി എന്നതിന്റെ പര്യായം?", "o": ["പ്രഭാതം", "ധരണി", "അന്തിനേരം", "ചിറകുള്ളവ"], "a": 0, "qVid": "v-3dcd4f24a8", "oVids": ["v-e12d03a2c1", "v-b622fdff48", "v-3d8bd44b34", "v-fa63cd4adb"], "aVid": "v-05d7a7f17e"}, {"q": "സൂര്യൻ എന്നതിന്റെ പര്യായം?", "o": ["ദിനകരൻ", "ധരണി", "അന്തിനേരം", "ചിറകുള്ളവ"], "a": 0, "qVid": "v-71a3113627", "oVids": ["v-41afaa8a91", "v-b622fdff48", "v-3d8bd44b34", "v-fa63cd4adb"], "aVid": "v-2d2561d694"}, {"q": "ആകാശം എന്നതിന്റെ പര്യായം?", "o": ["ഗഗനം", "ധരണി", "അന്തിനേരം", "ചിറകുള്ളവ"], "a": 0, "qVid": "v-d933ebca87", "oVids": ["v-acc42d7546", "v-b622fdff48", "v-3d8bd44b34", "v-fa63cd4adb"], "aVid": "v-67b4165f5d"}, {"q": "ഇത്തിരി എന്നതിന്റെ അർത്ഥം?", "o": ["അല്പം മാത്രം", "വിരുന്നുകാരൻ", "നക്ഷത്രം", "വലിയത്"], "a": 0, "qVid": "v-639ba3a3a8", "oVids": ["v-1b7788efe4", "v-e67adaf9e9", "v-cb61e6771e", "v-780821baf8"], "aVid": "v-571f639d3e"}, {"q": "അതിഥി എന്നതിന്റെ അർത്ഥം?", "o": ["വിരുന്നുകാരൻ", "അല്പം മാത്രം", "നക്ഷത്രം", "വലിയത്"], "a": 0, "qVid": "v-92cfb1bf75", "oVids": ["v-e67adaf9e9", "v-1b7788efe4", "v-cb61e6771e", "v-780821baf8"], "aVid": "v-34d9699982"}, {"q": "താരം എന്നതിന്റെ അർത്ഥം?", "o": ["നക്ഷത്രം", "അല്പം മാത്രം", "വിരുന്നുകാരൻ", "വലിയത്"], "a": 0, "qVid": "v-f6e5e1e02f", "oVids": ["v-cb61e6771e", "v-1b7788efe4", "v-e67adaf9e9", "v-780821baf8"], "aVid": "v-6e060e55e2"}], "qa": [{"q": "ഭൂമി?", "a": "ധരണി", "qVid": "v-7b56975111", "aVid": "v-b622fdff48"}, {"q": "സന്ധ്യാനേരം?", "a": "അന്തിനേരം", "qVid": "v-c7b152e5dc", "aVid": "v-3d8bd44b34"}, {"q": "പക്ഷി?", "a": "ചിറകുള്ളവ", "qVid": "v-ad1dc54e79", "aVid": "v-fa63cd4adb"}, {"q": "താരകങ്ങൾ?", "a": "നക്ഷത്രങ്ങൾ", "qVid": "v-0ea399b169", "aVid": "v-ed59cd3dfe"}, {"q": "ഇത്തിരി?", "a": "അല്പം മാത്രം", "qVid": "v-268fe5f022", "aVid": "v-1b7788efe4"}, {"q": "അതിഥി?", "a": "വിരുന്നുകാരൻ", "qVid": "v-181d5d66dd", "aVid": "v-e67adaf9e9"}, {"q": "താരം?", "a": "നക്ഷത്രം", "qVid": "v-14bfa5331e", "aVid": "v-cb61e6771e"}], "spell": [{"w": "ഭൂമി", "clue": "പര്യായം: ധരണി", "vid": "v-166b100c18", "clueVid": "v-aa94564afb"}, {"w": "സന്ധ്യാനേരം", "clue": "പര്യായം: അന്തിനേരം", "vid": "v-92ef47d48a", "clueVid": "v-e15424ebc6"}, {"w": "പക്ഷി", "clue": "പര്യായം: ചിറകുള്ളവ", "vid": "v-e47f8f0ecd", "clueVid": "v-5734f4b86c"}, {"w": "താരകങ്ങൾ", "clue": "പര്യായം: നക്ഷത്രങ്ങൾ", "vid": "v-c07b78277f", "clueVid": "v-27dce38bc0"}, {"w": "പുലരി", "clue": "പര്യായം: പ്രഭാതം", "vid": "v-8eca53c787", "clueVid": "v-d2a25b5d18"}, {"w": "സൂര്യൻ", "clue": "പര്യായം: ദിനകരൻ", "vid": "v-21e7f72786", "clueVid": "v-8306f8eebf"}, {"w": "ആകാശം", "clue": "പര്യായം: ഗഗനം", "vid": "v-0c3f1fe249", "clueVid": "v-fb7b034933"}, {"w": "ഇത്തിരി", "clue": "അർത്ഥം: അല്പം മാത്രം", "vid": "v-c6be75556d", "clueVid": "v-ef63ccd564"}, {"w": "അതിഥി", "clue": "അർത്ഥം: വിരുന്നുകാരൻ", "vid": "v-f0629e711d", "clueVid": "v-a9af821c54"}, {"w": "താരം", "clue": "അർത്ഥം: നക്ഷത്രം", "vid": "v-433aa84db6", "clueVid": "v-20a7ca905a"}], "titleVid": "v-e67adaf9e9", "blurbVid": "v-7d596bf169"}]}</script>
+<script>
+const D = JSON.parse(document.getElementById('data').textContent);
+const TOPICS = D.topics;
+const SKEY = 'joshua-ml-lessons-v1';
+let S = JSON.parse(localStorage.getItem(SKEY) || '{}');
+const save = () => localStorage.setItem(SKEY, JSON.stringify(S));
+const app = document.getElementById('app');
+const ov = document.getElementById('ov');
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+
+let sp = null, ptok = 0;
+function stopAudio() {
+  ptok++;
+  if (sp) { try { sp.onended = null; sp.onerror = null; sp.pause(); } catch (e) {} sp = null; }
+  try { if (window.LearnAudio) LearnAudio.stop(); } catch (e) {}
+  document.querySelectorAll('.playing').forEach(e => e.classList.remove('playing'));
+}
+function say(vidOrText, el) {
+  stopAudio();
+  const mine = ptok;
+  if (el) el.classList.add('playing');
+  const isVid = typeof vidOrText === 'string' && /^v-[a-f0-9]+$/.test(vidOrText);
+  const text = isVid ? null : String(vidOrText || '');
+  const url = isVid ? ('voice/' + vidOrText + '.mp3') : null;
+  const playUrl = (src, remoteText) => new Promise(res => {
+    sp = new Audio(src);
+    sp.playbackRate = 0.95;
+    sp.onended = () => { if (el && mine === ptok) el.classList.remove('playing'); res(mine === ptok); };
+    sp.onerror = () => {
+      if (mine !== ptok) return res(false);
+      if (remoteText && window.LearnAudio) {
+        LearnAudio.speak(remoteText, 'en-IN', 0.92, el).then(ok => res(!!ok));
+      } else if (remoteText) {
+        const g = 'https://translate.googleapis.com/translate_tts?ie=UTF-8&client=gtx&tl=ml&q=' + encodeURIComponent(remoteText.slice(0, 180));
+        sp = new Audio(g);
+        sp.onended = () => { if (el && mine === ptok) el.classList.remove('playing'); res(mine === ptok); };
+        sp.onerror = () => { if (el && mine === ptok) el.classList.remove('playing'); res(false); };
+        sp.play().catch(() => { if (el && mine === ptok) el.classList.remove('playing'); res(false); });
+      } else {
+        if (el && mine === ptok) el.classList.remove('playing');
+        res(false);
+      }
+    };
+    sp.play().catch(() => { if (el && mine === ptok) el.classList.remove('playing'); res(false); });
+  });
+  if (url) return playUrl(url, null);
+  if (window.LearnAudio) return LearnAudio.speak(text, 'ml-IN', 0.92, el);
+  return playUrl('https://translate.googleapis.com/translate_tts?ie=UTF-8&client=gtx&tl=ml&q=' + encodeURIComponent(text.slice(0, 180)), text);
+}
+function sayVid(vid, text, el) {
+  stopAudio();
+  const mine = ptok;
+  if (el) el.classList.add('playing');
+  if (!vid) return say(text, el);
+  sp = new Audio('voice/' + vid + '.mp3');
+  sp.playbackRate = 0.95;
+  return new Promise(res => {
+    sp.onended = () => { if (el && mine === ptok) el.classList.remove('playing'); res(mine === ptok); };
+    sp.onerror = () => {
+      if (mine !== ptok) return res(false);
+      if (window.LearnAudio) return LearnAudio.speak(text || '', 'ml-IN', 0.92, el).then(ok => res(!!ok));
+      if (el) el.classList.remove('playing');
+      res(false);
+    };
+    sp.play().catch(() => {
+      if (mine !== ptok) return res(false);
+      if (window.LearnAudio) return LearnAudio.speak(text || '', 'ml-IN', 0.92, el).then(ok => res(!!ok));
+      if (el) el.classList.remove('playing');
+      res(false);
+    });
+  });
+}
+const ding = () => { if (window.LearnAudio) LearnAudio.ding(); };
+const buzz = () => { if (window.LearnAudio) LearnAudio.buzz(); };
+function topicStars(id) { return Math.min(3, +(S[id] || 0)); }
+function awardTopic(id, stars) {
+  stars = Math.max(0, Math.min(3, stars));
+  if ((S[id] || 0) < stars) { S[id] = stars; save(); return true; }
+  return false;
+}
+function gotStars() { return TOPICS.reduce((n, t) => n + topicStars(t.id), 0); }
+function totalStars() { return TOPICS.length * 3; }
+function starStr(n) { return '⭐'.repeat(n) + '☆'.repeat(Math.max(0, 3 - n)); }
+
+function home() {
+  stopAudio();
+  const g = gotStars(), t = totalStars(), pct = t ? Math.round(g / t * 100) : 0;
+  app.innerHTML = `
+  <div class="top">
+    <a class="icon" href="../index.html" title="Home">🏠</a>
+    <button type="button" class="icon" onclick="history.back()" title="Back">←</button>
+    <div class="tt"><small>Class 3 · Joshua</small><b>📗 മലയാളം</b></div>
+    <span class="chip">⭐ ${g}/${t}</span>
+  </div>
+  <div class="hero">
+    <div class="big">🌍</div>
+    <h1>മലയാളം പാഠങ്ങൾ</h1>
+    <p>പാഠം · അർത്ഥം · ക്വിസ് · ഡിക്ടേഷൻ</p>
+  </div>
+  <div class="starbox">
+    <div class="row"><span>⭐ എന്റെ മലയാളം നക്ഷത്രങ്ങൾ</span><span>${g}/${t} · ${pct}%</span></div>
+    <div class="bar"><i style="width:${pct}%"></i></div>
+  </div>
+  <div class="gtiles">
+    ${TOPICS.map(t => `
+      <button type="button" class="gt" style="--b:${t.grad}" onclick="openTopic('${t.id}')">
+        <span class="i">${t.emoji}</span>
+        <b>${esc(t.title)}</b>
+        <small>${esc(t.blurb)}</small>
+        <span class="st">${starStr(topicStars(t.id))}</span>
+      </button>`).join('')}
+  </div>
+  <p class="tip">Tap 🔊 anytime to hear again.</p>`;
+}
+
+let CUR = null, G = null;
+function openTopic(id) {
+  CUR = TOPICS.find(t => t.id === id);
+  if (!CUR) return;
+  document.getElementById('ovt').textContent = CUR.emoji + ' ' + CUR.title;
+  document.getElementById('ovs').textContent = starStr(topicStars(CUR.id));
+  ov.classList.add('show');
+  document.body.style.overflow = 'hidden';
+  showTopicHome();
+}
+function closeOv() {
+  stopAudio();
+  ov.classList.remove('show');
+  document.body.style.overflow = '';
+  CUR = null; G = null;
+  home();
+}
+function showTopicHome() {
+  stopAudio();
+  const t = CUR;
+  document.getElementById('ovb').innerHTML = `
+    <div class="card">
+      <div class="em">${t.emoji}</div>
+      <h2>${esc(t.title)}</h2>
+      <p>${esc(t.blurb)}</p>
+      <button type="button" class="say" onclick="sayVid('${t.titleVid}','${esc(t.title)}. ${esc(t.blurb)}',this)">🔊</button>
+    </div>
+    <div class="modes">
+      <button type="button" class="mode" style="background:linear-gradient(135deg,#06d6a0,#118ab2)" onclick="startLearn()">
+        <span class="x">🎧</span>പഠിക്കുക<small>വസ്തുതകൾ</small>
+      </button>
+      <button type="button" class="mode" style="background:linear-gradient(135deg,#f77f00,#e63946)" onclick="startQuiz()">
+        <span class="x">🎯</span>ക്വിസ്<small>നക്ഷത്രങ്ങൾ</small>
+      </button>
+      <button type="button" class="mode" style="background:linear-gradient(135deg,#7b2cbf,#4361ee)" onclick="startAnswers()">
+        <span class="x">✍️</span>ഉത്തരങ്ങൾ<small>ചോദ്യോത്തരം</small>
+      </button>
+      ${(t.spell && t.spell.length) ? `<button type="button" class="mode" style="background:linear-gradient(135deg,#e63946,#9d0208)" onclick="startSpell()">
+        <span class="x">📝</span>ഡിക്ടേഷൻ<small>അക്ഷരങ്ങൾ</small>
+      </button>` : ''}
+    </div>`;
+  sayVid(t.titleVid, t.title + '. ' + t.blurb);
+}
+function startLearn() {
+  G = { mode: 'learn', i: 0 };
+  showLearn();
+}
+function showLearn() {
+  const t = CUR, L = t.learn, i = G.i, card = L[i];
+  document.getElementById('ovs').textContent = (i + 1) + '/' + L.length;
+  document.getElementById('ovb').innerHTML = `
+    <div class="prog">Fact ${i + 1} of ${L.length}</div>
+    <div class="card">
+      <div class="em">${card.em}</div>
+      <h2>${esc(card.t)}</h2>
+      <button type="button" class="say" onclick="sayVid('${card.vid}','${esc(card.t)}. ${esc(card.s)}',this)">🔊</button>
+      <p style="margin-top:12px">${esc(card.s)}</p>
+      <div class="dots">${L.map((_, k) => `<i class="${k === i ? 'on' : ''}"></i>`).join('')}</div>
+      <div class="learn-nav">
+        <button type="button" class="nx alt" ${i === 0 ? 'disabled style="opacity:.4"' : ''} onclick="G.i--;showLearn()">← Back</button>
+        ${i < L.length - 1
+          ? `<button type="button" class="nx" onclick="G.i++;showLearn()">Next ➜</button>`
+          : `<button type="button" class="nx" onclick="showTopicHome()">✅ Done</button>`}
+      </div>
+    </div>`;
+  sayVid(card.vid, card.t + '. ' + card.s);
+}
+function startQuiz() {
+  const q = shuffle(CUR.quiz.map((x, i) => ({ ...x, _i: i })));
+  G = { mode: 'quiz', queue: q, i: 0, right: 0, done: false };
+  showQuiz();
+}
+function showQuiz() {
+  if (G.i >= G.queue.length) return endQuiz();
+  const x = G.queue[G.i];
+  G.done = false;
+  document.getElementById('ovs').textContent = (G.i + 1) + '/' + G.queue.length + ' · ✓' + G.right;
+  const opts = x.o.map((t, i) => ({ t, i, vid: x.oVids[i] }));
+  const shuffled = shuffle(opts);
+  G._ans = x.a;
+  G._cur = x;
+  document.getElementById('ovb').innerHTML = `
+    <div class="prog">Question ${G.i + 1} of ${G.queue.length}</div>
+    <div class="card">
+      <div class="qtext">
+        <button type="button" class="say sm" onclick="sayVid('${x.qVid}','${esc(x.q)}',this)">🔊</button>
+        <span>${esc(x.q)}</span>
+      </div>
+      <div class="opts" id="opts">
+        ${shuffled.map(o => `
+          <div class="opt" data-i="${o.i}" role="button" tabindex="0" onclick="pickOpt(this)">
+            <button type="button" class="say sm" onclick="event.stopPropagation();sayVid('${o.vid}','${esc(o.t)}',this)">🔊</button>
+            <span>${esc(o.t)}</span>
+          </div>`).join('')}
+      </div>
+      <div class="fb" id="fb"></div>
+      <div id="after"></div>
+    </div>`;
+  sayVid(x.qVid, x.q);
+}
+function pickOpt(btn) {
+  if (!G || G.done) return;
+  G.done = true;
+  const chosen = +btn.getAttribute('data-i');
+  const ok = chosen === G._ans;
+  document.querySelectorAll('.opt').forEach(b => {
+    b.style.pointerEvents = 'none';
+    if (+b.getAttribute('data-i') === G._ans) b.classList.add('ok');
+  });
+  if (ok) {
+    btn.classList.add('ok'); G.right++; ding();
+    document.getElementById('fb').className = 'fb good';
+    document.getElementById('fb').textContent = 'Yes! 🌟';
+  } else {
+    btn.classList.add('bad'); buzz();
+    document.getElementById('fb').className = 'fb bad';
+    document.getElementById('fb').textContent = 'Almost — see the right answer';
+  }
+  const x = G._cur;
+  document.getElementById('after').innerHTML = `
+    <button type="button" class="say sm" onclick="sayVid('${x.aVid}','The answer is ${esc(x.o[x.a])}',this)">🔊</button>
+    <button type="button" class="nx" onclick="G.i++;showQuiz()">Next ➜</button>`;
+  sayVid(x.aVid, 'The answer is ' + x.o[x.a]);
+}
+function endQuiz() {
+  const total = G.queue.length;
+  const ratio = total ? G.right / total : 0;
+  const stars = ratio >= 0.9 ? 3 : ratio >= 0.6 ? 2 : ratio >= 0.35 ? 1 : 0;
+  const nb = awardTopic(CUR.id, stars);
+  document.getElementById('ovs').textContent = starStr(topicStars(CUR.id));
+  ding();
+  document.getElementById('ovb').innerHTML = `
+    <div class="card end">
+      <div class="big">${stars === 3 ? '🏆' : stars ? '🥳' : '💪'}</div>
+      <h2>Quiz done!</h2>
+      <p style="font-size:18px">You got <b>${G.right}</b> / ${total} right</p>
+      <div class="stars">${starStr(stars)}</div>
+      <p style="margin-top:8px">${nb ? 'New best for this chapter!' : 'Keep practising!'}</p>
+      <div>
+        <button type="button" class="nx" onclick="startQuiz()">🔁 Play again</button>
+        <button type="button" class="nx alt" onclick="showTopicHome()">Chapter</button>
+      </div>
+    </div>`;
+}
+function startAnswers() {
+  G = { mode: 'answers' };
+  const list = CUR.qa || [];
+  document.getElementById('ovs').textContent = list.length + ' Qs';
+  document.getElementById('ovb').innerHTML = `
+    <div class="prog">Answer these questions</div>
+    ${list.map((x, k) => `
+      <div class="qa" id="qa${k}">
+        <div class="q">
+          <button type="button" class="say sm" onclick="sayVid('${x.qVid}','${esc(x.q)}',this)">🔊</button>
+          <span>${k + 1}. ${esc(x.q)}</span>
+        </div>
+        <div id="ans${k}" style="display:none">
+          <div class="ans">
+            <button type="button" class="say sm" onclick="sayVid('${x.aVid}','${esc(x.a)}',this)">🔊</button>
+            <span>${esc(x.a)}</span>
+          </div>
+        </div>
+        <button type="button" class="show" id="sh${k}" onclick="showAns(${k})">👀 Show answer</button>
+      </div>`).join('')}
+    <button type="button" class="nx alt" onclick="showTopicHome()">← Chapter</button>`;
+}
+function showAns(k) {
+  const x = CUR.qa[k];
+  document.getElementById('ans' + k).style.display = '';
+  document.getElementById('sh' + k).style.display = 'none';
+  sayVid(x.aVid, x.a);
+}
+
+function scrambleLetters(chars) {
+  const letters = chars.filter(c => c !== ' ');
+  let bag = letters.slice();
+  do { bag = shuffle(bag); } while (bag.join('') === letters.join('') && letters.length > 1);
+  return bag;
+}
+function startSpell() {
+  if (!CUR.spell || !CUR.spell.length) return;
+  G = { mode: 'spell', queue: shuffle(CUR.spell.slice()), i: 0, right: 0 };
+  showSpell();
+}
+function showSpell() {
+  if (G.i >= G.queue.length) {
+    const total = G.queue.length, ratio = total ? G.right / total : 0;
+    const stars = ratio >= 0.9 ? 3 : ratio >= 0.6 ? 2 : ratio >= 0.35 ? 1 : 0;
+    awardTopic(CUR.id + '-spell', stars);
+    document.getElementById('ovb').innerHTML = `<div class="card end"><div class="big">📝</div><h2>ഡിക്ടേഷൻ കഴിഞ്ഞു!</h2>
+      <p>${G.right}/${total}</p><div class="stars">${starStr(stars)}</div>
+      <button type="button" class="nx" onclick="startSpell()">🔁</button>
+      <button type="button" class="nx alt" onclick="showTopicHome()">←</button></div>`;
+    return;
+  }
+  const x = G.queue[G.i];
+  G.pos = 0; G.fin = false;
+  const bag = scrambleLetters(x.w.split(''));
+  document.getElementById('ovs').textContent = (G.i + 1) + '/' + G.queue.length;
+  document.getElementById('ovb').innerHTML = `
+    <div class="prog">🔊 കേൾക്കുക · അക്ഷരങ്ങൾ തൊടുക</div>
+    <div class="card">
+      <button type="button" class="say" onclick="sayVid('${x.vid}','${esc(x.w)}',this)">🔊</button>
+      <p style="font-weight:700;color:#5b5f86">${esc(x.clue || '')}</p>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:14px 0">
+        ${x.w.split('').map((c,i)=>c===' '?'<div style="min-width:14px"></div>':`<div id="sl${i}" style="min-width:36px;height:44px;border:3px dashed #95d5b2;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900"></div>`).join('')}
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center">
+        ${bag.filter(c=>c!==' ').map(c=>`<button type="button" data-c="${esc(c)}" onclick="tapL(this)" style="border:0;min-width:46px;height:50px;border-radius:14px;font-size:22px;font-weight:900;background:#fff;box-shadow:0 4px 0 #b7e4c7">${esc(c)}</button>`).join('')}
+      </div>
+      <div id="after"></div>
+    </div>`;
+  sayVid(x.vid, x.w);
+}
+function tapL(btn) {
+  if (G.fin) return;
+  const w = G.queue[G.i].w;
+  while (G.pos < w.length && w[G.pos] === ' ') G.pos++;
+  if (btn.dataset.c === w[G.pos]) {
+    const sl = document.getElementById('sl' + G.pos);
+    if (sl) { sl.textContent = w[G.pos]; sl.style.borderStyle='solid'; sl.style.background='#d8f3dc'; }
+    G.pos++; btn.disabled = true; btn.style.opacity='.35';
+    while (G.pos < w.length && w[G.pos] === ' ') G.pos++;
+    if (G.pos >= w.length) { G.fin = true; G.right++; ding(); document.getElementById('after').innerHTML = `<button type="button" class="nx" onclick="G.i++;showSpell()">Next ➜</button>`; }
+  } else { buzz(); btn.style.background='#ffd3d3'; setTimeout(()=>btn.style.background='#fff',300); }
+}
+
+home();
+</script>
+</body>
+</html>

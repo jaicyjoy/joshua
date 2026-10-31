@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Maths · Class 2 · Multiplication</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:"Chalkboard SE","Comic Sans MS","Avenir Next",system-ui,sans-serif;color:#1f2340;background:linear-gradient(180deg,#fff3cd 0%,#d8f3dc 50%,#caf0f8 100%);min-height:100vh;line-height:1.4}
+button,a{font-family:inherit}
+#app{max-width:920px;margin:0 auto;padding:12px 14px 80px}
+.top{position:sticky;top:6px;z-index:10;display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:22px;color:#fff;background:linear-gradient(135deg,#f77f00,#e85d04);box-shadow:0 6px 0 rgba(0,0,0,.12)}
+.top a,.top button.icon{border:0;background:#fff;width:44px;height:44px;border-radius:50%;font-size:20px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:#333;flex:none;cursor:pointer;font-weight:900}
+.top .tt{flex:1;min-width:0}.top .tt small{display:block;font-size:12px;font-weight:700;opacity:.92}.top .tt b{display:block;font-size:18px}
+.chip{background:rgba(255,255,255,.28);border-radius:99px;padding:4px 10px;font-weight:800;font-size:13px}
+.hero{text-align:center;padding:14px 8px}.hero .big{font-size:56px}.hero h1{margin:4px 0;font-size:30px;color:#9b2226}.hero p{margin:0;color:#6a5f8f}
+.starbox{background:#fff;border-radius:22px;padding:14px;margin:12px 0;box-shadow:0 6px 0 #f0d9c8}
+.starbox .row{display:flex;justify-content:space-between;font-weight:800}
+.bar{height:14px;background:#f3e6dc;border-radius:99px;overflow:hidden;margin-top:8px}.bar i{display:block;height:100%;background:linear-gradient(90deg,#ffd60a,#06d6a0);border-radius:99px}
+.gtiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:12px}
+.gt{border:0;border-radius:20px;padding:14px;text-align:left;color:#fff;background:var(--b);box-shadow:0 6px 0 rgba(0,0,0,.16);cursor:pointer;width:100%}
+.gt .i{font-size:34px;display:block}.gt b{display:block;font-size:17px;margin-top:4px}.gt small{display:block;opacity:.95;font-size:12px;margin-top:2px}
+.gt .st{display:inline-block;margin-top:8px;background:rgba(0,0,0,.18);padding:3px 10px;border-radius:99px;font-weight:800;font-size:13px}
+.ov{position:fixed;inset:0;z-index:40;display:none;flex-direction:column;background:linear-gradient(165deg,#fff8ef,#e7f5ff)}
+.ov.show{display:flex}
+.ovtop{display:flex;align-items:center;gap:10px;padding:12px 14px;color:#fff;background:linear-gradient(135deg,#f77f00,#e85d04)}
+.ovtop button{border:0;background:#fff;width:42px;height:42px;border-radius:50%;font-size:18px;font-weight:900;cursor:pointer}
+.ovtop .t{flex:1;font-weight:800;font-size:15px}.ovtop .sc{background:rgba(255,255,255,.25);border-radius:99px;padding:4px 10px;font-weight:800}
+.ovb{flex:1;overflow-y:auto;padding:14px;max-width:860px;width:100%;margin:0 auto}
+.card{background:#fff;border-radius:22px;padding:18px;box-shadow:0 7px 0 #f0d9c8;text-align:center;margin-bottom:12px}
+.card h2{margin:8px 0;font-size:24px;color:#9b2226}.card p{margin:0;color:#4a4f7a;font-weight:700}
+.bigq{font-size:42px;font-weight:900;margin:16px 0;color:#1f2340;letter-spacing:1px}
+.opts{display:grid;gap:10px;margin-top:12px;text-align:left}
+.opt{border:2px solid #f0d9c8;background:#fff8f2;border-radius:16px;padding:14px;font-size:22px;font-weight:800;cursor:pointer;box-shadow:0 4px 0 #f0d9c8;width:100%;text-align:center}
+.opt.ok{background:#c9f7d6;border-color:#2fbf71}.opt.bad{background:#ffd3d3;border-color:#e5484d}
+.nx{display:inline-block;margin:12px 6px 0;border:0;border-radius:99px;padding:12px 26px;font-size:16px;font-weight:800;color:#fff;background:linear-gradient(135deg,#f77f00,#e85d04);cursor:pointer;box-shadow:0 5px 0 rgba(0,0,0,.14)}
+.nx.alt{background:#fff;color:#9b2226;border:2px solid #ffd0a8;box-shadow:0 5px 0 #f0d9c8}
+.fb{margin-top:12px;font-weight:800;font-size:18px}.fb.good{color:#1f9d55}.fb.bad{color:#d9480f}
+.prog{font-weight:800;color:#5b5f86;margin-bottom:8px}
+.learn p{text-align:left;margin:8px 0;font-size:17px}
+.learn b{color:#9b2226}
+.tip{text-align:center;color:#6a5f8f;font-size:14px;margin-top:16px}
+.stars{font-size:36px;letter-spacing:3px}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div class="ov" id="ov">
+  <div class="ovtop"><button type="button" onclick="closeOv()">✕</button><div class="t" id="ovt"></div><div class="sc" id="ovs"></div></div>
+  <div class="ovb" id="ovb"></div>
+</div>
+<script>
+const SKEY = 'joshua-maths2-v1';
+let S = JSON.parse(localStorage.getItem(SKEY) || '{}');
+const save = () => localStorage.setItem(SKEY, JSON.stringify(S));
+const app = document.getElementById('app');
+const ov = document.getElementById('ov');
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const starStr = n => '⭐'.repeat(n) + '☆'.repeat(Math.max(0, 3 - n));
+function award(id, stars) {
+  stars = Math.max(0, Math.min(3, stars));
+  if ((S[id] || 0) < stars) { S[id] = stars; save(); return true; }
+  return false;
+}
+function got() { return TOPICS.reduce((n, t) => n + Math.min(3, +(S[t.id] || 0)), 0); }
+function total() { return TOPICS.length * 3; }
+
+const TOPICS = [
+  {id:'props', emoji:'📐', title:'Properties of Multiplication', blurb:'×1 · ×0 · any order · distributive', grad:'linear-gradient(135deg,#4361ee,#7b2cbf)',
+    learn:[
+      'When a number is multiplied by 1, the product is the number itself. Example: 4 × 1 = 4, 200 × 1 = 200.',
+      'When a number is multiplied by 0, the product is always 0. Example: 101 × 0 = 0, 0 × 25 = 0.',
+      'We can multiply two numbers in any order; the product remains the same. Example: 5 × 2 = 10 and 2 × 5 = 10.',
+      'Distributive property: 12 × 17 = 12 × (10 + 7) = 12 × 10 + 12 × 7 = 120 + 84 = 204.',
+      '15 × 36 = 15 × (30 + 6) = 450 + 90 = 540. · 11 × 25 = 11 × (20 + 5) = 220 + 55 = 275.'
+    ],
+    quiz:[
+      {q:'4 × 1 = ?', a:'4', o:['4','0','5','1']},
+      {q:'101 × 0 = ?', a:'0', o:['0','101','1','10']},
+      {q:'5 × 2 and 2 × 5 give the ____ product.', a:'same', o:['same','different','zero','bigger']},
+      {q:'12 × 17 using distributive = 12×10 + 12×7 = ?', a:'204', o:['204','120','84','170']},
+      {q:'15 × 36 = 15×30 + 15×6 = ?', a:'540', o:['540','450','90','360']},
+      {q:'11 × 25 = 11×20 + 11×5 = ?', a:'275', o:['275','220','55','250']}
+    ]},
+  {id:'tens', emoji:'🔟', title:'Multiply by 10, 20, 100…', blurb:'Easy patterns with zeros', grad:'linear-gradient(135deg,#06d6a0,#118ab2)',
+    learn:[
+      'To multiply by 10, write the other number and add one zero: 2 × 10 = 20, 8 × 10 = 80.',
+      'To multiply by 20: first ×2, then add a zero. 3 × 20 = 60 (because 3 × 2 = 6).',
+      '7 × 30 = 210 (7 × 3 = 21, then add a zero). 5 × 40 = 200. 6 × 50 = 300. 9 × 90 = 810.',
+      'To multiply by 100, write the number and add two zeros: 4 × 100 = 400.',
+      '3 × 300 = 900. 5 × 600 = 3000. 8 × 300 = 2400. 6 × 700 = 4200.'
+    ],
+    quiz:[
+      {q:'7 × 10 = ?', a:'70', o:['70','7','17','700']},
+      {q:'3 × 20 = ?', a:'60', o:['60','23','6','30']},
+      {q:'7 × 30 = ?', a:'210', o:['210','37','21','70']},
+      {q:'9 × 90 = ?', a:'810', o:['810','99','90','180']},
+      {q:'4 × 100 = ?', a:'400', o:['400','104','40','140']},
+      {q:'5 × 600 = ?', a:'3000', o:['3000','605','30','600']}
+    ]},
+  {id:'easy', emoji:'✏️', title:'Multiply (no carry)', blurb:'2-digit & 3-digit × 1-digit', grad:'linear-gradient(135deg,#2a9d8f,#007f5f)',
+    learn:['Multiply each digit. No regrouping needed when digits are small.','Example: 11 × 4 = 44. · 23 × 3 = 69. · 121 × 4 = 484.'],
+    quiz:[
+      {q:'11 × 4 = ?', a:'44', o:['44','15','41','14']},
+      {q:'23 × 3 = ?', a:'69', o:['69','26','53','33']},
+      {q:'42 × 2 = ?', a:'84', o:['84','44','22','82']},
+      {q:'121 × 4 = ?', a:'484', o:['484','125','412','242']},
+      {q:'332 × 3 = ?', a:'996', o:['996','335','633','399']},
+      {q:'102 × 4 = ?', a:'408', o:['408','106','204','142']}
+    ]},
+  {id:'carry', emoji:'🧮', title:'Multiply (with carry)', blurb:'Regrouping practice', grad:'linear-gradient(135deg,#e63946,#9d0208)',
+    learn:['When a digit product is 10 or more, write the ones and carry the tens.','Example: 12 × 5 = 60. · 26 × 5 = 130. · 125 × 4 = 500.','Bigger ones: 1024 × 5 = 5120. · 3452 × 6 = 20712.'],
+    quiz:[
+      {q:'12 × 5 = ?', a:'60', o:['60','17','25','52']},
+      {q:'26 × 5 = ?', a:'130', o:['130','31','105','260']},
+      {q:'42 × 7 = ?', a:'294', o:['294','49','284','347']},
+      {q:'125 × 4 = ?', a:'500', o:['500','129','425','145']},
+      {q:'176 × 5 = ?', a:'880', o:['880','181','765','705']},
+      {q:'1024 × 5 = ?', a:'5120', o:['5120','1029','512','1524']},
+      {q:'3452 × 6 = ?', a:'20712', o:['20712','3458','2070','18512']},
+      {q:'7012 × 6 = ?', a:'42072', o:['42072','7018','4200','4212']}
+    ]},
+  {id:'mix', emoji:'🏆', title:'Mixed Practice', blurb:'All multiplication skills', grad:'linear-gradient(135deg,#7b2cbf,#f72585)',
+    learn:['Warm up with tables, then try bigger products. Study the multiplication table properly!'],
+    quiz:[
+      {q:'6 × 7 = ?', a:'42', o:['42','13','36','49']},
+      {q:'9 × 8 = ?', a:'72', o:['72','17','64','81']},
+      {q:'1001 × 7 = ?', a:'7007', o:['7007','1008','7001','107']},
+      {q:'1122 × 4 = ?', a:'4488', o:['4488','1126','422','448']},
+      {q:'2101 × 6 = ?', a:'12606', o:['12606','2107','1260','12601']},
+      {q:'8 × 7 = ?', a:'56', o:['56','15','48','63']},
+      {q:'0 × 700 = ?', a:'0', o:['0','700','70','1']},
+      {q:'200 × 1 = ?', a:'200', o:['200','201','0','199']}
+    ]}
+];
+
+let CUR = null, G = null;
+
+function home() {
+  const g = got(), t = total(), pct = t ? Math.round(g / t * 100) : 0;
+  app.innerHTML = `
+  <div class="top">
+    <a class="icon" href="../index.html" title="Home">🏠</a>
+    <button type="button" class="icon" onclick="history.back()" title="Back">←</button>
+    <div class="tt"><small>Class 2 · Joshua hub</small><b>✖️ Multiplication</b></div>
+    <span class="chip">⭐ ${g}/${t}</span>
+  </div>
+  <div class="hero"><div class="big">✖️</div><h1>Maths · Class 2</h1><p>Learn properties · practise products · win stars!</p></div>
+  <div class="starbox"><div class="row"><span>⭐ My Maths stars</span><span>${g}/${t} · ${pct}%</span></div><div class="bar"><i style="width:${pct}%"></i></div></div>
+  <div class="gtiles">
+    ${TOPICS.map(t => `<button type="button" class="gt" style="--b:${t.grad}" onclick="openTopic('${t.id}')">
+      <span class="i">${t.emoji}</span><b>${t.title}</b><small>${t.blurb}</small>
+      <span class="st">${starStr(Math.min(3, +(S[t.id]||0)))}</span>
+    </button>`).join('')}
+  </div>
+  <p class="tip">Stars stay on this device’s browser. Same phone/tablet + same browser keeps them after reload.</p>`;
+}
+
+function openTopic(id) {
+  CUR = TOPICS.find(t => t.id === id);
+  document.getElementById('ovt').textContent = CUR.emoji + ' ' + CUR.title;
+  document.getElementById('ovs').textContent = starStr(Math.min(3, +(S[CUR.id]||0)));
+  ov.classList.add('show');
+  document.body.style.overflow = 'hidden';
+  showHome();
+}
+function closeOv() { ov.classList.remove('show'); document.body.style.overflow = ''; CUR = null; G = null; home(); }
+function showHome() {
+  document.getElementById('ovb').innerHTML = `
+    <div class="card"><div style="font-size:56px">${CUR.emoji}</div><h2>${CUR.title}</h2><p>${CUR.blurb}</p></div>
+    <button type="button" class="nx" onclick="startLearn()">📖 Learn</button>
+    <button type="button" class="nx" onclick="startQuiz()">🎯 Quiz</button>
+    <button type="button" class="nx alt" onclick="closeOv()">← Topics</button>`;
+}
+function startLearn() {
+  document.getElementById('ovb').innerHTML = `
+    <div class="card learn" style="text-align:left">
+      <h2 style="text-align:center">${CUR.emoji} Learn</h2>
+      ${CUR.learn.map((p,i)=>`<p><b>${i+1}.</b> ${p}</p>`).join('')}
+      <div style="text-align:center"><button type="button" class="nx" onclick="startQuiz()">🎯 Practise</button>
+      <button type="button" class="nx alt" onclick="showHome()">←</button></div>
+    </div>`;
+}
+function startQuiz() {
+  G = { queue: shuffle(CUR.quiz.map((q,i)=>({...q,_i:i}))), i: 0, right: 0, done: false };
+  showQ();
+}
+function showQ() {
+  if (G.i >= G.queue.length) return endQ();
+  const x = G.queue[G.i];
+  G.done = false;
+  const opts = shuffle(x.o.slice());
+  document.getElementById('ovs').textContent = (G.i+1)+'/'+G.queue.length+' · ✓'+G.right;
+  document.getElementById('ovb').innerHTML = `
+    <div class="prog">Question ${G.i+1} of ${G.queue.length}</div>
+    <div class="card">
+      <div class="bigq">${x.q}</div>
+      <div class="opts">${opts.map(o=>`<button type="button" class="opt" onclick="pick(this,'${o.replace(/'/g,"\\'")}')">${o}</button>`).join('')}</div>
+      <div class="fb" id="fb"></div><div id="after"></div>
+    </div>`;
+}
+function pick(btn, val) {
+  if (G.done) return;
+  G.done = true;
+  const x = G.queue[G.i];
+  const ok = val === x.a;
+  document.querySelectorAll('.opt').forEach(b => {
+    b.style.pointerEvents = 'none';
+    if (b.textContent === x.a) b.classList.add('ok');
+  });
+  if (ok) { btn.classList.add('ok'); G.right++; document.getElementById('fb').className='fb good'; document.getElementById('fb').textContent='Yes! 🌟'; }
+  else { btn.classList.add('bad'); document.getElementById('fb').className='fb bad'; document.getElementById('fb').textContent='Answer: '+x.a; }
+  document.getElementById('after').innerHTML = `<button type="button" class="nx" onclick="G.i++;showQ()">Next ➜</button>`;
+}
+function endQ() {
+  const total = G.queue.length, ratio = total ? G.right/total : 0;
+  const stars = ratio >= 0.9 ? 3 : ratio >= 0.6 ? 2 : ratio >= 0.35 ? 1 : 0;
+  const nb = award(CUR.id, stars);
+  document.getElementById('ovs').textContent = starStr(Math.min(3, +(S[CUR.id]||0)));
+  document.getElementById('ovb').innerHTML = `
+    <div class="card"><div style="font-size:64px">${stars===3?'🏆':stars?'🥳':'💪'}</div>
+      <h2>Quiz done!</h2><p>You got <b>${G.right}</b> / ${total}</p>
+      <div class="stars">${starStr(stars)}</div>
+      <p>${nb ? 'New best!' : 'Keep practising — study the tables!'}</p>
+      <button type="button" class="nx" onclick="startQuiz()">🔁 Again</button>
+      <button type="button" class="nx alt" onclick="showHome()">←</button>
+    </div>`;
+}
+home();
+</script>
+</body>
+</html>
