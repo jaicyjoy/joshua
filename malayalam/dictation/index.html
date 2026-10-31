@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="ml">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ഒരുറക്കുപാട്ട് ഡിക്ടേഷൻ | Class 3</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:"Avenir Next","Segoe UI",system-ui,sans-serif;color:#1a3330;background:linear-gradient(180deg,#dff5f1 0%,#eef9f7 45%,#fff9ee 100%);min-height:100vh;line-height:1.45}
+button,input{font-family:inherit}
+#app{max-width:880px;margin:0 auto;padding:14px 14px 70px}
+.top{position:sticky;top:6px;z-index:10;display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:22px;color:#fff;background:linear-gradient(135deg,var(--c1),var(--c2));box-shadow:0 6px 0 rgba(0,0,0,.12)}
+.top a,.top button.icon{border:0;background:#fff;width:44px;height:44px;border-radius:50%;font-size:20px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:#333;flex:none;cursor:pointer}
+.top .tt{flex:1;min-width:0}
+.top .tt small{display:block;font-size:13px;font-weight:700;opacity:.9;text-transform:uppercase}
+.top .tt b{display:block;font-size:19px;line-height:1.2;font-family:"Malayalam Sangam MN","Malayalam MN","Noto Sans Malayalam",sans-serif}
+.chip{background:rgba(255,255,255,.25);border-radius:99px;padding:4px 10px;font-weight:800;font-size:14px;white-space:nowrap}
+.slow{border:0;border-radius:99px;padding:7px 10px;font-weight:800;font-size:14px;background:rgba(255,255,255,.25);color:#fff;cursor:pointer}
+.slow.on{background:#ffd60a;color:#3a2b00}
+.hero{text-align:center;padding:18px 8px 8px}
+.hero .big{font-size:56px}
+.hero h1{margin:4px 0 0;font-size:28px;color:var(--c2);font-family:"Malayalam Sangam MN","Malayalam MN","Noto Sans Malayalam",sans-serif}
+.hero p{margin:4px 0 0;color:#4a6f6a;font-size:15px}
+.starbox{background:#fff;border-radius:22px;padding:14px 16px;margin:12px 0;box-shadow:0 6px 0 #cce8e3}
+.starbox .row{display:flex;justify-content:space-between;font-weight:800;font-size:18px}
+.bar{height:14px;background:#dceee9;border-radius:99px;overflow:hidden;margin-top:8px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,#ffd60a,var(--c1));border-radius:99px;transition:width .4s}
+.gtiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:14px}
+.gt{border:0;border-radius:20px;padding:16px;text-align:left;color:#fff;background:var(--b);box-shadow:0 6px 0 rgba(0,0,0,.18);cursor:pointer;font:inherit}
+.gt .i{font-size:32px;display:block}
+.gt b{display:block;font-size:18px;margin-top:4px}
+.gt small{display:block;opacity:.95;font-size:13px}
+.sec{background:#fff;border-radius:22px;padding:14px;margin-top:14px;box-shadow:0 6px 0 #cce8e3}
+.sec h3{margin:0 0 10px;color:var(--c2);font-family:"Malayalam Sangam MN","Malayalam MN","Noto Sans Malayalam",sans-serif}
+.wlist{display:flex;flex-wrap:wrap;gap:8px}
+.wlist button{border:2px solid #b8ddd6;background:#f4fbf9;border-radius:99px;padding:8px 12px;font-size:17px;font-weight:700;cursor:pointer;color:var(--c2)}
+.wlist button.got{background:#c9f7d6;border-color:#2fbf71}
+.wlist button.playing{background:#fff1b8;border-color:#ffb703}
+.foot{text-align:center;margin-top:18px;font-size:14px;color:#5a7a74}
+
+.ov{position:fixed;inset:0;z-index:40;display:none;flex-direction:column;background:linear-gradient(160deg,#e8f7f4,#fff8f0 55%,#fff9ee)}
+.ov.show{display:flex}
+.ovtop{display:flex;align-items:center;gap:10px;padding:12px 14px;color:#fff;background:linear-gradient(135deg,var(--c1),var(--c2))}
+.ovtop button{border:0;background:#fff;width:42px;height:42px;border-radius:50%;font-size:18px;font-weight:900;cursor:pointer}
+.ovtop .t{flex:1;font-weight:800;font-size:17px;font-family:"Malayalam Sangam MN","Malayalam MN","Noto Sans Malayalam",sans-serif}
+.ovtop .sc{background:rgba(255,255,255,.25);border-radius:99px;padding:4px 12px;font-weight:800}
+.ovb{flex:1;overflow-y:auto;padding:16px 14px 40px;max-width:820px;width:100%;margin:0 auto}
+.card{background:#fff;border-radius:24px;padding:18px;box-shadow:0 7px 0 #cce8e3;text-align:center}
+.say{border:0;width:78px;height:78px;border-radius:50%;font-size:34px;background:#e8f6f3;cursor:pointer}
+.say.playing{background:#ffb703}
+.clue{margin-top:10px;font-size:17px;font-weight:700;color:#4a6f6a;font-family:Georgia,"Iowan Old Style",serif}
+.slots{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin:16px 0;min-height:40px}
+.slot{min-width:28px;height:42px;border-bottom:4px solid #7ecbc0;font-size:24px;font-weight:900;display:flex;align-items:center;justify-content:center;color:#888}
+.slot.space{border:0;min-width:12px;color:#bbb}
+.slot.f{color:#1f9d55;border-color:#2fbf71}
+.typein{display:block;width:100%;max-width:420px;margin:12px auto 0;font-size:26px;font-weight:800;text-align:center;padding:12px;border:4px solid #7ecbc0;border-radius:16px}
+.typein.ok{border-color:#2fbf71;background:#e7fbef}
+.typein.bad{border-color:#e5484d;animation:shake .35s}
+.tiles{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:10px}
+.tile{min-width:48px;height:52px;border:0;border-radius:14px;font-size:26px;font-weight:900;color:#fff;background:linear-gradient(140deg,#2a9d8f,#1d3557);box-shadow:0 5px 0 #14532d;cursor:pointer;font-family:"Malayalam Sangam MN","Malayalam MN","Noto Sans Malayalam",sans-serif}
+.tile.used{visibility:hidden}
+.tile.bad{background:#e5484d;animation:shake .35s}
+.opts{display:grid;gap:10px;margin-top:14px;text-align:left}
+.opt{border:2px solid #b8ddd6;background:#f4fbf9;border-radius:16px;padding:12px 14px;font-size:20px;font-weight:700;cursor:pointer;box-shadow:0 4px 0 #cce8e3}
+.opt.ok{background:#c9f7d6;border-color:#2fbf71;box-shadow:0 4px 0 #2fbf71}
+.opt.bad{background:#ffd3d3;border-color:#e5484d;box-shadow:0 4px 0 #e5484d;animation:shake .35s}
+@keyframes shake{25%,75%{transform:translateX(-6px)}50%{transform:translateX(6px)}}
+.fb{margin-top:12px;font-weight:800;font-size:18px}
+.fb.good{color:#1f9d55}.fb.bad{color:#d9480f}
+.nx{display:inline-block;margin:14px 6px 0;border:0;border-radius:99px;padding:12px 28px;font-size:17px;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--c1),var(--c2));cursor:pointer;box-shadow:0 5px 0 rgba(0,0,0,.15)}
+.nx.alt{background:#fff;color:var(--c1);border:2px solid #b8ddd6;box-shadow:0 5px 0 #cce8e3}
+.prog{display:flex;align-items:center;gap:10px;margin-bottom:12px;font-weight:800;color:#4a6f6a}
+.prog .bar{flex:1;margin:0}
+.end{text-align:center}
+.end .big{font-size:64px}
+.end h2{margin:4px 0;color:var(--c2);font-family:"Malayalam Sangam MN","Malayalam MN","Noto Sans Malayalam",sans-serif}
+.stars{font-size:36px;letter-spacing:3px}
+.conf{position:fixed;top:-30px;font-size:28px;pointer-events:none;z-index:60;animation:fall 1.5s ease-in forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(480deg);opacity:.5}}
+.ml .typein,.ml .opt,.ml .wlist button,.ml .slot,.ml .flash-word{font-family:"Malayalam Sangam MN","Malayalam MN","Sama Malayalam","Noto Sans Malayalam",sans-serif}
+@media(max-width:560px){.typein{font-size:22px}.opt{font-size:17px}}
+
+.la-say{border:0;background:#efeaff;width:40px;height:40px;border-radius:50%;font-size:18px;cursor:pointer;flex:none;vertical-align:middle;margin-left:6px;box-shadow:0 3px 0 #e3e0f7}
+.la-say:active{background:#ffb703}
+.la-row{display:flex;gap:8px;align-items:flex-start}
+
+</style>
+<script src="../../assets/learn-audio.js?v=2"></script>
+</head>
+<body class="ml">
+<div id="app"></div>
+<div class="ov" id="ov"><div class="ovtop"><button type="button" onclick="closeOv()">✕</button><div class="t" id="ovt"></div><div class="sc" id="ovs"></div></div><div class="ovb" id="ovb"></div></div>
+<script type="application/json" id="data">{"meta": {"kind": "ml3", "title": "ഒരുറക്കുപാട്ട് · ഡിക്ടേഷൻ", "emoji": "📝", "c1": "#2a9d8f", "c2": "#1d3557", "lang": "ml", "subject": "Malayalam"}, "words": [{"w": "വള്ളത്തോൾ", "clue": "കവി · പാഠം", "opts": ["വള്ളത്തോൾ", "വള്ളത്തോ", "വള്ളത്തോൾം", "ള്ളത്തോൾ"], "vid": "ml3-w-00"}, {"w": "തങ്കം", "clue": "സ്വർണ്ണം", "opts": ["തങ്കം", "തങ്ക", "തങ്കമ", "ങ്കം"], "vid": "ml3-w-01"}, {"w": "നിദ്ര", "clue": "ഉറക്കം", "opts": ["നിദ്ര", "നിദ്", "നിദ്രം", "ിദ്ര"], "vid": "ml3-w-02"}, {"w": "വെള്ളക്കിടക്ക", "clue": "വെള്ളത്തിന്റെ കിടക്ക", "opts": ["വെള്ളക്കിടക്ക", "വെള്ളക്കിടക്", "വെള്ളക്കിടക്കം", "െള്ളക്കിടക്ക"], "vid": "ml3-w-03"}, {"w": "മാന്തളിർ", "clue": "മാന്തളിർ", "opts": ["മാന്തളിർ", "മാന്തളി", "മാന്തളിർം", "ാന്തളിർ"], "vid": "ml3-w-04"}, {"w": "കർണ്ണയുഗ്മം", "clue": "രണ്ട് ചെവികൾ", "opts": ["കർണ്ണയുഗ്മം", "കർണ്ണയുഗ്മ", "കർണ്ണയുഗ്മമ", "ർണ്ണയുഗ്മം"], "vid": "ml3-w-05"}, {"w": "കോലുവാൻ", "clue": "ഉണ്ടാക്കുവാൻ", "opts": ["കോലുവാൻ", "കോലുവാ", "കോലുവാൻം", "ോലുവാൻ"], "vid": "ml3-w-06"}, {"w": "ഉല്ലാസം", "clue": "ആഹ്ളാദം", "opts": ["ഉല്ലാസം", "ഉല്ലാസ", "ഉല്ലാസമ", "ല്ലാസം"], "vid": "ml3-w-07"}, {"w": "ഗളനാളം", "clue": "കണ്ഠനാളം", "opts": ["ഗളനാളം", "ഗളനാള", "ഗളനാളമ", "ളനാളം"], "vid": "ml3-w-08"}, {"w": "ഉന്മേഷം", "clue": "ഉന്മേഷം", "opts": ["ഉന്മേഷം", "ഉന്മേഷ", "ഉന്മേഷമ", "ന്മേഷം"], "vid": "ml3-w-09"}]}</script>
+<script>
+const D = JSON.parse(document.getElementById('data').textContent);
+const M = D.meta, WORDS = D.words;
+document.title = 'ഒരുറക്കുപാട്ട് ഡിക്ടേഷൻ | Class 3';
+document.body.style.setProperty('--c1', M.c1);
+document.body.style.setProperty('--c2', M.c2);
+
+const app = document.getElementById('app');
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const SKEY = 'joshua-dict-' + M.kind;
+const S = JSON.parse(localStorage.getItem(SKEY) || '{}');
+let slow = localStorage.getItem(SKEY + '-slow') === '1';
+const award = (w, n) => { const p = S[w] || 0; if (n > p) { S[w] = n; localStorage.setItem(SKEY, JSON.stringify(S)); return true; } return false; };
+const starStr = n => '⭐'.repeat(n) + '☆'.repeat(3 - n);
+const gotStars = () => WORDS.reduce((s, x) => s + (S[x.w] || 0), 0);
+const totalStars = () => WORDS.length * 3;
+const norm = s => String(s).trim().replace(/\s+/g, ' ');
+
+const rate = () => slow ? 0.75 : 1;
+const VID = Object.fromEntries(WORDS.map(x => [x.w, x.vid]));
+let sp = null;
+let ptok = 0;
+function stopAudio() {
+  ptok++;
+  if (sp) {
+    try { sp.onended = null; sp.onerror = null; sp.pause(); } catch (e) {}
+    sp = null;
+  }
+  document.querySelectorAll('.playing').forEach(e => e.classList.remove('playing'));
+}
+/** Fresh Audio + cache-buster every tap so 🔊 always replays. */
+function playW(textOrVid, el) {
+  stopAudio();
+  const mine = ptok;
+  if (el) el.classList.add('playing');
+  const id = VID[textOrVid] || textOrVid;
+  const word = WORDS.find(x => x.w === textOrVid || x.vid === id);
+  const text = word ? word.w : String(textOrVid);
+  const done = (ok) => { if (el && mine === ptok) el.classList.remove('playing'); return ok && mine === ptok; };
+  return new Promise(res => {
+    sp = new Audio('voice/' + id + '.mp3?r=' + Date.now());
+    sp.defaultPlaybackRate = sp.playbackRate = rate();
+    sp.onended = () => res(done(true));
+    sp.onerror = () => {
+      if (mine !== ptok) return res(false);
+      if (window.LearnAudio) {
+        LearnAudio.speak(text, 'ml-IN', rate(), el).then(ok => res(done(!!ok)));
+        return;
+      }
+      sp = new Audio('https://translate.googleapis.com/translate_tts?ie=UTF-8&client=gtx&tl=ml&q=' + encodeURIComponent(text.slice(0, 160)));
+      sp.defaultPlaybackRate = sp.playbackRate = rate();
+      sp.onended = () => res(done(true));
+      sp.onerror = () => res(done(false));
+      sp.play().catch(() => res(done(false)));
+    };
+    sp.play().catch(() => {
+      if (mine !== ptok) return res(false);
+      if (window.LearnAudio) return LearnAudio.speak(text, 'ml-IN', rate(), el).then(ok => res(done(!!ok)));
+      res(done(false));
+    });
+  });
+}
+function toggleSlow() {
+  slow = !slow;
+  localStorage.setItem(SKEY + '-slow', slow ? '1' : '0');
+  document.querySelectorAll('.slow').forEach(b => b.classList.toggle('on', slow));
+}
+
+let actx = null;
+function tone(fs, d, type, v) {
+  try {
+    actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+    const t0 = actx.currentTime;
+    fs.forEach((f, k) => {
+      const o = actx.createOscillator(), g = actx.createGain();
+      o.type = type; o.frequency.value = f;
+      g.gain.setValueAtTime(0.0001, t0 + k * d);
+      g.gain.exponentialRampToValueAtTime(v, t0 + k * d + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, t0 + (k + 1) * d);
+      o.connect(g); g.connect(actx.destination);
+      o.start(t0 + k * d); o.stop(t0 + (k + 1) * d + 0.05);
+    });
+  } catch (e) {}
+}
+const ding = () => tone([660, 880, 1175], 0.1, 'sine', 0.3);
+const buzz = () => tone([220, 165], 0.16, 'triangle', 0.3);
+function confetti() {
+  const em = ['⭐', '🎉', '✨', '🌟', '🎈'];
+  for (let i = 0; i < 18; i++) {
+    const s = document.createElement('span');
+    s.className = 'conf'; s.textContent = em[i % em.length];
+    s.style.left = Math.random() * 100 + 'vw';
+    document.body.appendChild(s);
+    setTimeout(() => s.remove(), 2000);
+  }
+}
+const praise = () => ['ശാബാശ്! 🌟', 'വളരെ നല്ലത്! 🎉', 'ശരിയാണ്! 💯', 'സൂപ്പർ! ✨'][Math.floor(Math.random() * 4)];
+
+function home() {
+  const g = gotStars(), t = totalStars(), pct = t ? Math.round(g / t * 100) : 0;
+  app.innerHTML = `
+    <div class="top">
+      <a class="icon" href="../../index.html" title="Home">🏠</a>
+      <button type="button" class="icon" onclick="history.back()" title="Back">←</button>
+      <div class="tt"><small>${M.subject} · Class 8</small><b>${M.emoji} ${esc(M.title)}</b></div>
+      <span class="chip">⭐ ${g}/${t}</span>
+      <button class="slow ${slow ? 'on' : ''}" onclick="toggleSlow()">🐢 Slow</button>
+    </div>
+    <div class="hero"><div class="big">${M.emoji}</div>
+      <h1>${esc(M.title)}</h1>
+      <p>Order: Flash → Pick → Letters · ഫ്ലാഷ് → തിരഞ്ഞെടുക്കുക → അക്ഷരങ്ങൾ</p>
+    </div>
+    <div class="starbox"><div class="row"><span>⭐ My stars / എന്റെ നക്ഷത്രങ്ങൾ</span><span>${g} / ${t} · ${pct}%</span></div>
+      <div class="bar"><i style="width:${pct}%"></i></div></div>
+    <div class="gtiles">
+      <button class="gt" style="--b:linear-gradient(135deg,#ff9f1c,#e76f51)" onclick="startDrill('flash')">
+        <span class="i">🃏</span><b>1 · Flash</b>
+        <small>Listen first — blanks, then letters, then the word</small>
+      </button>
+      <button class="gt" style="--b:linear-gradient(135deg,#06d6a0,#118ab2)" onclick="startDrill('mcq')">
+        <span class="i">🎯</span><b>2 · Pick</b>
+        <small>Hear it, then choose the correct spelling</small>
+      </button>
+      <button class="gt" style="--b:linear-gradient(135deg,#2a9d8f,#1d3557)" onclick="startDrill('tiles')">
+        <span class="i">🔤</span><b>3 · Letters</b>
+        <small>Listen · tap only the needed letters</small>
+      </button>
+    </div>
+    <div class="sec"><h3>📋 All words — tap to hear / എല്ലാ വാക്കുകളും</h3>
+      <div class="wlist">${WORDS.map(x => `<button type="button" class="${S[x.w] >= 3 ? 'got' : ''}" onclick="playW(${JSON.stringify(x.w)},this)">${esc(x.w)} ${'⭐'.repeat(S[x.w] || 0)}</button>`).join('')}</div>
+    </div>
+    <p class="foot">Audio: recorded Malayalam voice · Stars saved in <b>joshua-dict-ml3</b></p>`;
+}
+
+const ov = document.getElementById('ov'), ovb = () => document.getElementById('ovb');
+let G = null;
+function openOv(title) {
+  stopAudio();
+  document.getElementById('ovt').textContent = title;
+  document.getElementById('ovs').textContent = '';
+  ov.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeOv() { stopAudio(); ov.classList.remove('show'); document.body.style.overflow = ''; G = null; home(); }
+const setScore = t => document.getElementById('ovs').innerHTML = t;
+
+function startDrill(mode) {
+  G = {mode, queue: shuffle(WORDS), i: 0, got: 0, total: WORDS.length};
+  const titles = { tiles: '🔤 3 · Letters', mcq: '🎯 2 · Pick', flash: '🃏 1 · Flash' };
+  openOv(titles[mode]);
+  if (mode === 'flash') showFlash();
+  else showQ();
+}
+
+function slotHtml(w, prefix, blank) {
+  return w.split('').map((ch, i) => {
+    const sp = ch === ' ';
+    const t = blank ? (sp ? '·' : '_') : (sp ? '·' : ch);
+    return `<div class="slot${sp ? ' space' : ''}${blank ? '' : ' f'}" id="${prefix}${i}">${t}</div>`;
+  }).join('');
+}
+
+function showQ() {
+  if (G.i >= G.queue.length) return endRound();
+  const x = G.queue[G.i];
+  G.miss = 0; G.fin = false;
+  setScore(`${G.i + 1}/${G.total} · ⭐ ${G.got}`);
+  const pct = G.i / G.total * 100;
+  let body;
+  if (G.mode === 'tiles') {
+    const needed = x.w.split('').filter(c => c !== ' ');
+    let letters = needed.slice();
+    do { letters = shuffle(letters); } while (letters.join('') === needed.join('') && needed.length > 1);
+    G.pos = 0;
+    body = `<button type="button" class="say" onclick="playW(${JSON.stringify(x.w)},this)">🔊</button>
+      <div class="clue">💡 ${esc(x.clue)} · അക്ഷരങ്ങൾ തൊടുക</div>
+      <div class="slots">${slotHtml(x.w, 'sl', true)}</div>
+      <div class="tiles">${letters.map(l => `<button type="button" class="tile" data-l="${esc(l)}" onclick="pickTile(this)">${esc(l)}</button>`).join('')}</div>
+      <div id="after"></div>`;
+  } else {
+    body = `<button type="button" class="say" onclick="playW(${JSON.stringify(x.w)},this)">🔊</button>
+      <div class="clue">💡 ${esc(x.clue)}</div>
+      <p class="clue">Which spelling is correct? / ശരിയായ വർണ്ണന?</p>
+      <div class="opts">${shuffle(x.opts).map(o => `<button type="button" class="opt" data-w="${esc(o)}" onclick="pickOpt(this)">${esc(o)}</button>`).join('')}</div>
+      <div id="after"></div>`;
+  }
+  ovb().innerHTML = `<div class="prog"><div class="bar"><i style="width:${pct}%"></i></div><span>${G.i + 1}/${G.total}</span></div><div class="card">${body}</div>`;
+  playW(x.w);
+}
+
+function fillSlots(w, prefix) {
+  w.split('').forEach((ch, i) => {
+    const el = document.getElementById((prefix || 'sl') + i);
+    if (el) { el.textContent = ch === ' ' ? '·' : ch; el.classList.add('f'); }
+  });
+}
+
+
+function pickTile(btn) {
+  if (!G || G.fin) return;
+  const x = G.queue[G.i], w = x.w;
+  while (G.pos < w.length && w[G.pos] === ' ') {
+    const el = document.getElementById('sl' + G.pos);
+    if (el) { el.textContent = '·'; el.classList.add('f'); }
+    G.pos++;
+  }
+  if (btn.dataset.l === w[G.pos]) {
+    const el = document.getElementById('sl' + G.pos);
+    if (el) { el.textContent = w[G.pos]; el.classList.add('f'); }
+    G.pos++; btn.classList.add('used');
+    while (G.pos < w.length && w[G.pos] === ' ') {
+      const el2 = document.getElementById('sl' + G.pos);
+      if (el2) { el2.textContent = '·'; el2.classList.add('f'); }
+      G.pos++;
+    }
+    if (G.pos >= w.length) finishWord(true);
+  } else {
+    G.miss++; buzz(); btn.classList.add('bad');
+    setTimeout(() => btn.classList.remove('bad'), 350);
+  }
+}
+
+function checkType() {
+  if (!G || G.fin) return;
+  const x = G.queue[G.i], inp = document.getElementById('tin');
+  const v = norm(inp.value);
+  const want = norm(x.w);
+  if (v === want) {
+    inp.classList.add('ok'); fillSlots(x.w, 'sl'); finishWord(true);
+  } else {
+    G.miss++; buzz(); inp.classList.add('bad');
+    setTimeout(() => inp.classList.remove('bad'), 400);
+    let k = 0; while (k < v.length && k < want.length && v[k] === want[k]) k++;
+    document.getElementById('after').innerHTML = `<div class="fb bad">Not yet — try again 💪${k ? ` (first ${k} letter${k > 1 ? 's' : ''} right)` : ''}</div>`;
+  }
+}
+
+function pickOpt(btn) {
+  if (!G || G.fin) return;
+  const x = G.queue[G.i], chosen = btn.getAttribute('data-w');
+  document.querySelectorAll('.opt').forEach(b => b.disabled = true);
+  if (chosen === x.w) {
+    btn.classList.add('ok'); finishWord(true);
+  } else {
+    G.miss++; buzz(); btn.classList.add('bad');
+    document.querySelectorAll('.opt').forEach(b => { if (b.getAttribute('data-w') === x.w) b.classList.add('ok'); });
+    document.getElementById('after').innerHTML = `<div class="fb bad">The green one is right. / പച്ച നിറത്തിലുള്ളത് ശരി.</div>
+      <button type="button" class="nx" onclick="finishWord(false);G.i++;showQ()">Next ➜</button>`;
+  }
+}
+
+function finishWord(okFirst) {
+  if (G.fin) return;
+  G.fin = true;
+  const x = G.queue[G.i];
+  const stars = G.miss === 0 ? 3 : G.miss <= 2 ? 2 : 1;
+  G.got += stars;
+  const nb = award(x.w, stars);
+  ding(); if (stars === 3) confetti();
+  setScore(`${G.i + 1}/${G.total} · ⭐ ${G.got}`);
+  document.getElementById('after').innerHTML = `<div class="stars">${starStr(stars)}</div>
+    <div class="fb good">${praise()}${nb ? ' · New best!' : ''}</div>
+    <div class="flash-word" style="margin-top:8px;font-size:26px;font-weight:900;color:var(--c2)">${esc(x.w)}</div>
+    <button type="button" class="nx" onclick="G.i++;showQ()">Next ➜</button>`;
+}
+
+function revealFlashLetters(w, done) {
+  const chars = w.split('');
+  let i = 0;
+  const step = () => {
+    if (i >= chars.length) { if (done) done(); return; }
+    const el = document.getElementById('fl' + i);
+    if (el) {
+      el.textContent = chars[i] === ' ' ? '·' : chars[i];
+      el.classList.add('f');
+    }
+    i++;
+    setTimeout(step, 100);
+  };
+  step();
+}
+
+function showFlash() {
+  if (G.i >= G.queue.length) return endRound();
+  const x = G.queue[G.i];
+  G.flashStep = 0;
+  setScore(`${G.i + 1}/${G.total}`);
+  ovb().innerHTML = `<div class="prog"><div class="bar"><i style="width:${G.i / G.total * 100}%"></i></div></div>
+    <div class="card">
+      <button type="button" class="say" onclick="playW(${JSON.stringify(x.w)},this)">🔊</button>
+      <div class="clue">💡 ${esc(x.clue)}</div>
+      <p class="clue">Think of the spelling — blanks, then letters, then the full word</p>
+      <div class="slots" id="flash-slots">${slotHtml(x.w, 'fl', true)}</div>
+      <div id="after"><button type="button" class="nx" onclick="flashRevealLetters()">🔤 Show letters</button></div>
+    </div>`;
+  playW(x.w);
+}
+
+function flashRevealLetters() {
+  const x = G.queue[G.i];
+  const after = document.getElementById('after');
+  after.innerHTML = '<p class="clue">Revealing letters…</p>';
+  revealFlashLetters(x.w, () => {
+    after.innerHTML = `<button type="button" class="nx" onclick="flashRevealWord()">👀 Show full word</button>`;
+  });
+}
+
+function flashRevealWord() {
+  const x = G.queue[G.i];
+  fillSlots(x.w, 'fl');
+  playW(x.w);
+  document.getElementById('after').innerHTML = `
+    <div class="flash-word" style="margin-top:12px;font-size:32px;font-weight:900;color:var(--c2)">${esc(x.w)}</div>
+    <button type="button" class="nx" onclick="award(${JSON.stringify(x.w)},3);G.got+=3;G.i++;showFlash()">✅ I know it ➜</button>
+    <button type="button" class="nx alt" onclick="G.i++;showFlash()">Again later</button>`;
+}
+
+function endRound() {
+  const max = G.total * 3;
+  const s = G.got >= max ? 3 : G.got >= max * 0.7 ? 2 : 1;
+  confetti(); ding();
+  ovb().innerHTML = `<div class="card end"><div class="big">${s === 3 ? '🏆' : '🥳'}</div>
+    <h2>Practice complete! / അഭ്യാസം പൂർത്തിയായി!</h2>
+    <p style="font-size:18px">⭐ ${G.got} / ${max}</p>
+    <div class="stars">${starStr(s)}</div>
+    <div><button type="button" class="nx" onclick="startDrill(G.mode)">🔁 Play again</button>
+    <button type="button" class="nx alt" onclick="closeOv()">✕ Close</button></div></div>`;
+}
+
+home();
+</script>
+</body>
+</html>
