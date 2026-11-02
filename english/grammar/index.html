@@ -168,6 +168,18 @@ button{font-family:inherit;color:inherit;cursor:pointer}
 .la-say:active{background:#ffb703}
 .la-row{display:flex;gap:8px;align-items:flex-start}
 
+
+.sumsec{background:#fff;border-radius:24px;padding:14px;margin-bottom:16px;box-shadow:0 6px 0 #eadff7}
+.sumtog{width:100%;border:0;background:transparent;text-align:left;font:inherit;font-weight:900;font-size:20px;color:var(--c2);padding:0;cursor:pointer;display:flex;align-items:center;gap:8px}
+.sumtog .chev{margin-left:auto;font-size:16px;opacity:.7;transition:transform .2s}
+.sumsec.open .sumtog .chev{transform:rotate(90deg)}
+.sumhint{font-weight:700;font-size:14px;color:#7a7096}
+.sumbody{display:none;margin-top:12px;padding-top:10px;border-top:2px dashed #eadff7;font-size:17px;font-weight:700;line-height:1.55;color:#3a3558}
+.sumbody p{margin:0 0 10px}
+.sumsec.open .sumbody{display:block}
+body.ml{font-family:"Malayalam Sangam MN","Malayalam MN","Noto Sans Malayalam","Avenir Next",system-ui,sans-serif}
+body.ml .wcard .w,body.ml .spl button,body.ml .tile,body.ml .slot,body.ml .opt,body.ml .mb,body.ml .bt{font-family:"Malayalam Sangam MN","Malayalam MN","Noto Sans Malayalam",sans-serif}
+
 </style>
 <script src="../../assets/learn-audio.js?v=2"></script>
 </head>
@@ -183,7 +195,7 @@ const app = document.getElementById('app');
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 const S = JSON.parse(localStorage.getItem('e3-stars-gram') || '{}');
-let slow = localStorage.getItem('e3-slow') === '1';
+let slow = localStorage.getItem('e3-slow-gram') === '1';
 function award(key, n) {
   const prev = S[key] || 0;
   if (n > prev) { S[key] = n; localStorage.setItem('e3-stars-gram', JSON.stringify(S)); return true; }
@@ -251,7 +263,7 @@ async function play(ids, el) {
 }
 function toggleSlow() {
   slow = !slow;
-  localStorage.setItem('e3-slow', slow ? '1' : '0');
+  localStorage.setItem('e3-slow-gram', slow ? '1' : '0');
   if (sp) { sp.defaultPlaybackRate = sp.playbackRate = rate(); }
   document.querySelectorAll('.slowbtn').forEach(b => b.classList.toggle('on', slow));
 }
@@ -324,6 +336,21 @@ function homeView() {
     <p class="foot">Tip: finish every game with ⭐⭐⭐ to become the English Champion 🏆 · Bookmark this page: <b>.../english/</b></p>`;
 }
 
+function sumSec(c) {
+  if (!c.summary || !c.summary.length) return '';
+  const paras = (Array.isArray(c.summary) ? c.summary : [c.summary]).map(p => `<p>${esc(p)}</p>`).join('');
+  return `<div class="sec sumsec" id="sumsec">
+    <button type="button" class="sumtog" onclick="toggleSum()"><span>📄 ${esc(c.sumTitle || 'Summary')}</span><span class="sumhint" id="sumhint">· tap to open</span><span class="chev">▶</span></button>
+    <div class="sumbody">${paras}</div>
+  </div>`;
+}
+function toggleSum() {
+  const box = document.getElementById('sumsec');
+  if (!box) return;
+  box.classList.toggle('open');
+  const h = document.getElementById('sumhint');
+  if (h) h.textContent = box.classList.contains('open') ? '· tap to close' : '· tap to open';
+}
 function chapterView() {
   const c = CH[view.ch], y = chStars(c);
   let body;
@@ -331,9 +358,9 @@ function chapterView() {
         ${c.plurals.map(([s, p, e], k) => `<button class="wcard" onclick="play('${c.pA[k]}',this)"><div class="e">${e}</div><div class="m">one <b>${esc(s)}</b></div><div class="e" style="font-size:30px">${e}${e}${e}</div><div class="m">many <b>${esc(p)}</b></div></button>`).join('')}</div>`;
   const spellSec = () => c.spell.length ? `<div class="sec"><h3>✍️ Tough Spellings</h3><p class="hint">Tap a word to hear it. Practise them in the Spelling Bee game!</p>
         <div class="spl">${c.spell.map(([w, , vid]) => `<button onclick="play('${vid || ('e-w-' + w)}',this)">${esc(w)}<small>${'⭐'.repeat(S['sp-' + w] || 0)}</small></button>`).join('')}</div></div>` : '';
-  const meanSec = () => c.meanings && c.meanings.length ? `<div class="sec"><h3>📖 Word Meanings</h3><p class="hint">Tap a card to hear it.</p><div class="wgrid">
+  const meanSec = () => c.meanings && c.meanings.length ? `<div class="sec"><h3>📖 ${esc(c.mTitle || 'Word Meanings')}</h3><p class="hint">Tap a card to hear it.</p><div class="wgrid">
         ${c.meanings.map(([w, m, e], k) => `<button class="wcard" onclick="play('${c.mA[k]}',this)"><div class="e">${e}</div><div class="w">${esc(w)}</div><div class="m">means <b>${esc(m)}</b></div></button>`).join('')}</div></div>` : '';
-  const oppSec = () => c.opposites && c.opposites.length ? `<div class="sec"><h3>↔️ Opposites</h3><p class="hint">Tap to hear.</p>
+  const oppSec = () => c.opposites && c.opposites.length ? `<div class="sec"><h3>↔️ ${esc(c.oTitle || 'Opposites')}</h3><p class="hint">Tap to hear.</p>
         ${c.opposites.map(([a, b, ea, eb], k) => `<button class="opp" onclick="play('${c.oA[k]}',this)"><div><span>${ea}</span>${esc(a)}</div><div class="ar">⇄</div><div><span>${eb}</span>${esc(b)}</div></button>`).join('')}</div>` : '';
   const qaSec = () => c.qa && c.qa.length ? `<div class="sec"><h3>❓ Questions and Answers</h3><p class="hint">Read the question, say your answer, then tap "Show answer".</p>
         ${c.qa.map(([q, a], k) => `<div class="qa" id="qa${k}"><div class="q"><span>${k + 1}. ${esc(q)}</span><button class="say" onclick="play('${c.qA[k]}',this)">🔊</button></div>
@@ -354,7 +381,7 @@ function chapterView() {
           <div style="background:#fff0d9"><b>+ es</b> after s, ss, x · bus → bus<u>es</u>, dress → dress<u>es</u>, fox → fox<u>es</u></div>
           <div style="background:#ffe3ef"><b>y → ies</b> · copy → cop<u>ies</u>, lady → lad<u>ies</u>, baby → bab<u>ies</u></div>
         </div>${pluralGrid()}</div>` : '') +
-      qaSec() + spellSec() +
+      qaSec() + spellSec() + sumSec(c) +
       `<button class="nx" onclick="go({name:'ch',ch:'${c.id}',tab:'play'})">🎮 Let's play!</button>`;
   } else {
     const tile = (bg, i, t, sub, key, fn) => `<button class="gt" style="--b:${bg}" onclick="${fn}"><span class="i">${i}</span><b>${t}</b><small>${sub}</small>${key ? `<span class="s">${starStr(S[key] || 0)}</span>` : ''}</button>`;
@@ -362,8 +389,8 @@ function chapterView() {
     body = `<div class="gtiles">
       ${c.quiz.length ? tile('linear-gradient(135deg,#ff4f8b,#c2185b)', '🎯', 'Quiz', `${c.quiz.length} questions`, c.id + '-q', `startQuiz('${c.id}')`) : ''}
       ${c.qa.length ? tile('linear-gradient(135deg,#2ec4b6,#118ab2)', '🧩', c.grammar ? 'Build the Sentence' : 'Build the Answer', c.grammar ? `${c.qa.length} sentences to make` : 'Put the answer words in order', c.id + '-b', `startBuild('${c.id}')`) : ''}
-      ${c.meanings.length > 1 ? tile('linear-gradient(135deg,#3a86ff,#8338ec)', '🔗', c.mTitle || 'Match the Meanings', c.mTitle ? 'Tap the pairs' : 'Word ⇄ meaning', c.id + '-m', `startMatch('${c.id}','m')`) : ''}
-      ${c.opposites.length ? tile('linear-gradient(135deg,#ff9f1c,#e76f51)', '↔️', 'Opposite Match', 'Word ⇄ opposite', c.id + '-o', `startMatch('${c.id}','o')`) : ''}
+      ${c.meanings.length > 1 ? tile('linear-gradient(135deg,#3a86ff,#8338ec)', '🔗', c.mTitle || 'Match the Meanings', 'Word ⇄ meaning', c.id + '-m', `startMatch('${c.id}','m')`) : ''}
+      ${c.opposites.length ? tile('linear-gradient(135deg,#ff9f1c,#e76f51)', '↔️', c.oTitle ? (c.oTitle + ' Match') : 'Opposite Match', c.oTitle ? 'Word ⇄ synonym' : 'Word ⇄ opposite', c.id + '-o', `startMatch('${c.id}','o')`) : ''}
       ${c.plurals ? tile('linear-gradient(135deg,#80b918,#2b9348)', '🍎', 'One and Many', c.grammar ? 's, es, ies, ves or special?' : 's, es or ies?', c.id + '-p', `startPlural('${c.id}')`) : ''}
       ${c.spell.length ? tile((c.id === 'g9' || c.dictation) ? 'linear-gradient(135deg,#e63946,#9d0208)' : 'linear-gradient(135deg,#8338ec,#3a0ca3)', (c.id === 'g9' || c.dictation) ? '📝' : '✍️', (c.id === 'g9' || c.dictation) ? 'Dictation' : 'Spelling Bee', `${c.spell.length} words · ⭐ ${sg}/${c.spell.length * 3}`, '', `startSpell('${c.id}')`) : ''}
     </div>`;
